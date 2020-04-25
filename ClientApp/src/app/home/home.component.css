@@ -1,0 +1,33 @@
+img{
+  width: 3%;
+  margin-right: 2%;
+  margin-left: 5%;
+}
+nav {
+  background:transparent;
+}
+#footer {
+  color: white;
+  position:absolute;
+  bottom:0;
+  background: rgba(0, 0, 0, 0.5);
+  margin-bottom: 5%;
+}
+hr{
+  border: 0.5px solid white;
+}
+span{
+  font-weight: bold;
+}
+input[type=text] {
+  border: none;
+  border-bottom: 1px solid white;
+  background: transparent;
+  font-family:Arial, FontAwesome;
+}
+::placeholder{
+  color: white;
+}
+.panelDiv{
+  width: 50%;
+}

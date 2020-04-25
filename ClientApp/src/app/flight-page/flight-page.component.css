@@ -1,0 +1,35 @@
+.img-background{
+
+  background: url("src\assets\flightPage.jpg") no-repeat top center fixed;
+  height: 91.3%;
+  width: 100%;
+}
+.content{
+  background-color:white;
+}
+h1{
+  color:white;
+  font-size:2.75rem;
+  font-family: "Franklin Gothic Medium";
+}
+table{
+  color:white;
+  background-color: rgba(18, 33, 51, 0.507);
+}
+.searchBtn{
+  float:right;
+}
+.btnRound{
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+  border-radius: 40%;
+}
+
+

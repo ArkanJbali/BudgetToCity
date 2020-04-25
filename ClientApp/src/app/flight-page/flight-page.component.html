@@ -1,0 +1,55 @@
+<div class="img-background">
+  <div class="container">
+    <br><br><br>
+    <h1>Where to next?</h1>
+    <div class="row">
+
+
+      <form>
+        <table class="table">
+          <thead><h3>Flight: </h3></thead>
+          <tr>
+            <td>
+              <label for="From">From</label><br />
+              <input class="form-control form-control-sm" name="From" id="From" type="text" />
+            </td>
+            <td>
+              <label for="To">To</label><br />
+              <input class="form-control form-control-sm" name="To" id="To" type="text" />
+            </td>
+            <td>
+              <label for="Depart">Depart</label> <br />
+              <input class="form-control form-control-sm" name="Depart" id="Depart" type="date" />
+            </td>
+            <td>
+              <label for="Return">Return</label> <br />
+              <input class="form-control form-control-sm" name="Return" id="Return" type="date" />
+            </td>
+            <td colspan="2">
+              <label for="Travelers">Travelers</label> <br />
+              <button type="button" class="btn btn-outline-danger btnRound" (click)="decremantTotal()">-</button>
+              <span class="form-control" name="Travelers" id="Travelers" style="display:inline;">{{total}}</span>
+              <button type="button" class="btn btn-outline-success btnRound" (click)="incrementTotal()">+</button>
+
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5">
+              <button type="button" class="btn btn-success searchBtn">
+                Search flights <i class="fas fa-arrow-right"></i>
+              </button>
+            </td>
+
+          </tr>
+        </table>
+      </form>
+      <br /><br />
+            <div *ngIf="Airports && Airports.length >0">
+              <select id="airports" class="form-control">
+                <option *ngFor="let airport of Airports" value="airport.airportCode">{{airport.airportName}} - {{airport.airportCode}}</option>
+              </select>
+            </div>
+    </div>
+  </div>
+</div>
+
