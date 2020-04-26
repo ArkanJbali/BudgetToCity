@@ -7,6 +7,7 @@
 .content{
   background-color:white;
 }
+
 h1{
   color:white;
   font-size:2.75rem;
@@ -32,4 +33,10 @@ table{
   border-radius: 40%;
 }
 
-
+mat-label{
+    color:white;
+}
+.example-custom-date-class {
+  background: orange;
+  border-radius: 100%;
+}

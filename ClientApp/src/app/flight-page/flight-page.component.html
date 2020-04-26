@@ -10,16 +10,38 @@
           <thead><h3>Flight: </h3></thead>
           <tr>
             <td>
-              <label for="From">From</label><br />
-              <input class="form-control form-control-sm" name="From" id="From" type="text" />
+              <mat-form-field class="example-full-width" *ngIf="Airports && Airports.length >0">
+                <mat-label>From</mat-label>
+                <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.airportName}} - {{option.airportCode}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+                
             </td>
             <td>
-              <label for="To">To</label><br />
-              <input class="form-control form-control-sm" name="To" id="To" type="text" />
+              <mat-form-field class="example-full-width" *ngIf="Airports && Airports.length >0">
+                <mat-label>To</mat-label>
+                <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.airportName}} - {{option.airportCode}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
             </td>
             <td>
               <label for="Depart">Depart</label> <br />
               <input class="form-control form-control-sm" name="Depart" id="Depart" type="date" />
+              <!-- <mat-form-field class="example-full-width">
+     <mat-label>Return</mat-label>
+     <input matInput [matDatepicker]="picker">
+     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+     <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+   </mat-form-field>-->
             </td>
             <td>
               <label for="Return">Return</label> <br />
@@ -44,11 +66,7 @@
         </table>
       </form>
       <br /><br />
-            <div *ngIf="Airports && Airports.length >0">
-              <select id="airports" class="form-control">
-                <option *ngFor="let airport of Airports" value="airport.airportCode">{{airport.airportName}} - {{airport.airportCode}}</option>
-              </select>
-            </div>
+            
     </div>
   </div>
 </div>

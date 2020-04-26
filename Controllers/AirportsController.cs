@@ -21,6 +21,7 @@ namespace BudgetToCity.Controllers
         {
             var data = await _context.Airports.ToListAsync();
             return Ok(data);
+
         }
         // GET: api/Airports
         /*[HttpGet]
