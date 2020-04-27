@@ -34,18 +34,24 @@
 
             </td>
             <td>
-              <label for="Depart">Depart</label> <br />
-              <input class="form-control form-control-sm" name="Depart" id="Depart" type="date" />
-              <!-- <mat-form-field class="example-full-width">
-     <mat-label>Return</mat-label>
-     <input matInput [matDatepicker]="picker">
-     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-     <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
-   </mat-form-field>-->
+              <!-- <label for="Depart">Depart</label> <br />
+  <input class="form-control form-control-sm" name="Depart" id="Depart" type="date" />-->
+              <mat-form-field class="example-full-width">
+                <mat-label>Depart</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+              </mat-form-field>
             </td>
             <td>
-              <label for="Return">Return</label> <br />
-              <input class="form-control form-control-sm" name="Return" id="Return" type="date" />
+              <!-- <label for="Return">Return</label> <br />
+  <input class="form-control form-control-sm" name="Return" id="Return" type="date" />-->
+              <mat-form-field class="example-full-width">
+                <mat-label>Return</mat-label>
+                <input matInput [matDatepicker]="picker1">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker [dateClass]="dateClass" #picker1></mat-datepicker>
+              </mat-form-field>
             </td>
             <td colspan="2">
               <label for="Travelers">Travelers</label> <br />

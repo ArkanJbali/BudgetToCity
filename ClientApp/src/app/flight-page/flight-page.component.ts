@@ -37,7 +37,6 @@ export class FlightPageComponent implements OnInit {
 
   dateClass = (d: Date): MatCalendarCellCssClasses => {
     const date = d.getDate();
-
     // Highlight the 1st and 20th day of each month.
     return (date === 1 || date === 20) ? 'example-custom-date-class' : '';
   }
