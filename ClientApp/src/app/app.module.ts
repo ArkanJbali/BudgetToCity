@@ -16,13 +16,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CarPageComponent } from './car-page/car-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutPageComponent,
-    FlightPageComponent
+    FlightPageComponent,
+    CarPageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
