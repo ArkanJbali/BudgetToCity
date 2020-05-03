@@ -1,1 +1,23 @@
-<p>car-page works!</p>
+<div class="tess">
+  <circle-progress [percent]="progress"
+                   [radius]="40"
+                   [outerStrokeWidth]="5"
+                   [innerStrokeWidth]="4"
+                   [space]="-10"
+                   [outerStrokeColor]="'#4882c2'"
+                   [innerStrokeColor]="'#e7e8ea'"
+                   [titleFontSize]="10"
+                   [titleColor]="'#fff'"
+                   [unitsColor]="'#fff'"
+                   [unitsFontSize]="10"
+                   [showSubtitle]="false"
+                   [animation]="true"
+                   [animationDuration]="300"
+                   [startFromZero]="false"
+                   [responsive]="true"
+                   *ngIf='visibleOrNot'></circle-progress>
+</div>
+<div *ngIf='visibleOrNot'>
+  <span *ngIf='visibleOrNot'> {{subtitle}} </span>
+</div>
+<span *ngIf='!visibleOrNot'> Done... </span>

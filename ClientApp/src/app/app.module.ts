@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -17,6 +18,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CarPageComponent } from './car-page/car-page.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { AlertComponent } from './alert/alert.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -24,10 +28,22 @@ import { CarPageComponent } from './car-page/car-page.component';
     HomeComponent,
     AboutPageComponent,
     FlightPageComponent,
-    CarPageComponent
+    CarPageComponent,
+    AlertComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300
+    }),
+    ToastrModule.forRoot(),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -44,11 +60,12 @@ import { CarPageComponent } from './car-page/car-page.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
       { path: 'about', component: AboutPageComponent },
-      { path: 'flights', component: FlightPageComponent }
+      { path: 'flights', component: FlightPageComponent },
+      { path: 'cars', component: CarPageComponent }
     ])
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule],
-  providers: [MatDatepickerModule,],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
