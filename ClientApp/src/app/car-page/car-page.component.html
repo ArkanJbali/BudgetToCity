@@ -1,23 +1,23 @@
-<div class="tess">
+<div>
   <circle-progress [percent]="progress"
-                   [radius]="40"
-                   [outerStrokeWidth]="5"
-                   [innerStrokeWidth]="4"
-                   [space]="-10"
+                   [radius]="5"
+                   [outerStrokeWidth]="0.5"
+                   [innerStrokeWidth]="0.8"
+                   [space]="-3"
                    [outerStrokeColor]="'#4882c2'"
                    [innerStrokeColor]="'#e7e8ea'"
-                   [titleFontSize]="10"
+                   [titleFontSize]="3"
                    [titleColor]="'#fff'"
                    [unitsColor]="'#fff'"
-                   [unitsFontSize]="10"
+                   [unitsFontSize]="4"
                    [showSubtitle]="false"
                    [animation]="true"
-                   [animationDuration]="300"
+                   [animationDuration]="200"
                    [startFromZero]="false"
                    [responsive]="true"
                    *ngIf='visibleOrNot'></circle-progress>
-</div>
-<div *ngIf='visibleOrNot'>
+</div><br />
+<div *ngIf='visibleOrNot' style="margin-left:7%;">
   <span *ngIf='visibleOrNot'> {{subtitle}} </span>
 </div>
-<span *ngIf='!visibleOrNot'> Done... </span>
+

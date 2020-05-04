@@ -10,10 +10,5 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 export class AppComponent {
   title = 'PrototypeApplication';
 
-  aboutURL() {
-    window.location.href = 'http://localhost:4200/about';
-  }
-  flightURL() {
-    window.location.href = 'http://localhost:4200/flights';
-  }
+
 }

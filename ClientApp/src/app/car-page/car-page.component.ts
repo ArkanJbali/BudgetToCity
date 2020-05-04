@@ -42,7 +42,7 @@ export class CarPageComponent implements OnInit {
         this.visibleOrNot = false;
       }
     }
-    this.intervalId = setInterval(getDownloadProgress, 300);
+    this.intervalId = setInterval(getDownloadProgress, 200);
   }
 
   ngOnDestroy() {

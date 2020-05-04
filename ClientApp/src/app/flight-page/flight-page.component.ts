@@ -5,8 +5,7 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { map, startWith } from 'rxjs/operators';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import * as moment from 'moment';
-import { AlertsService } from '../services/alerts.service';
+import * as moment from 'moment/moment';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-flight-page',
@@ -15,6 +14,9 @@ import { ToastrService } from 'ngx-toastr';
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }]
 })
 export class FlightPageComponent implements OnInit {
+  quotesF: any;
+  placesF: any;
+  carriersF: any;
   total = 1;
   responseCheck = false;
   Airports: Airport[] = [];
@@ -23,7 +25,7 @@ export class FlightPageComponent implements OnInit {
   filteredOptions: Observable<Airport[]>;
   filteredOptions2: Observable<Airport[]>;
   searchFlightForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient, private alertService: AlertsService, private toastrService: ToastrService) {
+  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient, private toastrService: ToastrService) {
 
     http.get<Airport[]>(baseUrl + 'api/Airports').subscribe(result => {
       this.Airports = result;
@@ -67,8 +69,6 @@ export class FlightPageComponent implements OnInit {
 
 
     if (this.searchFlightForm.valid) {
-      console.log("Form Submitted!");
-      this.toastrService.success('Success',"Submitted");
       this.searchFlightForm.controls.departDate.setValue(moment(new Date(this.searchFlightForm.controls.departDate.value)).format('YYYY-MM-DD'));
       this.searchFlightForm.controls.returnDate.setValue(moment(new Date(this.searchFlightForm.controls.returnDate.value)).format('YYYY-MM-DD'));
     
@@ -78,7 +78,7 @@ export class FlightPageComponent implements OnInit {
     }
     else {
       console.log("Form invalid !!!!");
-      this.toastrService.error('Error','Should fill all required fields');
+      this.toastrService.error('Should fill all required fields', 'Error');
     }
 
    
@@ -140,23 +140,26 @@ export class FlightPageComponent implements OnInit {
   console.log('Inside HTTPClient: ', data);
   //jsonText = JSON.parse(data.toString());
   if (data.hasOwnProperty('Quotes')) {
-    console.log('Quotes: ', data['Quotes'])
-    console.log('Price: ', data['Quotes'][0]['MinPrice'], "\nDirect? ", data['Quotes'][0]['Direct']);
+    this.carriersF = data['Carriers'];
+    this.quotesF = data['Quotes'];
+    this.placesF = data['Places'];
+    console.log("Carries: ", this.carriersF);
+    console.log("Quotes: ", this.quotesF);
+    console.log("Places: ", this.placesF);
+    //console.log('Quotes: ', data['Quotes'])
+    //console.log('Carriers Length: ', Object.keys(data['Carriers']).length);
+    //console.log('Price: ', data['Quotes'][0]['MinPrice'], "\nDirect? ", data['Quotes'][0]['Direct']);
     //console.log(jsonText.Places[0].IataCode, "-", jsonText.Places[0].Name, "   -  ", jsonText.Places[1].IataCode, "-", jsonText.Places[1].Name);
     //console.log("Carries: ", jsonText.Carriers[0].Name, " - ", jsonText.Carriers[1].Name);
     this.responseCheck = true;
   }
-  this.saveResponseTxt(data);
     }, err => {
     console.log('Error Status: ', err.status);
     if (err.status == 400) {
       this.responseCheck = false;
-      this.toastrService.error('Error', err.errorMessage);
+      this.toastrService.error("Error in API get status: "+err.status, 'Error');
     }
     });
-  }
-  saveResponseTxt(str: Object) {
-    console.log('Inside Function: ', str);
   }
 }
 
