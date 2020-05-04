@@ -7,6 +7,7 @@ import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import * as moment from 'moment/moment';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-flight-page',
   templateUrl: './flight-page.component.html',
@@ -14,10 +15,12 @@ import { ToastrService } from 'ngx-toastr';
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }]
 })
 export class FlightPageComponent implements OnInit {
-  quotesF: any;
-  placesF: any;
-  carriersF: any;
+  quotesF: Quotes[];
+  placesF: Places[];
+  carriersF: Carries[];
   total = 1;
+  priceFlight: number;
+  directFlights: boolean;
   responseCheck = false;
   Airports: Airport[] = [];
   myControl = new FormControl();
@@ -25,7 +28,7 @@ export class FlightPageComponent implements OnInit {
   filteredOptions: Observable<Airport[]>;
   filteredOptions2: Observable<Airport[]>;
   searchFlightForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient, private toastrService: ToastrService) {
+  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) {
 
     http.get<Airport[]>(baseUrl + 'api/Airports').subscribe(result => {
       this.Airports = result;
@@ -143,7 +146,9 @@ export class FlightPageComponent implements OnInit {
     this.carriersF = data['Carriers'];
     this.quotesF = data['Quotes'];
     this.placesF = data['Places'];
-    console.log("Carries: ", this.carriersF);
+    this.priceFlight = data['Quotes'][0]['MinPrice'];
+    this.directFlights = data['Quotes'][0]['Direct'];
+    console.log("Carries: ", this.carriersF[0]);
     console.log("Quotes: ", this.quotesF);
     console.log("Places: ", this.placesF);
     //console.log('Quotes: ', data['Quotes'])
@@ -166,4 +171,26 @@ export class FlightPageComponent implements OnInit {
 interface Airport {
   airportCode: string;
   airportName: string;
+}
+
+interface Carries {
+  CarrierId: number;
+  Name: string;
+}
+interface Places {
+  CityId: string;
+  CityName: string;
+  CountryName: string;
+  IataCode: string;
+  Name: string;
+  PlaceId: number;
+  SkyscannerCode: string;
+  Type: string;
+}
+interface Quotes {
+  Direct: boolean;
+  MinPrice: number;
+  OutboundLeg: [];
+  QuoteDateTime: string;
+  QuoteId: number;
 }
