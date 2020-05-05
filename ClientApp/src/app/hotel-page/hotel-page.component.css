@@ -1,0 +1,70 @@
+.img-background {
+  background: url("src\assets\hotelspage2.jpg") no-repeat top center fixed;
+  height: 91.3%;
+  width: 100%;
+}
+
+.content {
+  background-color: white;
+}
+
+.blur {
+  box-shadow: 20px 20px 50px grey;
+}
+
+h1 {
+  color: white;
+  font-size: 2.5rem;
+  font-family: "Franklin Gothic Medium";
+}
+
+table {
+  color: white;
+  background-color: rgba(18, 33, 51, 0.507);
+}
+
+.searchBtn {
+  float: right;
+}
+
+.btnRound {
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+  border-radius: 50%;
+}
+
+mat-label {
+  color: white;
+}
+
+.example-custom-date-class {
+  background: orange;
+  border-radius: 100%;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 60%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.imageTxt {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.selectBtn {
+  top: 50%;
+  left: 50%;
+}

@@ -22,7 +22,7 @@
 
             </td>
             <td>
-              <mat-form-field class="example-full-width" *ngIf="Airports && Airports.length >0">
+              <mat-form-field class="example-full-width">
                 <mat-label>To</mat-label>
                 <input type="text" matInput [formControl]="myControl2 " [matAutocomplete]="auto" formControlName="toAirportCode">
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">

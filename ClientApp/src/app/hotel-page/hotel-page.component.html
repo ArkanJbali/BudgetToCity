@@ -1,1 +1,65 @@
-<p>hotel-page works!</p>
+<div class="img-background">
+  <div class="container">
+    <br><br><br>
+    <h1>Find the good out there.</h1>
+    <div class="row table-responsive">
+
+
+      <form [formGroup]="searchFlightForm" (ngSubmit)="onSubmit(searchFlightForm.value)">
+        <table class="table">
+          <thead>Hotels: </thead>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Cities/Hotels</mat-label>
+                <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" formControlName="fromAirportCode">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.airportName}} - {{option.airportCode}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+            </td>
+     
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Check in</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="departDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Check out</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="returnDate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker [dateClass]="dateClass" #picker1></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td colspan="2">
+              <button type="button" class="btn btn-outline-danger btnRound" (click)="decremantTotal()">-</button>
+              <mat-form-field class="example-full-width" style="width:30%;">
+                <mat-label>Guests</mat-label>
+                <input type="text" matInput name="travelers" id="Travelers" formControlName="travelers" [value]="total" style="display:inline-block;">
+              </mat-form-field>
+              <button type="button" class="btn btn-outline-success btnRound" (click)="incrementTotal()">+</button>
+
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5">
+              <button type="submit" class="btn btn-success searchBtn">
+                Search Hotels <i class="fas fa-arrow-right"></i>
+              </button>
+            </td>
+
+          </tr>
+        </table>
+      </form>
+      <br /><br />
+
+    </div>
+  </div>
+</div>
