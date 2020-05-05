@@ -1,7 +1,7 @@
 .img-background {
-  background: url("src\assets\hotelspage2.jpg") no-repeat top center fixed;
+  background: url("src\assets\hotelsPage.jpg") no-repeat top center fixed;
   height: 91.3%;
-  width: 100%;
+  max-width: 100%;
 }
 
 .content {
@@ -14,7 +14,7 @@
 
 h1 {
   color: white;
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   font-family: "Franklin Gothic Medium";
 }
 

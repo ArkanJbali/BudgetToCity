@@ -22,7 +22,10 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { AlertComponent } from './alert/alert.component';
 import { ToastrModule } from 'ngx-toastr';
 import { HotelPageComponent } from './hotel-page/hotel-page.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DefaultModule } from './dashboard/layouts/default/default.module';
+import { DefaultComponent } from './dashboard/layouts/default/default.component';
+import { DashboardComponent } from './dashboard/modules/dashboard/dashboard.component';
+import { PostsComponent } from './dashboard/modules/posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +36,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CarPageComponent,
     AlertComponent,
     HotelPageComponent,
-    DashboardComponent
   ],
   imports: [
+    DefaultModule,
     CommonModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     NgCircleProgressModule.forRoot({
@@ -67,10 +70,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
       { path: 'flights', component: FlightPageComponent },
       { path: 'cars', component: CarPageComponent },
       { path: 'hotels', component: HotelPageComponent },
-      { path: 'dashboard', component: DashboardComponent }
+      {
+        path: 'dashboard', component: DefaultComponent, children: [
+          { path: '', component: DashboardComponent },
+          { path: 'posts', component: PostsComponent }
+        ]
+      }
     ])
   ],
-  exports: [BsDropdownModule, TooltipModule, ModalModule],
+  exports: [RouterModule, BsDropdownModule, TooltipModule, ModalModule],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })

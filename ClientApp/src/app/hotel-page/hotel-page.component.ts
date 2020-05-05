@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import * as moment from 'moment/moment';
+import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -9,24 +15,84 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 export class HotelPageComponent implements OnInit {
   total = 1;
-  searchFlightForm: FormGroup;
-
-  constructor() { }
+  searchHotelForm: FormGroup;
+  Hotels: IHotel[] = [];
+  myControl = new FormControl();
+  myControl2 = new FormControl();
+  filteredOptions: Observable<IHotel[]>;
+  filteredOptions2: Observable<IHotel[]>;
+  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) { }
 
   ngOnInit() {
+    this.searchHotelForm = new FormGroup({
+      HotelCode: new FormControl(),
+      checkInDate: new FormControl(),
+      checkOutDate: new FormControl(),
+      Guests: new FormControl()
+    });
+    this.searchHotelForm = this.formBuilder.group({
+      HotelCode: ['', Validators.required],
+      checkInDate: ['', Validators.required],
+      checkOutDate: ['', Validators.required],
+      Guests: ['', Validators.required]
+    });
+    this.searchHotelForm.controls.Guests.setValue(this.total);
+
+  }
+  onSubmit(newEvent) {
+    this.searchHotelForm.controls.fromAirportCode.setValue(this.myControl.value);
+    this.searchHotelForm.controls.toAirportCode.setValue(this.myControl2.value);
+
+
+    if (this.searchHotelForm.valid) {
+      this.searchHotelForm.controls.departDate.setValue(moment(new Date(this.searchHotelForm.controls.departDate.value)).format('YYYY-MM-DD'));
+      this.searchHotelForm.controls.returnDate.setValue(moment(new Date(this.searchHotelForm.controls.returnDate.value)).format('YYYY-MM-DD'));
+
+     // this.getFlights();
+     // setTimeout(() => {
+     //   this.scroll();
+     // }, 1200);
+
+      console.log(this.searchHotelForm.value);
+    }
+    else {
+      console.log("Form invalid !!!!");
+      this.toastrService.error('Should fill all required fields', 'Error');
+    }
+  }
+  private _filter(value: string): IHotel[] {
+    const filterValue = value.toLowerCase();
+    return this.Hotels.filter(option => option.airportName.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  dateClass = (d: Date): MatCalendarCellCssClasses => {
+    const date = d.getDate();
+    // Highlight the 1st and 20th day of each month.
+    return (date === 1 || date === 20) ? 'example-custom-date-class' : '';
+  }
+  displayFn(hotel: IHotel): string {
+    return hotel && hotel.airportName ? hotel.airportName : '';
+  }
   decremantTotal() {
     if (this.total !== 1) {
       this.total = this.total - 1;
-      this.searchFlightForm.controls.travelers.setValue(this.total);
+      this.searchHotelForm.controls.travelers.setValue(this.total);
     }
   }
   incrementTotal() {
     if (this.total !== 8) {
       this.total = this.total + 1;
-      this.searchFlightForm.controls.travelers.setValue(this.total);
+      this.searchHotelForm.controls.travelers.setValue(this.total);
     }
+  }
+  scroll() {
+    var elmnt = document.getElementById("hotelsList");
+    elmnt.scrollIntoView(true);
+
   }
 }
 
+interface IHotel {
+  airportCode: string;
+  airportName: string;
+}
