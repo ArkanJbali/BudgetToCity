@@ -76,14 +76,16 @@ export class FlightPageComponent implements OnInit {
       this.searchFlightForm.controls.returnDate.setValue(moment(new Date(this.searchFlightForm.controls.returnDate.value)).format('YYYY-MM-DD'));
     
       this.getFlights();
-    
+      setTimeout(() => {
+        this.scroll();
+      }, 1200);
+
       console.log(this.searchFlightForm.value);
     }
     else {
       console.log("Form invalid !!!!");
       this.toastrService.error('Should fill all required fields', 'Error');
     }
-
    
    
   }
@@ -165,6 +167,12 @@ export class FlightPageComponent implements OnInit {
       this.toastrService.error("Error in API get status: "+err.status, 'Error');
     }
     });
+  }
+  
+  scroll() {
+    var elmnt = document.getElementById("flightList");
+      elmnt.scrollIntoView(true); 
+ 
   }
 }
 

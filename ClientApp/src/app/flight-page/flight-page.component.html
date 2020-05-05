@@ -81,7 +81,7 @@
   <div class="content" style="margin-top:320px;" *ngIf="searchFlightForm.valid && responseCheck && quotesF.length >0">
     <div class="container blur">
       <br /><br />
-      <div class="row border" *ngFor="let c of carriersF">
+      <div class="row border" id='flightList' *ngFor="let c of carriersF">
 
         <div class="col-md-2 imageTxt">
           <img src="../assets/BudgetToCityLogo.png" alt="Airline1" style="width:40%;">

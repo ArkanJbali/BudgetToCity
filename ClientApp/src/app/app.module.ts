@@ -21,6 +21,8 @@ import { CarPageComponent } from './car-page/car-page.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { AlertComponent } from './alert/alert.component';
 import { ToastrModule } from 'ngx-toastr';
+import { HotelPageComponent } from './hotel-page/hotel-page.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ToastrModule } from 'ngx-toastr';
     AboutPageComponent,
     FlightPageComponent,
     CarPageComponent,
-    AlertComponent
+    AlertComponent,
+    HotelPageComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +65,9 @@ import { ToastrModule } from 'ngx-toastr';
       { path: 'home', component: HomeComponent },
       { path: 'about', component: AboutPageComponent },
       { path: 'flights', component: FlightPageComponent },
-      { path: 'cars', component: CarPageComponent }
+      { path: 'cars', component: CarPageComponent },
+      { path: 'hotels', component: HotelPageComponent },
+      { path: 'dashboard', component: DashboardComponent }
     ])
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule],
