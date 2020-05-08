@@ -5,7 +5,7 @@ import { DashboardComponent } from '../../modules/dashboard/dashboard.component'
 import { RouterModule } from '@angular/router';
 import { PostsComponent } from '../../modules/posts/posts.component';
 import { SharedModule } from '../../shared/shared.module';
-import { MatSidenavModule, MatDividerModule } from '@angular/material';
+import { MatSidenavModule, MatDividerModule, MatCardModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -20,7 +20,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     SharedModule,
     MatSidenavModule,
     MatDividerModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatCardModule
   ]
 })
 export class DefaultModule { }

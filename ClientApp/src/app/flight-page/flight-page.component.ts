@@ -74,12 +74,15 @@ export class FlightPageComponent implements OnInit {
     if (this.searchFlightForm.valid) {
       this.searchFlightForm.controls.departDate.setValue(moment(new Date(this.searchFlightForm.controls.departDate.value)).format('YYYY-MM-DD'));
       this.searchFlightForm.controls.returnDate.setValue(moment(new Date(this.searchFlightForm.controls.returnDate.value)).format('YYYY-MM-DD'));
-    
-      this.getFlights();
-      setTimeout(() => {
-        this.scroll();
-      }, 1200);
-
+     // if (!this.responseCheck) {
+      //  this.toastrService.warning('There is no matched searches', 'No result');
+      //} else {
+        this.getFlights();
+        setTimeout(() => {
+          this.scroll();
+        }, 1200);
+       
+      //}
       console.log(this.searchFlightForm.value);
     }
     else {
@@ -144,7 +147,7 @@ export class FlightPageComponent implements OnInit {
 }).subscribe(data => {
   console.log('Inside HTTPClient: ', data);
   //jsonText = JSON.parse(data.toString());
-  if (data.hasOwnProperty('Quotes')) {
+  if (data.hasOwnProperty('Quotes') && Object.keys(data['Quotes']).length > 0) {
     this.carriersF = data['Carriers'];
     this.quotesF = data['Quotes'];
     this.placesF = data['Places'];

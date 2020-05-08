@@ -27,6 +27,7 @@ import { DefaultComponent } from './dashboard/layouts/default/default.component'
 import { DashboardComponent } from './dashboard/modules/dashboard/dashboard.component';
 import { PostsComponent } from './dashboard/modules/posts/posts.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
