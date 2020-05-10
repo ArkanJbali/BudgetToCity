@@ -7,18 +7,17 @@ using System.Threading.Tasks;
 
 namespace BudgetToCity.Repository
 {
-    //public class HotelRepository : IHotel
-    //{
+    public class HotelRepository : IHotel
+    {
 
-    //    private DBContext db;
+        private DBContext db;
 
-    //    HotelRepository(DBContext _db)
-    //    {
-    //        db = _db;
-    //    }
+        HotelRepository(DBContext _db)
+        {
+            db = _db;
+        }
+        public IEnumerable<Cities> GetHotels => db.Cities;
 
-    //    //public IEnumerable<Hotels> GetHotels => db.Hotels;
-
-    //}
+    }
 }
 

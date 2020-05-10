@@ -8,21 +8,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BudgetToCity.Controllers
 {
-    //[Route("api/[controller]")]
-    //[ApiController]
+    [Route("api/[controller]")]
+    [ApiController]
     public class HotelsController : ControllerBase
     {
-        //private readonly DBContext _context;
-        //public HotelsController(DBContext context)
-        //{
-        //    _context = context;
-        //}
-        //[HttpGet]
-        //public async Task<IActionResult> GetHotels()
-        //{
-        //    var data = await _context.Hotels.ToListAsync();
-        //    return Ok(data);
+        private readonly DBContext _context;
+        public HotelsController(DBContext context)
+        {
+            _context = context;
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetHotels()
+        {
+            var data = await _context.Cities.ToListAsync();
+            return Ok(data);
 
-        //}
+        }
     }
 }

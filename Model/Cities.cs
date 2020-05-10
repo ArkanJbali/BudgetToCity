@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BudgetToCity.Model
 {
-    public class Hotels
+    public class Cities
     {
-        public string hotelName { get; set; } = "";
-
+        public string Id { get; set; } = "";
+        public string City { get; set; } = "";
     }
 }

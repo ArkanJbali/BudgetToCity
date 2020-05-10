@@ -19,7 +19,7 @@ namespace BudgetToCity.Repository
         }
         public DbSet<Airports> Airports { get; set; }
 
-        //public DbSet<Hotels> Hotels { get; set; }
+        public DbSet<Cities> Cities { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -42,6 +42,20 @@ namespace BudgetToCity.Repository
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
+            modelBuilder.Entity<Cities>(entity =>
+            {
+                entity.HasKey(e => e.City);
+
+
+                    entity.Property(e => e.City).HasColumnName("City");
+
+
+                    entity.Property(e => e.Id)
+                        .HasMaxLength(50)
+                        .IsUnicode(false);
+                });
+            
+            
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

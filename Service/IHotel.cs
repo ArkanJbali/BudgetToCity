@@ -9,6 +9,6 @@ namespace BudgetToCity.Service
 {
     public interface IHotel
     {
-        IEnumerable<Hotels> GetHotels { get; }
+        IEnumerable<Cities> GetHotels { get; }
     }
 }
