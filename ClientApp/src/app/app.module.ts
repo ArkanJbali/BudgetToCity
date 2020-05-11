@@ -26,7 +26,7 @@ import { DefaultModule } from './dashboard/layouts/default/default.module';
 import { DefaultComponent } from './dashboard/layouts/default/default.component';
 import { DashboardComponent } from './dashboard/modules/dashboard/dashboard.component';
 import { PostsComponent } from './dashboard/modules/posts/posts.component';
-
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -61,6 +61,7 @@ import { PostsComponent } from './dashboard/modules/posts/posts.component';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),

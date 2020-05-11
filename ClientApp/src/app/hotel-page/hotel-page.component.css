@@ -51,20 +51,28 @@ mat-label {
 
 .centered {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 60%;
-  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 80%;
 }
 
 .imageTxt {
   position: relative;
   text-align: center;
-  color: white;
+  color: black;
 }
 
 .selectBtn {
   top: 50%;
   left: 50%;
+}
+
+.example-card {
+  max-width: 100%;
+  margin: 4px
+}
+
+.example-header-image {
+  margin-left: 75%;
 }

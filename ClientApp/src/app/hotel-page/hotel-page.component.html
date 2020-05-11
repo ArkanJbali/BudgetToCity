@@ -12,7 +12,7 @@
             <td>
               <mat-form-field class="example-full-width">
                 <mat-label>Cities/Hotels</mat-label>
-                <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" formControlName="HotelCode">
+                <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" formControlName="City">
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                   <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                     {{option.city}}
@@ -38,11 +38,20 @@
                 <mat-datepicker [dateClass]="dateClass" #picker1></mat-datepicker>
               </mat-form-field>
             </td>
-            <td colspan="2">
+            <td>
               <button type="button" class="btn btn-outline-danger btnRound" (click)="decremantTotal()">-</button>
               <mat-form-field class="example-full-width" style="width:30%;">
                 <mat-label>Guests</mat-label>
                 <input type="text" matInput name="travelers" id="Travelers" formControlName="Guests" [value]="total" style="display:inline-block;">
+              </mat-form-field>
+              <button type="button" class="btn btn-outline-success btnRound" (click)="incrementTotal()">+</button>
+
+            </td>
+            <td>
+              <button type="button" class="btn btn-outline-danger btnRound" (click)="decremantTotal()">-</button>
+              <mat-form-field class="example-full-width" style="width:30%;">
+                <mat-label>Rooms</mat-label>
+                <input type="text" matInput name="rooms" id="rooms" formControlName="Rooms" [value]="total" style="display:inline-block;">
               </mat-form-field>
               <button type="button" class="btn btn-outline-success btnRound" (click)="incrementTotal()">+</button>
 
@@ -58,7 +67,56 @@
           </tr>
         </table>
       </form>
+      <br />
+    </div>
+  </div>
+  <!--          *ngIf="searchHotelForm.valid && hotelResponseCheck && hotelsData.length >0"     -->
+
+  <div class="content" style="margin-top:320px;" *ngIf="searchHotelForm.valid && hotelResponseCheck && hotelsData.length >0" >
+    <div class="container blur">
+      <br /><br />
+      <h3 style="color:black;">Hotels List: </h3>
+      <hr />
+            <div id="hotelsList" *ngFor="let h of hotelsData">
+              <mat-card class="example-card">
+                <mat-card-header>
+
+                  <mat-card-title>{{h.name}} </mat-card-title>
+                  <mat-card-subtitle>Rate: {{h.rating}}/5.0</mat-card-subtitle>
+                </mat-card-header>
+                <br />
+                <div class="container">
+                  <div class="row">
+                    <div class="col-4">
+                      <img mat-card-image src="{{h.photo.images.original.url}}" alt="Hotel">
+                    </div>
+                    <div class="col-8">
+                      <mat-card-content>
+                        <div class="example-header-image imageTxt">
+                          <img src="../assets/rating.png" style="width:40%;">
+                          <span class="centered">{{h.hotel_class}}</span>
+                        </div>
+                        <p>
+                          {{h.ranking}}
+
+                        </p>
+                        <h4>{{h.price}}</h4>
+
+                        <br /><br />
+                              <a class="btn btn-success selectBtn" href="{{h.hac_offers.offers[0].link}}" target="_blank">Visist Link <i class="fas fa-arrow-right"></i> </a>
+                       
+                      </mat-card-content>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </mat-card>
+            </div>
+      <br /><br />
 
     </div>
+    <br /><br />
   </div>
 </div>

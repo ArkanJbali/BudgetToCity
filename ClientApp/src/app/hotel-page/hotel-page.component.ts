@@ -15,6 +15,12 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./hotel-page.component.css']
 })
 export class HotelPageComponent implements OnInit {
+  imgURL = "https://material.angular.io/assets/img/examples/shiba2.jpg";
+  hotelsData: HotelCard;
+  locationID: number;
+  diffInDays: number;
+  locationResponseCheck = false;
+  hotelResponseCheck = false;
   total = 1;
   searchHotelForm: FormGroup;
   Hotels: IHotel[] = [];
@@ -32,42 +38,42 @@ export class HotelPageComponent implements OnInit {
   }
   ngOnInit() {
     this.searchHotelForm = new FormGroup({
-      HotelCode: new FormControl(),
+      City: new FormControl(),
       checkInDate: new FormControl(),
       checkOutDate: new FormControl(),
-      Guests: new FormControl()
+      Guests: new FormControl(),
+      Rooms: new FormControl()
+
     });
     this.searchHotelForm = this.formBuilder.group({
-      HotelCode: ['', Validators.required],
+      City: ['', Validators.required],
       checkInDate: ['', Validators.required],
       checkOutDate: ['', Validators.required],
-      Guests: ['', Validators.required]
+      Guests: ['', Validators.required],
+      Rooms: ['']
     });
     this.searchHotelForm.controls.Guests.setValue(this.total);
 
   }
   onSubmit(newEvent) {
-    this.searchHotelForm.controls.HotelsCode.setValue(this.myControl.value);
+    this.searchHotelForm.controls.City.setValue(this.myControl.value.city);
 
-
+    
     if (this.searchHotelForm.valid) {
-     // this.searchHotelForm.controls.departDate.setValue(moment(new Date(this.searchHotelForm.controls.departDate.value)).format('YYYY-MM-DD'));
-     // this.searchHotelForm.controls.returnDate.setValue(moment(new Date(this.searchHotelForm.controls.returnDate.value)).format('YYYY-MM-DD'));
-
-     // this.getFlights();
-     // setTimeout(() => {
-     //   this.scroll();
-     // }, 1200);
-
-      console.log(this.searchHotelForm.value);
+      this.getLocationID();
+      this.searchHotelForm.controls.checkInDate.setValue(moment(new Date(this.searchHotelForm.controls.checkInDate.value)).format('YYYY-MM-DD'));
+      this.searchHotelForm.controls.checkOutDate.setValue(moment(new Date(this.searchHotelForm.controls.checkOutDate.value)).format('YYYY-MM-DD'));
+      this.diffInDays = Math.abs(moment(new Date(this.searchHotelForm.controls.checkInDate.value)).diff(moment(new Date(this.searchHotelForm.controls.checkOutDate.value)), 'days'));
+      
+      
+     
+      console.log("Form values: ",this.searchHotelForm.value);
     }
     else {
-      console.log("Form invalid !!!!");
       this.toastrService.error('Should fill all required fields', 'Error');
     }
   }
   private _filter(value: string): IHotel[] {
-    console.log("New York City, USA".toLowerCase())
     const filterValue = value.toLowerCase();
     return this.Hotels.filter(option => option.city.toLowerCase().indexOf(filterValue) === 0);
   }
@@ -93,13 +99,88 @@ export class HotelPageComponent implements OnInit {
     }
   }
   scroll() {
-    var elmnt = document.getElementById("hotelsList");
-    elmnt.scrollIntoView(true);
+    if (this.hotelResponseCheck) {
+      var elmnt = document.getElementById("hotelsList");
+      elmnt.scrollIntoView(true);
+    }
 
+  }
+  getLocationID() {
+    var from = (this.searchHotelForm.controls.City.value);
+    this.httpClient.get("https://tripadvisor1.p.rapidapi.com/locations/search?location_id=1&limit=30&sort=relevance&offset=0&lang=en_US&currency=USD&units=km&query=" + from + "", {
+      "headers": {
+        "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+        "x-rapidapi-key": "df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f"
+      }
+    }).subscribe(data => {
+      //console.log('Inside HTTPClient - location: ', data);
+      if (data.hasOwnProperty('data') && Object.keys(data['data']).length > 0) {
+        this.locationID = data['data'][0]['result_object']['location_id'];
+        this.locationResponseCheck = true;
+        if (this.locationResponseCheck) {
+          setTimeout(() => {
+            this.getHotels();
+          }, 1500);
+        }
+      }
+    }, err => {
+      console.log('Error Status: ', err.status);
+      if (err.status == 400) {
+        this.locationResponseCheck = false;
+        this.toastrService.error("Error in API get status: " + err.status, 'Error');
+      }
+    });
+  }
+  getHotels() {
+    var locationId = this.locationID;
+    var checkin = this.searchHotelForm.controls.checkInDate.value;
+    var adults = 1;
+    var rooms = 1;
+    var nights = this.diffInDays;
+    this.httpClient.get("https://tripadvisor1.p.rapidapi.com/hotels/list?offset=0&currency=USD&limit=30&checkin=" + checkin + "&order=asc&lang=en_US&sort=recommended&nights=" + nights + "&location_id=" + locationId + "&adults=" + adults + "&rooms=" + rooms + "", {
+      "headers": {
+      "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+      "x-rapidapi-key": "df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f"
+    }
+    }).subscribe(data => {
+      if (data.hasOwnProperty('data') && Object.keys(data['data']).length > 0) {
+        this.hotelsData = data['data'];
+        //for (var i = 0; i < data['data'].length; i++) {
+          //console.log('has data: ', data['data']);
+          //console.log('HotelName: ', data['data'][0]['name']);
+          //console.log('Image: ', data['data'][0]['photo']['images']['original']['url']);
+          //console.log('Ranking: ', data['data'][0]['ranking']);
+          //console.log('Rating: ', data['data'][0]['rating']);
+          //console.log('Price: ', data['data'][0]['price']);
+          //console.log('Hotel Stars: ', data['data'][0]['hotel_class']);
+          //console.log('URL: ', data['data'][0]['hac_offers']['offers'][0]['link']);
+          console.log('hotels API work');
+        //}
+        this.hotelResponseCheck = true;
+        setTimeout(() => {
+          this.scroll();
+        }, 1200);
+
+      }
+    }, err => {
+      console.log('Error Status: ', err.status);
+      if (err.status == 400) {
+        this.hotelResponseCheck = false;
+        this.toastrService.error("Error in API get status: " + err.status, 'Error');
+      }
+    });
   }
 }
 
 interface IHotel {
   Id: string;
   city: string;
+}
+interface HotelCard {
+  hotelName: string;
+  hotelRank: string;
+  hotelRating: string;
+  hotelPrice: string;
+  hotelImage: string;
+  hotelURL: string;
 }
