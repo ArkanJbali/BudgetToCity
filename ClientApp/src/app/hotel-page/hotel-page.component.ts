@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment/moment';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 
 @Component({
@@ -18,11 +19,17 @@ export class HotelPageComponent implements OnInit {
   searchHotelForm: FormGroup;
   Hotels: IHotel[] = [];
   myControl = new FormControl();
-  myControl2 = new FormControl();
   filteredOptions: Observable<IHotel[]>;
-  filteredOptions2: Observable<IHotel[]>;
-  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) {
+    http.get<IHotel[]>(baseUrl + 'api/Hotels').subscribe(result => {
+      this.Hotels = result;
 
+      this.filteredOptions = this.myControl.valueChanges.pipe(startWith(''),
+        map(value => typeof value === 'string' ? value : value.City),
+        map(name => name ? this._filter(name) : this.Hotels.slice()));
+      console.log(this.Hotels.slice()[0].city);
+    }, error => console.error(error));
+  }
   ngOnInit() {
     this.searchHotelForm = new FormGroup({
       HotelCode: new FormControl(),
@@ -40,13 +47,12 @@ export class HotelPageComponent implements OnInit {
 
   }
   onSubmit(newEvent) {
-    this.searchHotelForm.controls.fromAirportCode.setValue(this.myControl.value);
-    this.searchHotelForm.controls.toAirportCode.setValue(this.myControl2.value);
+    this.searchHotelForm.controls.HotelsCode.setValue(this.myControl.value);
 
 
     if (this.searchHotelForm.valid) {
-      this.searchHotelForm.controls.departDate.setValue(moment(new Date(this.searchHotelForm.controls.departDate.value)).format('YYYY-MM-DD'));
-      this.searchHotelForm.controls.returnDate.setValue(moment(new Date(this.searchHotelForm.controls.returnDate.value)).format('YYYY-MM-DD'));
+     // this.searchHotelForm.controls.departDate.setValue(moment(new Date(this.searchHotelForm.controls.departDate.value)).format('YYYY-MM-DD'));
+     // this.searchHotelForm.controls.returnDate.setValue(moment(new Date(this.searchHotelForm.controls.returnDate.value)).format('YYYY-MM-DD'));
 
      // this.getFlights();
      // setTimeout(() => {
@@ -61,8 +67,9 @@ export class HotelPageComponent implements OnInit {
     }
   }
   private _filter(value: string): IHotel[] {
+    console.log("New York City, USA".toLowerCase())
     const filterValue = value.toLowerCase();
-    return this.Hotels.filter(option => option.airportName.toLowerCase().indexOf(filterValue) === 0);
+    return this.Hotels.filter(option => option.city.toLowerCase().indexOf(filterValue) === 0);
   }
 
   dateClass = (d: Date): MatCalendarCellCssClasses => {
@@ -71,7 +78,7 @@ export class HotelPageComponent implements OnInit {
     return (date === 1 || date === 20) ? 'example-custom-date-class' : '';
   }
   displayFn(hotel: IHotel): string {
-    return hotel && hotel.airportName ? hotel.airportName : '';
+    return hotel && hotel.city ? hotel.city : '';
   }
   decremantTotal() {
     if (this.total !== 1) {
@@ -93,6 +100,6 @@ export class HotelPageComponent implements OnInit {
 }
 
 interface IHotel {
-  airportCode: string;
-  airportName: string;
+  Id: string;
+  city: string;
 }
