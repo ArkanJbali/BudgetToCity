@@ -16,6 +16,8 @@ import { Router } from '@angular/router';
 })
 export class FlightPageComponent implements OnInit {
   quotesF: Quotes[];
+  numberRand: number;
+  plusOrMinus: number;
   placesF: Places[];
   carriersF: Carries[];
   total = 1;
@@ -104,6 +106,15 @@ export class FlightPageComponent implements OnInit {
   }
   displayFn(airport: Airport): string {
     return airport && airport.airportName ? airport.airportName : '';
+  }
+
+  getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  getPlusOrMinus() {
+    return  Math.random() < 0.5 ? -1 : 1;
+;
   }
   decremantTotal() {
       if (this.total !== 1) {

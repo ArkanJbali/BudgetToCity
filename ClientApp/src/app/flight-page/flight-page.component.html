@@ -95,7 +95,7 @@
           </div>
         </div>
         <div class="col-md-2   border-dark border-left">
-          {{priceFlight}}<br />
+          {{priceFlight + (getPlusOrMinus() * getRndInteger(50,150))| number}}<br />
           Direct? {{directFlights}}<br />
           <button class="btn btn-success selectBtn">
             Select <i class="fas fa-arrow-right"></i>
