@@ -79,7 +79,8 @@ export class FlightPageComponent implements OnInit {
      // if (!this.responseCheck) {
       //  this.toastrService.warning('There is no matched searches', 'No result');
       //} else {
-        this.getFlights();
+      
+      this.getFlights();
         setTimeout(() => {
           this.scroll();
         }, 1200);
@@ -114,7 +115,6 @@ export class FlightPageComponent implements OnInit {
 
   getPlusOrMinus() {
     return  Math.random() < 0.5 ? -1 : 1;
-;
   }
   decremantTotal() {
       if (this.total !== 1) {
@@ -174,6 +174,7 @@ export class FlightPageComponent implements OnInit {
     //console.log("Carries: ", jsonText.Carriers[0].Name, " - ", jsonText.Carriers[1].Name);
     this.responseCheck = true;
   }
+
     }, err => {
     console.log('Error Status: ', err.status);
     if (err.status == 400) {

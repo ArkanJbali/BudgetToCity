@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../../modules/dashboard.service';
 
 @Component({
   selector: 'app-default',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class DefaultComponent implements OnInit {
   sideBarOpen = true;
   constructor() { }
+
 
   ngOnInit() {
   }

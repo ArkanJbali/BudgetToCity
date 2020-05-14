@@ -27,6 +27,8 @@ import { DefaultComponent } from './dashboard/layouts/default/default.component'
 import { DashboardComponent } from './dashboard/modules/dashboard/dashboard.component';
 import { PostsComponent } from './dashboard/modules/posts/posts.component';
 import { MatCardModule } from '@angular/material/card';
+import { CardComponent } from './dashboard/shared/widgets/card/card.component';
+import { PieComponent } from './dashboard/shared/widgets/pie/pie.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,7 @@ import { MatCardModule } from '@angular/material/card';
     FlightPageComponent,
     CarPageComponent,
     AlertComponent,
-    HotelPageComponent,
+    HotelPageComponent
   ],
   imports: [
     DefaultModule,

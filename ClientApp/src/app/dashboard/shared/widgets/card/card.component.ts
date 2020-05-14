@@ -3,49 +3,63 @@ import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 
 @Component({
-  selector: 'app-widget-area',
-  templateUrl: './area.component.html',
-  styleUrls: ['./area.component.css']
+  selector: 'app-widget-card',
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.css']
 })
-export class AreaComponent implements OnInit {
-  chartOptions: {};
-  @Input() data: any = [];
-
+export class CardComponent implements OnInit {
+  @Input() label: string;
+  @Input() total: string;
+  @Input() percentage: string;
   Highcharts = Highcharts;
-
+  chartOptions = {};
+  @Input() data = [];
   constructor() { }
 
   ngOnInit() {
     this.chartOptions = {
       chart: {
-        type: 'area'
+        type: 'area',
+        backgroundColor: null,
+        borderWidth: 0,
+        margin: [2, 2, 2, 2],
+        height: 60
       },
       title: {
-        text: 'Historic and Estimated Website\'s Users Visits by Region'
+        text: null
       },
       subtitle: {
-        text: 'Source: BudgeToCity.com'
+        text: null
       },
       xAxis: {
-        categories: ['1/2020', '2/2020', '3/2020', '4/2020', '5/2020', '6/2020', '7/2020', '8/2020', '9/2020', '10/2020', '11/2020', '12/2020'],
-        tickmarkPlacement: 'on',
+        labels: {
+          enabled: false
+        },
         title: {
           enabled: false
-        }
+        },
+        startOnTick: false,
+        endOnTick: false,
+        tickOptions: []
       },
       yAxis: {
-        title: {
-          text: 'Number of Visits'
-        },
         labels: {
-          formatter: function () {
-            return this.value;
-          }
-        }
+          enabled: false
+        },
+        title: {
+          enabled: false
+        },
+        startOnTick: false,
+        endOnTick: false,
+        tickOptions: []
       },
       tooltip: {
         split: true,
+        outside: true,
         valueSuffix: ' users'
+      },
+      legend: {
+        enabled: false
       },
       plotOptions: {
         area: {
@@ -59,14 +73,15 @@ export class AreaComponent implements OnInit {
         }
       },
       exporting: {
-        enabled: true
+        enabled: false
       },
       credits: {
         enabled: false
       },
-      series: this.data
-
-    };
+      series: [{
+        data: this.data
+      }]
+    }
 
     HC_exporting(Highcharts);
 
@@ -76,5 +91,5 @@ export class AreaComponent implements OnInit {
       );
     }, 300);
   }
-  }
 
+}

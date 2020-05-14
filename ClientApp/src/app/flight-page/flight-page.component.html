@@ -94,8 +94,8 @@
             <div class="col-6 col-md-2">{{placesF[1].IataCode}}</div>
           </div>
         </div>
-        <div class="col-md-2   border-dark border-left">
-          {{priceFlight + (getPlusOrMinus() * getRndInteger(50,150))| number}}<br />
+        <div class="col-md-2 border-dark border-left">
+          {{priceFlight + (this.getPlusOrMinus() * this.getRndInteger(50, 150)) }}<br />
           Direct? {{directFlights}}<br />
           <button class="btn btn-success selectBtn">
             Select <i class="fas fa-arrow-right"></i>
