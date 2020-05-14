@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BudgetToCity.Model;
+using BudgetToCity.Models;
 using BudgetToCity.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,8 +12,8 @@ namespace BudgetToCity.Controllers
     [ApiController]
     public class AirportsController : ControllerBase
     {
-        private readonly DBContext _context;
-        public AirportsController(DBContext context)
+        private readonly BudgeToCityContext _context;
+        public AirportsController(BudgeToCityContext context)
         {
             _context = context;
         }
@@ -39,7 +40,7 @@ namespace BudgetToCity.Controllers
         }*/
 
         // GET: api/Airports/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetAirports")]
         public string Get(int id)
         {
             return "value";

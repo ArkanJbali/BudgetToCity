@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BudgetToCity.Models;
 using BudgetToCity.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,8 +13,8 @@ namespace BudgetToCity.Controllers
     [ApiController]
     public class HotelsController : ControllerBase
     {
-        private readonly DBContext _context;
-        public HotelsController(DBContext context)
+        private readonly BudgeToCityContext _context;
+        public HotelsController(BudgeToCityContext context)
         {
             _context = context;
         }

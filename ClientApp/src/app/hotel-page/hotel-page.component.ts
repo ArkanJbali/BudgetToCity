@@ -144,7 +144,8 @@ export class HotelPageComponent implements OnInit {
     }
     }).subscribe(data => {
       if (data.hasOwnProperty('data') && Object.keys(data['data']).length > 0) {
-        this.hotelsData = data['data'];
+       
+        
         //for (var i = 0; i < data['data'].length; i++) {
           //console.log('has data: ', data['data']);
           //console.log('HotelName: ', data['data'][0]['name']);
@@ -156,10 +157,14 @@ export class HotelPageComponent implements OnInit {
           //console.log('URL: ', data['data'][0]['hac_offers']['offers'][0]['link']);
           console.log('hotels API work');
         //}
-        this.hotelResponseCheck = true;
+        
+        setTimeout(() => {
+          this.hotelsData = data['data'];
+          this.hotelResponseCheck = true;
+        }, 1000);
         setTimeout(() => {
           this.scroll();
-        }, 1200);
+        }, 2000);
 
       }
     }, err => {

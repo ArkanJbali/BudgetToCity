@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using BudgetToCity.Service;
+using BudgetToCity.Models;
 
 namespace BudgetToCity
 {
@@ -23,7 +24,8 @@ namespace BudgetToCity
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DBContext>(options =>
+
+            services.AddDbContext<BudgeToCityContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("connectionStr")));
 
             services.AddControllersWithViews();

@@ -20,6 +20,7 @@ namespace BudgetToCity.Repository
         public DbSet<Airports> Airports { get; set; }
 
         public DbSet<Cities> Cities { get; set; }
+        public DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -54,25 +55,22 @@ namespace BudgetToCity.Repository
                         .HasMaxLength(50)
                         .IsUnicode(false);
                 });
-            
-            
+            modelBuilder.Entity<Users>(entity =>
+            {
+                entity.HasKey(e => e.Email);
+
+
+                entity.Property(e => e.Email).HasColumnName("Email");
+                entity.Property(e => e.Phone).HasColumnName("Phone");
+                entity.Property(e => e.Permession).HasColumnName("Permession");
+                entity.Property(e => e.Role).HasColumnName("Role");
+                entity.Property(e => e.Fname).HasColumnName("Fname");
+                entity.Property(e => e.Lname).HasColumnName("Lname");
+                entity.Property(e => e.Password).HasColumnName("Password");
+                entity.Property(e => e.isApproved).HasColumnName("isApproved");
+            });
+
+
         }
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-
-        //    modelBuilder.Entity<Hotels>(entity =>
-        //    {
-        //        entity.HasKey(e => e.hotelName);
-
-
-        //        entity.Property(e => e.hotelName).HasColumnName("Cities");
-
-
-        //        entity.Property(e => e.hotelName)
-        //            .HasMaxLength(50)
-        //            .IsUnicode(false);
-        //    });
-        //}
     }
 }
