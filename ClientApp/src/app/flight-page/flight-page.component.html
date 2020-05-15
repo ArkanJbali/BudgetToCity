@@ -96,18 +96,16 @@
         </div>
         <div class="col-md-2 border-dark border-left">
           {{priceFlight + (this.getPlusOrMinus() * this.getRndInteger(50, 150)) }}<br />
-          Direct? {{directFlights}}<br />
+          {{directFlights == 'True' ? "Direct Plan" :"Nondirect Plan"}} <br />
           <button class="btn btn-success selectBtn">
             Select <i class="fas fa-arrow-right"></i>
           </button>
         </div>
-
-
         <div class="w-100 d-none d-md-block"></div>
-
         <div class="col-md-2 imageTxt">
           <img src="../assets/BudgetToCityLogo.png" alt="Airline2" style="width:40%;">
-          <span class="centered">{{c.Name}}</span>
+          <span class="centered">{{c.Name
+          }}</span>
         </div>
         <div class="col-md-8">
           <div class="row">
