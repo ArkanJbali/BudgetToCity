@@ -27,8 +27,8 @@ import { DefaultComponent } from './dashboard/layouts/default/default.component'
 import { DashboardComponent } from './dashboard/modules/dashboard/dashboard.component';
 import { PostsComponent } from './dashboard/modules/posts/posts.component';
 import { MatCardModule } from '@angular/material/card';
-import { CardComponent } from './dashboard/shared/widgets/card/card.component';
-import { PieComponent } from './dashboard/shared/widgets/pie/pie.component';
+import { MatIconModule } from '@angular/material/icon';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -38,11 +38,13 @@ import { PieComponent } from './dashboard/shared/widgets/pie/pie.component';
     FlightPageComponent,
     CarPageComponent,
     AlertComponent,
-    HotelPageComponent
+    HotelPageComponent,
+    LoginComponent
   ],
   imports: [
     DefaultModule,
     CommonModule,
+    MatIconModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     NgCircleProgressModule.forRoot({
       // set defaults here
@@ -73,6 +75,7 @@ import { PieComponent } from './dashboard/shared/widgets/pie/pie.component';
       { path: 'about', component: AboutPageComponent },
       { path: 'flights', component: FlightPageComponent },
       { path: 'cars', component: CarPageComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'hotels', component: HotelPageComponent },
       {
         path: 'dashboard', component: DefaultComponent, children: [
