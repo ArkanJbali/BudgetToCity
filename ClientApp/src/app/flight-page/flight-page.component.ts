@@ -22,6 +22,7 @@ export class FlightPageComponent implements OnInit {
   carriersF: Carries[];
   total = 1;
   priceFlight: number;
+  priceFlightsArr: number[] = [];
   directFlights: boolean;
   responseCheck = false;
   Airports: Airport[] = [];
@@ -81,9 +82,7 @@ export class FlightPageComponent implements OnInit {
       //} else {
       
       this.getFlights();
-        setTimeout(() => {
-          this.scroll();
-        }, 1200);
+
        
       //}
       console.log(this.searchFlightForm.value);
@@ -160,6 +159,8 @@ export class FlightPageComponent implements OnInit {
   //jsonText = JSON.parse(data.toString());
   if (data.hasOwnProperty('Quotes') && Object.keys(data['Quotes']).length > 0) {
     this.carriersF = data['Carriers'];
+    
+    
     this.quotesF = data['Quotes'];
     this.placesF = data['Places'];
     this.priceFlight = data['Quotes'][0]['MinPrice'];
@@ -172,7 +173,15 @@ export class FlightPageComponent implements OnInit {
     //console.log('Price: ', data['Quotes'][0]['MinPrice'], "\nDirect? ", data['Quotes'][0]['Direct']);
     //console.log(jsonText.Places[0].IataCode, "-", jsonText.Places[0].Name, "   -  ", jsonText.Places[1].IataCode, "-", jsonText.Places[1].Name);
     //console.log("Carries: ", jsonText.Carriers[0].Name, " - ", jsonText.Carriers[1].Name);
-    this.responseCheck = true;
+    setTimeout(() => {
+      this.responseCheck = true;
+      for (let i = 0; i < this.carriersF.length; i++) {
+        this.priceFlightsArr.push(Number(this.priceFlight) + (this.getPlusOrMinus() * this.getRndInteger(50, 150)));
+      }
+    }, 1000);
+    setTimeout(() => {
+      this.scroll();
+    }, 2000);
   }
 
     }, err => {
@@ -188,6 +197,9 @@ export class FlightPageComponent implements OnInit {
     var elmnt = document.getElementById("flightList");
       elmnt.scrollIntoView(true); 
  
+  }
+  addFlight(i) {
+    console.log("Flight Div: ",i);
   }
 }
 

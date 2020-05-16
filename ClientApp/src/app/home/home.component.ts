@@ -9,6 +9,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import * as moment from 'moment/moment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from "@angular/material";
+import { BudgetReservationComponent } from './budget-reservation/budget-reservation.component';
 
 @Component({
   selector: 'app-home',
@@ -23,9 +25,11 @@ export class HomeComponent implements OnInit {
   myControl2 = new FormControl();
   filteredOptions2: Observable<Airport[]>;
   searchBudgetForm: FormGroup;
-  sliderValue = 0;
+  sliderValue = 200;
 
-  constructor(private modalService: BsModalService, private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) {
+  constructor(private modalService: BsModalService, private formBuilder: FormBuilder,
+    http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient,
+    private toastrService: ToastrService, private router: Router, private dialog: MatDialog,) {
     http.get<Airport[]>(baseUrl + 'api/Airports').subscribe(result => {
       this.Airports = result;
 
@@ -68,6 +72,7 @@ export class HomeComponent implements OnInit {
       this.searchBudgetForm.controls.fromDate.setValue(moment(new Date(this.searchBudgetForm.controls.fromDate.value)).format('YYYY-MM-DD'));
       this.searchBudgetForm.controls.returnDate.setValue(moment(new Date(this.searchBudgetForm.controls.returnDate.value)).format('YYYY-MM-DD'));
       console.log(this.searchBudgetForm.value);
+      this.openStepper();
     }
     else {
       console.log("Form invalid !!!!");
@@ -93,7 +98,16 @@ export class HomeComponent implements OnInit {
   valueChanged(e) {
     //console.log('e', parseInt(e));
     this.sliderValue = parseInt(e);
-}
+  }
+  openStepper() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '80%';
+    dialogConfig.height = '95%';
+    dialogConfig.data = this.searchBudgetForm.value;
+    this.dialog.open(BudgetReservationComponent, dialogConfig);
+  }
 }
 interface Airport {
   airportCode: string;

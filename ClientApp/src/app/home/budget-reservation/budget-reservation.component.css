@@ -1,0 +1,10 @@
+.btn-dialog-close {
+  width: 45px;
+  min-width: 5px !important;
+  height: 40px;
+  padding: 0px !important;
+  float: right;
+}
+.mat-form-field {
+  margin-top: 16px;
+}

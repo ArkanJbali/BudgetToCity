@@ -81,7 +81,7 @@
   <div class="content" style="margin-top:320px;" *ngIf="searchFlightForm.valid && responseCheck && quotesF.length >0">
     <div class="container blur">
       <br /><br />
-      <div class="row border" id='flightList' *ngFor="let c of carriersF">
+      <div class="row border" id='flightList' *ngFor="let c of carriersF; let i = index" >
 
         <div class="col-md-2 imageTxt">
           <img src="../assets/BudgetToCityLogo.png" alt="Airline1" style="width:40%;">
@@ -95,9 +95,9 @@
           </div>
         </div>
         <div class="col-md-2 border-dark border-left">
-          {{priceFlight + (this.getPlusOrMinus() * this.getRndInteger(50, 150)) }}<br />
+          {{priceFlightsArr[i]}}<br />
           {{directFlights == 'True' ? "Direct Plan" :"Nondirect Plan"}} <br />
-          <button class="btn btn-success selectBtn">
+          <button class="btn btn-success selectBtn" (click)=addFlight(c)>
             Select <i class="fas fa-arrow-right"></i>
           </button>
         </div>

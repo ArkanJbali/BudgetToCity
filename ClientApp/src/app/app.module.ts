@@ -29,6 +29,8 @@ import { PostsComponent } from './dashboard/modules/posts/posts.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './login/login.component';
+import { MatButtonModule, MatDialogModule, MatStepperModule } from '@angular/material';
+import { BudgetReservationComponent } from './home/budget-reservation/budget-reservation.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +41,16 @@ import { LoginComponent } from './login/login.component';
     CarPageComponent,
     AlertComponent,
     HotelPageComponent,
-    LoginComponent
+    LoginComponent,
+    BudgetReservationComponent
   ],
   imports: [
     DefaultModule,
     CommonModule,
     MatIconModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatStepperModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     NgCircleProgressModule.forRoot({
       // set defaults here
@@ -86,7 +92,8 @@ import { LoginComponent } from './login/login.component';
     ])
   ],
   exports: [RouterModule, BsDropdownModule, TooltipModule, ModalModule],
-  providers: [MatDatepickerModule],
-  bootstrap: [AppComponent]
+  providers: [MatDatepickerModule, HomeComponent],
+  bootstrap: [AppComponent],
+  entryComponents: [BudgetReservationComponent]
 })
 export class AppModule { }
