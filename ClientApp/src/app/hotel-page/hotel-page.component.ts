@@ -15,7 +15,6 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./hotel-page.component.css']
 })
 export class HotelPageComponent implements OnInit {
-  imgURL = "https://material.angular.io/assets/img/examples/shiba2.jpg";
   hotelsData: HotelCard;
   locationID: number;
   diffInDays: number;
@@ -33,7 +32,6 @@ export class HotelPageComponent implements OnInit {
       this.filteredOptions = this.myControl.valueChanges.pipe(startWith(''),
         map(value => typeof value === 'string' ? value : value.City),
         map(name => name ? this._filter(name) : this.Hotels.slice()));
-      console.log(this.Hotels.slice()[0].city);
     }, error => console.error(error));
   }
   ngOnInit() {

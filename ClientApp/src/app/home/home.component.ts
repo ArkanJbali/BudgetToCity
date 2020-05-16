@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
     if (this.searchBudgetForm.valid) {
       this.searchBudgetForm.controls.fromDate.setValue(moment(new Date(this.searchBudgetForm.controls.fromDate.value)).format('YYYY-MM-DD'));
       this.searchBudgetForm.controls.returnDate.setValue(moment(new Date(this.searchBudgetForm.controls.returnDate.value)).format('YYYY-MM-DD'));
-      console.log(this.searchBudgetForm.value);
+      console.log('Home form data', this.searchBudgetForm.value);
       this.openStepper();
     }
     else {

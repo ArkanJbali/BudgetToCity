@@ -29,7 +29,7 @@ import { PostsComponent } from './dashboard/modules/posts/posts.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './login/login.component';
-import { MatButtonModule, MatDialogModule, MatStepperModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatStepperModule, MatTooltipModule } from '@angular/material';
 import { BudgetReservationComponent } from './home/budget-reservation/budget-reservation.component';
 
 @NgModule({
@@ -51,6 +51,7 @@ import { BudgetReservationComponent } from './home/budget-reservation/budget-res
     MatDialogModule,
     MatButtonModule,
     MatStepperModule,
+    MatTooltipModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     NgCircleProgressModule.forRoot({
       // set defaults here

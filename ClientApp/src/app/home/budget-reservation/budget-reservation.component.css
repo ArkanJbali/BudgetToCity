@@ -8,3 +8,58 @@
 .mat-form-field {
   margin-top: 16px;
 }
+.infoMessage{
+    color: lightslategrey;
+}
+
+.blur {
+  box-shadow: 20px 20px 50px grey;
+}
+
+.searchBtn {
+  float: right;
+}
+
+
+.centered {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80%;
+}
+
+.imageTxt {
+  position: relative;
+  text-align: center;
+  color: black;
+}
+
+.centeredFlights {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 60%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.imageTxtFlight {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.selectBtn {
+  top: 50%;
+  left: 50%;
+}
+
+.example-card {
+  max-width: 100%;
+  margin: 4px
+}
+
+.example-header-image {
+  margin-left: 75%;
+}
