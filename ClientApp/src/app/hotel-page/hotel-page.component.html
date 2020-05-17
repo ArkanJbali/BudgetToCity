@@ -75,13 +75,13 @@
   <div class="content" style="margin-top:320px;" *ngIf="searchHotelForm.valid && hotelResponseCheck && hotelsData.length >0" >
     <div class="container blur">
       <br /><br />
-      <h3 style="color:black;">Hotels List: </h3>
+      <h3 style="color:black;">Choose You'r Hotel: </h3>
       <hr />
             <div id="hotelsList" *ngFor="let h of hotelsData">
               <mat-card class="example-card">
                 <mat-card-header>
 
-                  <mat-card-title>{{h.name}} </mat-card-title>
+                  <mat-card-title><b>{{h.name}}</b></mat-card-title>
                   <mat-card-subtitle>Rate: {{h.rating}}/5.0</mat-card-subtitle>
                 </mat-card-header>
                 <br />
@@ -100,11 +100,13 @@
                           {{h.ranking}}
 
                         </p>
-                        <h4>{{h.price}}</h4>
-
                         <br /><br />
-                              <a class="btn btn-success selectBtn" href="{{h.hac_offers.offers[0].link}}" target="_blank">Visist Link <i class="fas fa-arrow-right"></i> </a>
-                       
+
+                        <h4>Price Per Night: {{h.price}}</h4>
+
+                        <br />
+                        <a style="margin-left:550px;" class="btn btn-success selectBtn" href="{{h.hac_offers.offers[0].link}}" target="_blank">Visit Link <i class="fas fa-arrow-right"></i> </a>
+
                       </mat-card-content>
                     </div>
                   </div>

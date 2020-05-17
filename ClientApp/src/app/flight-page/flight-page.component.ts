@@ -198,8 +198,8 @@ export class FlightPageComponent implements OnInit {
       elmnt.scrollIntoView(true); 
  
   }
-  addFlight(i) {
-    console.log("Flight Div: ",i);
+  addFlight(i,j) {
+    confirm("You Choosed: " + i.Name + "\n" + "Price: " + j + "\n Click To Confirm");
   }
 }
 

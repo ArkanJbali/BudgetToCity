@@ -97,7 +97,7 @@
         <div class="col-md-2 border-dark border-left">
           {{priceFlightsArr[i]}}<br />
           {{directFlights == 'True' ? "Direct Plan" :"Nondirect Plan"}} <br />
-          <button class="btn btn-success selectBtn" (click)=addFlight(c)>
+          <button class="btn btn-success selectBtn" (click)=addFlight(c,priceFlightsArr[i])>
             Select <i class="fas fa-arrow-right"></i>
           </button>
         </div>
