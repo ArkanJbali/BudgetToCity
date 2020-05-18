@@ -1,24 +1,38 @@
-<button mat-raised-button color="primary"> TEST </button><br /><br />
-<div>
-  <circle-progress [percent]="progress"
-                   [radius]="5"
-                   [outerStrokeWidth]="0.5"
-                   [innerStrokeWidth]="0.8"
-                   [space]="-3"
-                   [outerStrokeColor]="'#4882c2'"
-                   [innerStrokeColor]="'#e7e8ea'"
-                   [titleFontSize]="3"
-                   [titleColor]="'#fff'"
-                   [unitsColor]="'#fff'"
-                   [unitsFontSize]="4"
-                   [showSubtitle]="false"
-                   [animation]="true"
-                   [animationDuration]="200"
-                   [startFromZero]="false"
-                   [responsive]="true"
-                   *ngIf='visibleOrNot'></circle-progress>
-</div><br />
-<div *ngIf='visibleOrNot' style="margin-left:7%;">
-  <span *ngIf='visibleOrNot'> {{subtitle}} </span>
+<div class="img-background">
+  <section>
+    <div class="box">
+      <h2>Rental Car Comming Soon</h2>
+      <p>
+        asdasfdasf f asfas as d sadfsaf asdasfas fas fsa fsa <br />
+        asdas das dasfqwf qw f qwffsa asf asfasfas fsa  asf  <br />
+        asdasd asfqwqw w eq q   qwr   asdsafa fas sfa a sfasf a  <br />
+      </p>
+    </div>
+  </section>
+  <div class="container">
+    <div class="row">
+      <div class="col progress" *ngIf='visibleOrNot'>
+        <circle-progress [percent]="progress"
+                         [radius]="5"
+                         [outerStrokeWidth]="0.5"
+                         [innerStrokeWidth]="0.8"
+                         [space]="-3"
+                         [outerStrokeColor]="'#4882c2'"
+                         [innerStrokeColor]="'#e7e8ea'"
+                         [titleFontSize]="3"
+                         [titleColor]="'#fff'"
+                         [unitsColor]="'#fff'"
+                         [unitsFontSize]="4"
+                         [showSubtitle]="false"
+                         [animation]="true"
+                         [animationDuration]="200"
+                         [startFromZero]="false"
+                         [responsive]="true"></circle-progress>
+      </div>
+      <div class="col progress" *ngIf='visibleOrNot' style="margin-left:7%;">
+        <span *ngIf='visibleOrNot'> {{subtitle}} </span>
+      </div>
+    </div>
+  </div>
 </div>
 
