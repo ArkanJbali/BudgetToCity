@@ -17,7 +17,8 @@
   <div class="row">
     <div class="col">
       <h3>
-        Your Budget is: {{userBudget}}</h3>
+        Your Budget is: {{userBudget | currency}}
+      </h3>
     </div>
   </div>
 </div>
@@ -26,19 +27,23 @@
         <mat-step [stepControl]="firstFormGroup" errorMessage="Hotel is required.">
           <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Pick up a hotel</ng-template>
-            <mat-form-field>
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="Hotel" formControlName="firstCtrl" required>
-            </mat-form-field>
-            <div class="content" style="margin-top:320px;" *ngIf="hotelResponseCheck">
+            <!--<mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Hotel">
+  </mat-form-field>-->
+            <div style="margin-top:50px;" *ngIf="hotelResponseCheck">
               <div class="container blur">
                 <br /><br />
                 <h3 style="color:black;">Hotels List: </h3>
                 <hr />
-                <div id="hotelsList" *ngFor="let h of hotelsData">
+                <div id="hotelsList" *ngFor="let h of hotelsData; let i = index">
                   <mat-card class="example-card">
                     <mat-card-header>
-
+                      <mat-checkbox formControlName="firstCtrl" required  (change)="onChangeHotel(h)" [disabled]="isCheckedHotel && (isCheckedHotelName!=h)"
+                      matTooltip="*Please choose one hotel to complete your reservation"
+                      [matTooltipShowDelay]="1000"
+                      [matTooltipHideDelay]="2000">
+                      </mat-checkbox><br />
                       <mat-card-title>{{h.name}} </mat-card-title>
                       <mat-card-subtitle>Rate: {{h.rating}}/5.0</mat-card-subtitle>
                     </mat-card-header>
@@ -72,21 +77,23 @@
               </div>
             </div>
             <div>
-              <button mat-button matStepperNext>Next</button>
+              <button mat-button matStepperNext (click)="addHotel()">Next</button>
             </div>
           </form>
         </mat-step>
         <mat-step [stepControl]="secondFormGroup" errorMessage="Flight is required.">
           <form [formGroup]="secondFormGroup">
             <ng-template matStepLabel>Pick up a flight</ng-template>
-            <mat-form-field>
+            <!--<mat-form-field>
               <mat-label>Address</mat-label>
-              <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl"
+              <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName=""
                      required>
-            </mat-form-field>
-            <div class="content" style="margin-top:320px;" *ngIf="responseCheck">
+            </mat-form-field>-->
+            <div class="content" style="margin-top:50px;" *ngIf="responseCheck">
               <div class="container blur">
                 <br /><br />
+                <h3 style="color:black;">Flight List: </h3>
+                <hr />
                 <div class="row border" id='flightList' *ngFor="let c of carriersF; let i = index">
 
                   <div class="col-md-2 imageTxtFlight">
@@ -101,11 +108,16 @@
                     </div>
                   </div>
                   <div class="col-md-2 border-dark border-left">
-                    {{priceFlightsArr[i]}}<br />
+                    {{priceFlightsArr[i] | currency}}<br />
                     {{directFlights == 'True' ? "Direct Plan" :"Nondirect Plan"}} <br />
-                    <button class="btn btn-success selectBtn" (click)=addFlight(c)>
-                      Select <i class="fas fa-arrow-right"></i>
-                    </button>
+                    <mat-checkbox formControlName="secondCtrl" required (change)="onChangeFlight(i,priceFlightsArr[i])" [disabled]="isCheckedFlight && (isCheckedFlightName!=i)"
+                                  matTooltip="*Please choose one flight to complete your reservation"
+                                  [matTooltipShowDelay]="1000"
+                                  [matTooltipHideDelay]="2000">
+                    </mat-checkbox><br />
+                    <!--<button class="btn btn-success selectBtn" (click)=addFlight(c)>
+    Select <i class="fas fa-arrow-right"></i>
+  </button>-->
                   </div>
                   <div class="w-100 d-none d-md-block"></div>
                   <div class="col-md-2 imageTxtFlight">
@@ -126,13 +138,94 @@
             </div>
             <div>
               <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
+              <button mat-button matStepperNext (click)="addHotel()">Next</button>
             </div>
           </form>
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
-          <p>You are now done.</p>
+          <div *ngIf="isDoneCanFetch">
+            <div style="margin-top:50px;" *ngIf="isHotelSelected">
+              <div class="container blur">
+                <br /><br />
+                <h3 style="color:black;">Your hotel: </h3>
+                <hr />
+                <div id="hotelsList">
+                  <mat-card class="example-card">
+                    <mat-card-header>
+                      <mat-card-title>{{isCheckedHotelName.name}} </mat-card-title>
+                      <mat-card-subtitle>Rate: {{isCheckedHotelName.rating}}/5.0</mat-card-subtitle>
+                    </mat-card-header>
+                    <br />
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-4">
+                          <img mat-card-image src="{{isCheckedHotelName.photo.images.original.url}}" alt="Hotel">
+                        </div>
+                        <div class="col-8">
+                          <mat-card-content>
+                            <div class="example-header-image imageTxt">
+                              <img src="../assets/rating.png" style="width:40%;">
+                              <span class="centered">{{isCheckedHotelName.hotel_class}}</span>
+                            </div>
+                            <p>
+                              {{isCheckedHotelName.ranking}}
+
+                            </p>
+                            <h4>{{isCheckedHotelName.price}}</h4>
+
+                            <br /><br />
+                            <!--<a class="btn btn-success selectBtn" href="{{isCheckedHotelName.hac_offers.offers[0].link}}" target="_blank">Visist Link <i class="fas fa-arrow-right"></i> </a>-->
+
+                          </mat-card-content>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-card>
+                </div>
+              </div>
+            </div>
+            <!------------------------------------------------->
+            <div class="content" style="margin-top:50px;" *ngIf="isFlightSelected">
+              <div class="container blur">
+                <br /><br />
+                <h3 style="color:black;">Your flight: </h3>
+                <hr />
+                <div class="row border" id='flightList'>
+
+                  <div class="col-md-2 imageTxtFlight">
+                    <img src="../assets/BudgetToCityLogo.png" alt="Airline1" style="width:40%;">
+                    <span class="centeredFlights">{{carriersF2.Name}}</span>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="row">
+                      <div class="col-6 col-md-2">{{placesF2[0].IataCode}}</div>
+                      <div class="col-6 col-md-3"> <img src="../assets/airplane_line.png" style="width:100%;"> </div>
+                      <div class="col-6 col-md-2">{{placesF2[1].IataCode}}</div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 border-dark border-left">
+                    {{isFlightPriceSelected | currency}}<br />
+                    {{directFlights == 'True' ? "Direct Plan" :"Nondirect Plan"}} <br />
+                  </div>
+                  <div class="w-100 d-none d-md-block"></div>
+                  <div class="col-md-2 imageTxtFlight">
+                    <img src="../assets/BudgetToCityLogo.png" alt="Airline2" style="width:40%;">
+                    <span class="centeredFlights">
+                      {{carriersF2.Name}}
+                    </span>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="row">
+                      <div class="col-6 col-md-2">{{placesF2[1].IataCode}}</div>
+                      <div class="col-6 col-md-3"> <img src="../assets/airplane_line.png" style="width:100%;"> </div>
+                      <div class="col-6 col-md-2">{{placesF2[0].IataCode}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button (click)="stepper.reset()">Reset</button>

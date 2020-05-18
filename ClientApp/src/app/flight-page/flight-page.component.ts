@@ -128,27 +128,10 @@ export class FlightPageComponent implements OnInit {
     }
   }
   getFlights() {
-    var data = null;
-    var jsonText = null;
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-    
-    xhr.addEventListener("readystatechange", function () {
-      if (this.readyState === this.DONE) {
-        //console.log(this.responseText);
-        
-      }
-    });
     var from = (this.searchFlightForm.controls.fromAirportCode.value.airportCode) + "-sky";
     var to = (this.searchFlightForm.controls.toAirportCode.value.airportCode) + "-sky";
     var depart = this.searchFlightForm.controls.departDate.value;
     var returns = this.searchFlightForm.controls.returnDate.value;
-
-    xhr.open("GET", "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/" + from + "/" + to + "/" + depart + "?inboundpartialdate=" + returns +"");
-    xhr.setRequestHeader("x-rapidapi-host", "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com");
-    xhr.setRequestHeader("x-rapidapi-key", "df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f");
-
-    xhr.send(data);
     this.httpClient.get("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/" + from + "/" + to + "/" + depart + "?inboundpartialdate=" + returns + "", {
       "headers": {
       "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
@@ -189,6 +172,10 @@ export class FlightPageComponent implements OnInit {
     if (err.status == 400) {
       this.responseCheck = false;
       this.toastrService.error("Error in API get status: "+err.status, 'Error');
+    }
+    if (err.status) {
+      this.responseCheck = false;
+      this.toastrService.error("Error in API get status: " + err.status, 'Error');
     }
     });
   }

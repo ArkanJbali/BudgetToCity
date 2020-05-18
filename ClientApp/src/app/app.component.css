@@ -1,4 +1,9 @@
-img{
+.backImg {
+  background: url("../assets/CountriesWallpapers/Dubai.jpg") no-repeat top center fixed;
+  height: auto;
+  width: 100%;
+}
+  img{
   width: 3%;
   margin-right: 2%;
   margin-left: 5%;

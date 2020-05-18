@@ -29,14 +29,23 @@ export class BudgetReservationComponent implements OnInit {
   plusOrMinus: number;
   placesF: Places[];
   carriersF: Carries[];
+
+  quotesF2: Quotes[];
+  placesF2: Places[];
+  carriersF2: Carries[];
+
   total = 1;
   priceFlight: number;
+  flightsData;
+  //---------------------------------
   priceFlightsArr: number[] = [];
+  flightsArrData: any = [];
   directFlights: boolean;
   responseCheck = false;
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  //----------------------------------
   hotelsData: HotelCard;
   locationID: number;
   diffInDays: number;
@@ -87,7 +96,7 @@ export class BudgetReservationComponent implements OnInit {
         "x-rapidapi-key": "df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f"
       }
     }).subscribe(data => {
-      console.log('Inside HTTPClient - locations: ', data);
+      //console.log('Inside HTTPClient - locations: ', data);
       if (data.hasOwnProperty('data') && Object.keys(data['data']).length > 0) {
         this.locationID = data['data'][0]['result_object']['location_id'];
         this.locationResponseCheck = true;
@@ -123,7 +132,7 @@ export class BudgetReservationComponent implements OnInit {
         setTimeout(() => {
           this.hotelsData = data['data'];
           this.hotelResponseCheck = true;
-          console.log('data length: ', this.hotelsData, '\nResponse:', this.hotelResponseCheck);
+          //console.log('data length: ', this.hotelsData, '\nResponse:', this.hotelResponseCheck);
         }, 3000);
         //setTimeout(() => {
         // loading part
@@ -159,6 +168,7 @@ export class BudgetReservationComponent implements OnInit {
       }
     }).subscribe(data => {
       console.log('Inside HTTPClient: ', data);
+      this.flightsData = data;
       //jsonText = JSON.parse(data.toString());
       if (data.hasOwnProperty('Quotes') && Object.keys(data['Quotes']).length > 0) {
         this.carriersF = data['Carriers'];
@@ -189,6 +199,58 @@ export class BudgetReservationComponent implements OnInit {
   addFlight(i) {
     console.log("Flight Div: ", i);
   }
+  isCheckedHotel;
+  isCheckedHotelName;
+  isHotelSelected = false;
+  onChangeHotel(e) {
+    this.isCheckedHotel = !this.isCheckedHotel;
+    this.isCheckedHotelName = e;
+    console.log(this.isCheckedHotelName);
+  }
+  isCheckedFlight;
+  isCheckedFlightName;
+  isFlightSelected = false;
+  isFlightPriceSelected;
+  onChangeFlight(e, price) {
+    this.isCheckedFlight = !this.isCheckedFlight;
+    this.isCheckedFlightName = e;
+    this.isFlightPriceSelected = price;
+    //console.log(this.isCheckedFlightName);
+  }
+  isDoneCanFetch = false;
+  addHotel() {
+    //console.log("Hotel Div: ", h);
+    if (this.isCheckedHotelName != null && this.isHotelSelected == false) {
+      var splitted = this.isCheckedHotelName['price'].split("-");
+      var pricePerNight = splitted[1].replace(/[^0-9 ]/g, "");
+      console.log(pricePerNight);
+      this.userBudget -= pricePerNight;
+      this.isHotelSelected = true;
+    }
+    if (this.isCheckedFlightName != null && this.isFlightSelected == false) {
+      this.flightsArrData.push(this.flightsData['Carriers'][this.isCheckedFlightName]);
+      this.flightsArrData.push(this.flightsData['Places']);
+      this.flightsArrData.push(this.flightsData['Quotes'][0]);
+      this.carriersF2 = this.flightsArrData[0];
+      this.quotesF2 = this.flightsArrData[2];
+      this.placesF2 = this.flightsArrData[1];
+      console.log('carriersF2', this.carriersF2);
+      console.log('quotesF2', this.quotesF2);
+      console.log('placesF2', this.placesF2);
+      console.log(this.flightsArrData);
+      this.userBudget -= this.isFlightPriceSelected;
+      this.isFlightSelected = true;
+    }
+    if (this.isFlightSelected == true && this.isHotelSelected == true) {
+      this.isDoneCanFetch = true;
+    }
+  }
+  //findBudget() {
+  //  let hotelPrices = Math.max.apply(Math, this.hotelsData['price'].map(function (o) { return o; }));
+  //  console.log('Hotel Min price: ', hotelPrices);
+  //  let flightPrices = Math.max.apply(Math, this.priceFlightsArr.map(function (o) { return o; }));
+  //  console.log('Flight Min price: ', flightPrices);
+  //}
 }
 interface HotelCard {
   hotelName: string;
