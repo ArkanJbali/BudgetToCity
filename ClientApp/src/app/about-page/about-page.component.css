@@ -5,12 +5,11 @@
 }
 
 .img-card {
-  background: url("src\assets\travelAbout1.jpg") no-repeat center;
+  background: url("src\assets\travelAbout3.jpg") no-repeat;
   height: 100%;
   width: 100%;
   display: block;
   margin: auto;
-  border-radius: 4px;
 }
 
 .header {
@@ -28,100 +27,21 @@
   color: inherit;
   font-size: 2rem;
 }
+.header2{
+  background: url("src\assets\travelAbout4.jpg") no-repeat top center fixed;
+  background-size: cover;
+  height: 300px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  /*filter: brightness(50%);*/
+}
 
 .content {
-  margin-bottom: 10%;
   padding: 0;
-  background-color: white;
+  background: #f7f7f7;
 }
 
-.slide-up-fade-in {
-  animation: slide-up-fade-in ease 1s;
-  animation-iteration-count: 1;
-  transform-origin: 50% 50%;
-  animation-fill-mode: forwards; /*when the spec is finished*/
-  -webkit-animation: slide-up-fade-in ease 1s;
-  -webkit-animation-iteration-count: 1;
-  -webkit-transform-origin: 50% 50%;
-  -webkit-animation-fill-mode: forwards; /*Chrome 16+, Safari 4+*/
-  -moz-animation: slide-up-fade-in ease 1s;
-  -moz-animation-iteration-count: 1;
-  -moz-transform-origin: 50% 50%;
-  -moz-animation-fill-mode: forwards; /*FF 5+*/
-  -o-animation: slide-up-fade-in ease 1s;
-  -o-animation-iteration-count: 1;
-  -o-transform-origin: 50% 50%;
-  -o-animation-fill-mode: forwards; /*Not implemented yet*/
-  -ms-animation: slide-up-fade-in ease 1s;
-  -ms-animation-iteration-count: 1;
-  -ms-transform-origin: 50% 50%;
-  -ms-animation-fill-mode: forwards; /*IE 10+*/
-  opacity: 0;
-  opacity: 1\9;
-}
-
-
-
-
-@keyframes slide-up-fade-in {
-  0% {
-    opacity: 0;
-    transform: translate(0px,150px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translate(0px,0px);
-  }
-}
-
-@-moz-keyframes slide-up-fade-in {
-  0% {
-    opacity: 0;
-    -moz-transform: translate(0px,150px);
-  }
-
-  100% {
-    opacity: 1;
-    -moz-transform: translate(0px,0px);
-  }
-}
-
-@-webkit-keyframes slide-up-fade-in {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate(0px,150px);
-  }
-
-  100% {
-    opacity: 1;
-    -webkit-transform: translate(0px,0px);
-  }
-}
-
-@-o-keyframes slide-up-fade-in {
-  0% {
-    opacity: 0;
-    -o-transform: translate(0px,150px);
-  }
-
-  100% {
-    opacity: 1;
-    -o-transform: translate(0px,0px);
-  }
-}
-
-@-ms-keyframes slide-up-fade-in {
-  0% {
-    opacity: 0;
-    -ms-transform: translate(0px,150px);
-  }
-
-  100% {
-    opacity: 1;
-    -ms-transform: translate(0px,0px);
-  }
-}
 
 .clearfix {
   clear: both;
@@ -230,4 +150,60 @@ section {
   100% {
     opacity: 0;
   }
+}
+.aboutHeader {
+  -webkit-box-pack: center !important;
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+  align-self: center !important;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-family: inherit;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+}
+.aboutDiv {
+  /*margin-left: -200px;
+  -ms-flex-item-align: center !important;
+  align-self: center !important;
+  padding: 3rem !important;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  background:white;
+  height:50%;
+  z-index:2;*/
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: -100px;
+  float: left;
+  width: 100%;
+  background: white;
+  padding: 3rem !important;
+  border-radius: 4px;
+}
+.tiheader {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 2rem;
+  position: relative;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.subHeader {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
