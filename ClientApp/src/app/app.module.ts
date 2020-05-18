@@ -31,6 +31,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './login/login.component';
 import { MatButtonModule, MatDialogModule, MatStepperModule, MatTooltipModule, MatCheckboxModule } from '@angular/material';
 import { BudgetReservationComponent } from './home/budget-reservation/budget-reservation.component';
+import { TourPackagesComponent } from './tour-packages/tour-packages.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { BudgetReservationComponent } from './home/budget-reservation/budget-res
     AlertComponent,
     HotelPageComponent,
     LoginComponent,
-    BudgetReservationComponent
+    BudgetReservationComponent,
+    TourPackagesComponent
   ],
   imports: [
     DefaultModule,
@@ -86,6 +88,7 @@ import { BudgetReservationComponent } from './home/budget-reservation/budget-res
       { path: 'cars', component: CarPageComponent },
       { path: 'login', component: LoginComponent },
       { path: 'hotels', component: HotelPageComponent },
+      { path: 'tour', component: TourPackagesComponent },
       {
         path: 'dashboard', component: DefaultComponent, children: [
           { path: '', component: DashboardComponent },
