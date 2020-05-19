@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using BudgetToCity.Models;
 
 namespace BudgetToCity.Models
 {
@@ -30,6 +31,29 @@ namespace BudgetToCity.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UsersPosts>(entity =>
+            {
+                entity.HasKey(e => e.postID);
+
+                entity.Property(e => e.postTitle).IsRequired()
+                    .HasColumnName("postTitle")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.postContent).IsRequired()
+                    .HasColumnName("postContent")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.postTime).IsRequired()
+                    .HasColumnName("postTime");
+                entity.Property(e => e.isApproved).IsRequired()
+                    .HasColumnName("isApproved");
+                entity.Property(e => e.userName).IsRequired()
+                    .HasColumnName("userName")
+                    .HasMaxLength(50);
+                entity.Property(e => e.userEmail).IsRequired()
+                    .HasColumnName("userEmail")
+                    .HasMaxLength(50);
+            });
             modelBuilder.Entity<Airports>(entity =>
             {
                 entity.HasNoKey();
@@ -96,5 +120,7 @@ namespace BudgetToCity.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<BudgetToCity.Models.UsersPosts> UsersPosts { get; set; }
     }
 }
