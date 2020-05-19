@@ -49,7 +49,8 @@ import { UserPostsComponent } from './user-posts/user-posts.component';
     TourPackagesComponent,
     UserPostsComponent
   ],
-  imports: [  
+  imports: [
+    FormsModule,
     DefaultModule,
     CommonModule,
     MatIconModule,

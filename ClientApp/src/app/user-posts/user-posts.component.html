@@ -4,37 +4,30 @@
 
   <h4 style="margin-top:25%;">"We all need people who will give us <br />feedback. That's how we improve."</h4>
 </div>
+
 <div class="content">
+
+  <br /><br /><br />
   <div class="container">
-    <div class="row">
-      <div class="col-2">pic</div>
-      <div class="col">
-        <div class="row">
-          Title
-        </div>
-        <div class="row">
-          <div class="col">UserName</div>
-          <div class="col">Date</div>
-        </div>
-        <div class="row">
-          Description
+    <div style="margin-bottom:5%;" *ngFor="let p of posts">
+      <div class="row">
+        <div class="col">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <img mat-card-avatar src="../assets/BudgetToCityLogo.png" />
+              <mat-card-title><b>{{p.postTitle}}</b></mat-card-title>
+              <mat-card-subtitle>
+                <mat-icon>account_circle</mat-icon><span>{{p.userName}}</span>
+                <mat-icon style="margin-left:10%;">today</mat-icon><span>{{p.postTime | date:'HH:mm:ss dd/MM/yy'}}</span>
+              </mat-card-subtitle>
+
+            </mat-card-header>
+            
+            <mat-card-content>{{p.postContent}}</mat-card-content>
+          </mat-card>
         </div>
       </div>
-        <!--<div class="blog-entry d-md-flex">
-          <a class="img img-2"></a>
-          <div class="text text-2">
-            <h3 class="mb-2"><a href="single.html">A Loving Heart is the Truest Wisdom</a></h3>
-            <div class="meta-wrap">
-              <p>
-                <span><i class="fa fa-icon-calendar"></i>June 28, 2019</span>
-                <span><a ><i class="fa fa-icon-folder-o"></i>Travel</a></span>
-                <span><i class="fa fa-icon-comment2"></i>5 Comment</span>
-              </p>
-            </div>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-            <p><a  class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
-          </div>
-        </div>-->
-      </div>
+    </div>
   </div>
+  <br /><br /><br />
 </div>

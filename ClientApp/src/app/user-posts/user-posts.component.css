@@ -27,3 +27,13 @@ h4 {
   padding: 0;
   background: #f7f7f7;
 }
+
+span{
+    margin-left:3%;
+}
+postCard{
+    margin-bottom: 10%;
+}
+::ng-deep .mat-card-header-text {
+  width: 100%;
+}

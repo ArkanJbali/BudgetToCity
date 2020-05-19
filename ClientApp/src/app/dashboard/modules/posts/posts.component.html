@@ -1,51 +1,79 @@
   <div>
-    <div class="mat-elevation-z8">
-      <h3>Users Posts List</h3>
-      <hr />
-      <table mat-table [dataSource]="dataSource">
+  <div class="mat-elevation-z8">
+    <h3>Users Posts List</h3>
+    <hr />
+    <table mat-table [dataSource]="dataSource" class="table">
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="Post ID">
-          <th mat-header-cell *matHeaderCellDef> Post ID </th>
-          <td mat-cell *matCellDef="let element"> {{element.postID}} </td>
-        </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="Post ID">
+        <th mat-header-cell *matHeaderCellDef> Post ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.postID}} </td>
+      </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="Title">
-          <th mat-header-cell *matHeaderCellDef> Title </th>
-          <td mat-cell *matCellDef="let element"> {{element.postTitle}} </td>
-        </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="Title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.postTitle}} </td>
+      </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="Content">
-          <th mat-header-cell *matHeaderCellDef> Content </th>
-          <td mat-cell *matCellDef="let element"> {{element.postContent}} </td>
-        </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="Content">
+        <th mat-header-cell *matHeaderCellDef> Content </th>
+        <td mat-cell *matCellDef="let element" style="width:50%;"> {{element.postContent}} </td>
+      </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="DateTime">
-          <th mat-header-cell *matHeaderCellDef> DateTime </th>
-          <td mat-cell *matCellDef="let element"> {{element.postTime}} </td>
-        </ng-container>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="DateTime">
+        <th mat-header-cell *matHeaderCellDef> DateTime </th>
+        <td mat-cell *matCellDef="let element"> {{element.postTime | date:'HH:mm:ss dd/MM/yy'}} </td>
+      </ng-container>
 
-        <ng-container matColumnDef="isApproved">
-          <th mat-header-cell *matHeaderCellDef> isApproved </th>
-          <td mat-cell *matCellDef="let element"> {{element.isApproved}} </td>
-        </ng-container>
+      <ng-container matColumnDef="isApproved">
+        <th mat-header-cell *matHeaderCellDef> isApproved </th>
+        <td mat-cell *matCellDef="let element"> {{element.isApproved}} </td>
+      </ng-container>
 
-        <ng-container matColumnDef="User Name">
-          <th mat-header-cell *matHeaderCellDef> User Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
-        </ng-container>
+      <ng-container matColumnDef="User Name">
+        <th mat-header-cell *matHeaderCellDef> User Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+      </ng-container>
 
-        <ng-container matColumnDef="Email">
-          <th mat-header-cell *matHeaderCellDef> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element.userEmail}} </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-    </div>
+      <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.userEmail}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon class="btn btn-primary" (click)="updatePost(element)">edit</mat-icon>
+          <mat-icon class="btn btn-outline-danger" (click)="deletePost(element.postID)">clear</mat-icon>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
   </div>
+  <form #f="ngForm" style="width:30%;" *ngIf="checkUpdatePost">
+    <label>postTitle</label>
+    <input mat-input type="text" name="postTitle" [(ngModel)]="currentPost.postTitle">
+    <br>
+    <label>postContent</label>
+    <input mat-input type="text" name="postContent" [(ngModel)]="currentPost.postContent">
+    <br>
+    <label>postTime</label>
+    <input mat-input type="text" name="postTime" [(ngModel)]="currentPost.postTime" disabled>
+    <br>
+    <label>isApproved</label>
+    <input mat-input type="text" name="isApproved" [(ngModel)]="currentPost.isApproved">
+    <br>
+    <label>userName</label>
+    <input mat-input type="text" name="userName" [(ngModel)]="currentPost.userName" disabled>
+    <br>
+    <label>userEmail</label>
+    <input mat-input type="text" name="userEmail" [(ngModel)]="currentPost.userEmail" disabled>
+    <br>
+    <input type="button" (click)="createOrUpdatePost(f)" value="Update User">
+  </form>
+</div>
 
