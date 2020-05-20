@@ -36,6 +36,7 @@ export class PostsServiceService {
   }
 
   saveBlogPost(userPost): Observable<Posts> {
+    console.log(userPost);
     return this.http.post<Posts>(this.myAppUrl + this.myApiUrl, JSON.stringify(userPost), this.httpOptions)
       .pipe(
         retry(1),

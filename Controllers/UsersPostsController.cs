@@ -48,8 +48,8 @@ namespace BudgetToCity.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsersPosts([FromRoute] int id, [FromBody] UsersPosts usersPosts)
         {
-            Console.WriteLine(usersPosts.postTitle);
-            Console.WriteLine(id);
+            //Console.WriteLine(usersPosts.postTitle);
+            //Console.WriteLine(id);
 
             if (id != usersPosts.postID)
             {

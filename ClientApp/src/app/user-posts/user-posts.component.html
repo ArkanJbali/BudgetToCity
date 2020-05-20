@@ -8,26 +8,64 @@
 <div class="content">
 
   <br /><br /><br />
-  <div class="container">
-    <div style="margin-bottom:5%;" *ngFor="let p of posts">
-      <div class="row">
-        <div class="col">
-          <mat-card class="example-card">
-            <mat-card-header>
-              <img mat-card-avatar src="../assets/BudgetToCityLogo.png" />
-              <mat-card-title><b>{{p.postTitle}}</b></mat-card-title>
-              <mat-card-subtitle>
-                <mat-icon>account_circle</mat-icon><span>{{p.userName}}</span>
-                <mat-icon style="margin-left:10%;">today</mat-icon><span>{{p.postTime | date:'HH:mm:ss dd/MM/yy'}}</span>
-              </mat-card-subtitle>
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <h1 class="tiheader">What Our Customers Say</h1>
+                    <h6 class="subHeader">Leave Your Comment</h6>
+                  </div>
+                </div>
+                <div style="margin-bottom:5%;" *ngFor="let p of posts">
+                  <div class="row">
+                    <div class="col">
+                      <mat-card class="example-card">
+                        <mat-card-header>
+                          <img mat-card-avatar src="../assets/BudgetToCityLogo.png" />
+                          <mat-card-title><b>{{p.postTitle}}</b></mat-card-title>
+                          <mat-card-subtitle>
+                            <mat-icon>account_circle</mat-icon><span>{{p.userName}}</span>
+                            <mat-icon style="margin-left:10%;">today</mat-icon><span>{{p.postTime | date:'HH:mm:ss dd/MM/yy'}}</span>
+                          </mat-card-subtitle>
 
-            </mat-card-header>
-            
-            <mat-card-content>{{p.postContent}}</mat-card-content>
-          </mat-card>
+                        </mat-card-header>
+
+                        <mat-card-content>{{p.postContent}}</mat-card-content>
+                      </mat-card>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  <br /><br /><br />
+  <div class="container">
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit(postForm.value)">
+      <div class="form-group row">
+        <div class="form-group col">
+          <mat-form-field class="example-full-width">
+            <mat-label for="inputName">Name</mat-label>
+            <input type="text" class="form-control" id="inputName" placeholder="Name" matInput formControlName="userName">
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6">
+          <mat-form-field class="example-full-width" style=" width: 100%;">
+            <mat-label for="inputEmail4">Email</mat-label>
+            <input type="email" class="form-control" id="inputEmail4" placeholder="Email@email.com" matInput formControlName="userEmail">
+          </mat-form-field>
+        </div>
+        <div class="form-group col">
+          <mat-form-field class="example-full-width">
+            <mat-label for="inputTitle">Title</mat-label>
+            <input type="text" class="form-control" id="inputTitle" placeholder="Reservation, Service..." matInput formControlName="postTitle">
+          </mat-form-field>
         </div>
       </div>
-    </div>
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label for="inputContent">Description</mat-label>
+          <textarea class="form-control" id="inputContent" rows="3" matInput formControlName="postContent"></textarea>
+        </mat-form-field>
+      </div>
+        <button type="submit" class="btn btn-primary">Post Comment</button>
+    </form>
+    <br /><br /><br />
   </div>
-  <br /><br /><br />
 </div>
