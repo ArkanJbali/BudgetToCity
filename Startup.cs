@@ -27,7 +27,16 @@ namespace BudgetToCity
 
             services.AddDbContext<BudgeToCityContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("connectionStr")));
-
+            var clientDomain = Configuration.GetValue<string>("ClientDomain");
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(clientDomain,
+            //        builder => builder.AllowAnyOrigin()
+            //            .AllowAnyMethod()
+            //            .AllowAnyHeader()
+            //            .AllowCredentials());
+            //});
+            services.AddCors(options => options.AddPolicy(clientDomain, builder => builder.WithOrigins("")));
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -53,6 +62,8 @@ namespace BudgetToCity
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCors(options => options.WithOrigins("http://localhost:44391").AllowAnyMethod().AllowAnyHeader());
+            //app.UseCors("ClientDomain");
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();

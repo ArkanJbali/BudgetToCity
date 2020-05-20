@@ -9,6 +9,7 @@ using BudgetToCity.Models;
 
 namespace BudgetToCity.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersPostsController : ControllerBase
@@ -29,7 +30,7 @@ namespace BudgetToCity.Controllers
 
         // GET: api/UsersPosts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UsersPosts>> GetUsersPosts(int id)
+        public async Task<ActionResult<UsersPosts>> GetUsersPosts([FromRoute] int id)
         {
             var usersPosts = await _context.UsersPosts.FindAsync(id);
 
@@ -45,10 +46,14 @@ namespace BudgetToCity.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsersPosts(int id, UsersPosts usersPosts)
+        public async Task<IActionResult> PutUsersPosts([FromRoute] int id, [FromBody] UsersPosts usersPosts)
         {
+            Console.WriteLine(usersPosts.postTitle);
+            Console.WriteLine(id);
+
             if (id != usersPosts.postID)
             {
+                
                 return BadRequest();
             }
 
@@ -77,7 +82,7 @@ namespace BudgetToCity.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<UsersPosts>> PostUsersPosts(UsersPosts usersPosts)
+        public async Task<ActionResult<UsersPosts>> PostUsersPosts([FromBody] UsersPosts usersPosts)
         {
             _context.UsersPosts.Add(usersPosts);
             await _context.SaveChangesAsync();
@@ -87,7 +92,7 @@ namespace BudgetToCity.Controllers
 
         // DELETE: api/UsersPosts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<UsersPosts>> DeleteUsersPosts(int id)
+        public async Task<ActionResult<UsersPosts>> DeleteUsersPosts([FromRoute] int id)
         {
             var usersPosts = await _context.UsersPosts.FindAsync(id);
             if (usersPosts == null)
