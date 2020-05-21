@@ -33,6 +33,7 @@ import { MatButtonModule, MatDialogModule, MatStepperModule, MatTooltipModule, M
 import { BudgetReservationComponent } from './home/budget-reservation/budget-reservation.component';
 import { TourPackagesComponent } from './tour-packages/tour-packages.component';
 import { UserPostsComponent } from './user-posts/user-posts.component';
+import { UsersManagementComponent } from './dashboard/modules/users-management/users-management.component';
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import { UserPostsComponent } from './user-posts/user-posts.component';
       {
         path: 'dashboard', component: DefaultComponent, children: [
           { path: '', component: DashboardComponent },
-          { path: 'posts', component: PostsComponent }
+          { path: 'posts', component: PostsComponent },
+          { path: 'users', component: UsersManagementComponent }
         ]
       }
     ])

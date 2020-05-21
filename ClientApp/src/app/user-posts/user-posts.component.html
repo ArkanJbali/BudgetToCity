@@ -16,7 +16,7 @@
                   </div>
                 </div>
                 <div style="margin-bottom:5%;" *ngFor="let p of posts">
-                  <div class="row">
+                  <div class="row"  *ngIf="p.isApproved == 1">
                     <div class="col">
                       <mat-card class="example-card">
                         <mat-card-header>

@@ -55,29 +55,60 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
   </div>
   <!--*ngIf="checkUpdatePost"-->
+    <br /><br />
   <form #f="ngForm" style="width:30%;">
-    <label>postID</label>
-    <input mat-input type="text" name="postID" [(ngModel)]="currentPost.postID">
-    <br>
-    <label>postTitle</label>
-    <input mat-input type="text" name="postTitle" [(ngModel)]="currentPost.postTitle">
-    <br>
-    <label>postContent</label>
-    <input mat-input type="text" name="postContent" [(ngModel)]="currentPost.postContent">
-    <br>
-    <label>postTime</label>
-    <input mat-input type="text" name="postTime" [(ngModel)]="currentPost.postTime">
-    <br>
-    <label>isApproved</label>
-    <input mat-input type="text" name="isApproved" [(ngModel)]="currentPost.isApproved">
-    <br>
-    <label>userName</label>
-    <input mat-input type="text" name="userName" [(ngModel)]="currentPost.userName">
-    <br>
-    <label>userEmail</label>
-    <input mat-input type="text" name="userEmail" [(ngModel)]="currentPost.userEmail">
-    <br>
-    <input type="button" (click)="createOrUpdatePost(f)" value="Update User">
+    <table class="table">
+
+      <tr>
+        <td><label>postID</label></td>
+        <td>
+          <input mat-input type="text" name="postID" [(ngModel)]="currentPost.postID">
+        </td>
+      </tr>
+      <tr>
+        <td><label>postTitle</label></td>
+        <td>
+          <input mat-input type="text" name="postTitle" [(ngModel)]="currentPost.postTitle">
+        </td>
+      </tr>
+      <tr>
+        <td><label>postContent</label></td>
+        <td>
+          <input mat-input type="text" name="postContent" [(ngModel)]="currentPost.postContent">
+        </td>
+      </tr>
+      <tr>
+        <td><label>postTime</label></td>
+        <td>
+          <input mat-input type="text" name="postTime" [(ngModel)]="currentPost.postTime">
+        </td>
+      </tr>
+      <tr>
+        <td><label>isApproved</label></td>
+        <td>
+          <input mat-input type="number" name="isApproved" [(ngModel)]="currentPost.isApproved">
+        </td>
+      </tr>
+      <tr>
+        <td><label>userName</label></td>
+        <td>
+          <input mat-input type="text" name="userName" [(ngModel)]="currentPost.userName">
+        </td>
+      </tr>
+      <tr>
+        <td><label>userEmail</label></td>
+        <td>
+          <input mat-input type="text" name="userEmail" [(ngModel)]="currentPost.userEmail">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input class="btn btn-primary" type="button" (click)="createOrUpdatePost(f)" value="Update User">
+        </td>
+      </tr>
+
+    </table>
   </form>
+  
 </div>
 

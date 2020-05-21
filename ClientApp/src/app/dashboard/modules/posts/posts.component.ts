@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -20,13 +20,25 @@ export class PostsComponent implements OnInit {
 
 
   baseURL;
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private toastrService: ToastrService, private postsService: PostsServiceService) {
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private toastrService: ToastrService,
+    private postsService: PostsServiceService,
+    private changeDetectorRefs: ChangeDetectorRef) {
     this.baseURL = baseUrl;
     this.getPosts();
   }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
+  }
+  refreshTable() {
+    this.postsService.getBlogPosts()
+      .subscribe(data => {
+        this.posts = data;
+        this.dataSource.data = data;
+        this.changeDetectorRefs.detectChanges();
+        //this.dataSource = new MatTableDataSource<Posts>(this.posts);
+
+      }, error => this.toastrService.error('Error in connection please try agian.', 'Error get post list'));
   }
   getPosts() {
     this.postsService.getBlogPosts()
@@ -51,8 +63,9 @@ export class PostsComponent implements OnInit {
     console.log('delete', postID);
     this.postsService.deleteBlogPost(postID).subscribe((data) => {
       console.log('res: ', data);
+      this.refreshTable();
     }, error => console.log(error));
-    this.getPosts();
+    
   }
   createOrUpdatePost(form) {
     console.log('Form: ', form);
@@ -68,18 +81,15 @@ export class PostsComponent implements OnInit {
           
           this.toastrService.success('This Post is updated Successfully', 'Update');
         }, error => console.log(error));
-
-
-
-
       
-      this.getPosts();
+      this.refreshTable();
       this.checkUpdatePost = false;
     } else {
       //to create new post should remove the condition from html
       this.toastrService.success('This Post is created Successfully', 'Create new post');
       this.getPosts();
     }
+    form.reset();
   }
 }
 export interface Posts {

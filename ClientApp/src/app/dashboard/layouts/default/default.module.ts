@@ -9,12 +9,14 @@ import { MatSidenavModule, MatDividerModule, MatCardModule, MatPaginatorModule, 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardService } from '../../modules/dashboard.service';
 import { FormsModule } from '@angular/forms';
+import { UsersManagementComponent } from '../../modules/users-management/users-management.component';
 
 @NgModule({
   declarations: [
     DefaultComponent,
     DashboardComponent,
-    PostsComponent
+    PostsComponent,
+    UsersManagementComponent
   ],
   imports: [
     FormsModule,
