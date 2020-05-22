@@ -29,11 +29,13 @@ import { PostsComponent } from './dashboard/modules/posts/posts.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './login/login.component';
-import { MatButtonModule, MatDialogModule, MatStepperModule, MatTooltipModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatStepperModule, MatTooltipModule, MatCheckboxModule, MatPaginatorModule } from '@angular/material';
 import { BudgetReservationComponent } from './home/budget-reservation/budget-reservation.component';
 import { TourPackagesComponent } from './tour-packages/tour-packages.component';
 import { UserPostsComponent } from './user-posts/user-posts.component';
 import { UsersManagementComponent } from './dashboard/modules/users-management/users-management.component';
+import { DashboardHotelComponent } from './dashboard/modules/dashboard-hotel/dashboard-hotel.component';
+import { NotfoundComponent } from './dashboard/modules/notfound/notfound.component';
 
 
 @NgModule({
@@ -60,6 +62,7 @@ import { UsersManagementComponent } from './dashboard/modules/users-management/u
     MatStepperModule,
     MatTooltipModule,
     MatCheckboxModule,
+    MatPaginatorModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     NgCircleProgressModule.forRoot({
       // set defaults here
@@ -96,9 +99,11 @@ import { UsersManagementComponent } from './dashboard/modules/users-management/u
       { path: 'usersPosts', component: UserPostsComponent },
       {
         path: 'dashboard', component: DefaultComponent, children: [
-          { path: '', component: DashboardComponent },
+          { path: '', component: NotfoundComponent },
+          { path: 'admin', component: DashboardComponent },
           { path: 'posts', component: PostsComponent },
-          { path: 'users', component: UsersManagementComponent }
+          { path: 'users', component: UsersManagementComponent },
+          { path: 'manager', component: DashboardHotelComponent }
         ]
       }
     ])

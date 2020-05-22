@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { Users } from '../models/Users.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostsServiceService {
+export class UsersService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8'
@@ -16,43 +17,44 @@ export class PostsServiceService {
   myApiUrl: string;
   constructor(private http: HttpClient) {
     this.myAppUrl = 'https://localhost:44391/';
-    this.myApiUrl = 'api/UsersPosts/';
+    this.myApiUrl = 'api/Users/';
   }
-
-  getBlogPosts(): Observable<Posts[]> {
-    return this.http.get<Posts[]>(this.myAppUrl + this.myApiUrl)
+  getUsers(): Observable<Users[]> {
+    return this.http.get<Users[]>(this.myAppUrl + this.myApiUrl)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  getBlogPost(postID: number): Observable<Posts> {
-    return this.http.get<Posts>(this.myAppUrl + this.myApiUrl + postID)
+  getUser(email: string): Observable<Users> {
+    return this.http.get<Users>(this.myAppUrl + this.myApiUrl + email)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  saveBlogPost(userPost): Observable<Posts> {
-    return this.http.post<Posts>(this.myAppUrl + this.myApiUrl, JSON.stringify(userPost), this.httpOptions)
+  saveUser(user): Observable<Users> {
+    console.log(user);
+    return this.http.post<Users>(this.myAppUrl + this.myApiUrl, JSON.stringify(user), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  updateBlogPost(postId: number, userPost): Observable<Posts> {
-    return this.http.put<Posts>(this.myAppUrl + this.myApiUrl + postId, JSON.stringify(userPost), this.httpOptions)
+  updateUser(email: string, user): Observable<Users> {
+    console.log(JSON.stringify(user));
+    return this.http.put<Users>(this.myAppUrl + this.myApiUrl + email, JSON.stringify(user), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  deleteBlogPost(postID: number): Observable<Posts> {
-    return this.http.delete<Posts>(this.myAppUrl + this.myApiUrl + postID)
+  deleteUser(Email: string): Observable<Users> {
+    return this.http.delete<Users>(this.myAppUrl + this.myApiUrl + Email)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
@@ -71,13 +73,4 @@ export class PostsServiceService {
     console.log(errorMessage);
     return throwError(errorMessage);
   }
-}
-export interface Posts {
-  postID: number;
-  postTitle: string;
-  postContent: string;
-  postTime: Date;
-  isApproved: number;
-  userName: string;
-  userEmail: string;
 }

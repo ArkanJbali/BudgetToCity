@@ -10,13 +10,17 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardService } from '../../modules/dashboard.service';
 import { FormsModule } from '@angular/forms';
 import { UsersManagementComponent } from '../../modules/users-management/users-management.component';
+import { DashboardHotelComponent } from '../../modules/dashboard-hotel/dashboard-hotel.component';
+import { NotfoundComponent } from '../../modules/notfound/notfound.component';
 
 @NgModule({
   declarations: [
     DefaultComponent,
     DashboardComponent,
     PostsComponent,
-    UsersManagementComponent
+    UsersManagementComponent,
+    DashboardHotelComponent,
+    NotfoundComponent
   ],
   imports: [
     FormsModule,

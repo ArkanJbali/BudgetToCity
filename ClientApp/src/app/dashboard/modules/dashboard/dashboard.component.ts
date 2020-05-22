@@ -2,17 +2,8 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
+import { Users } from '../../../models/Users.model';
 
-export interface Users {
-  Email: string;
-  Phone: string;
-  Permession: number;
-  Role: string;
-  Fname: string;
-  Lnmae: string;
-  Password: string;
-  isApproved: number;
-}
 
 
 @Component({

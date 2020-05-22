@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { PostsServiceService } from '../../../services/posts-service.service';
+import { Posts } from '../../../models/Posts.model';
 
 @Component({
   selector: 'app-posts',
@@ -44,60 +45,40 @@ export class PostsComponent implements OnInit {
     this.postsService.getBlogPosts()
       .subscribe(data => {
         this.posts = data;
-        console.log(data);
         this.dataSource = new MatTableDataSource<Posts>(this.posts);
       }, error => this.toastrService.error('Error in connection please try agian.', 'Error get post list'));
-    //this.http.get(this.baseURL + 'api/UsersPosts').subscribe(result => {
-    //  this.posts = result as Posts[];
-    //  console.log(result);
-    //  this.dataSource = new MatTableDataSource<Posts>(this.posts);
-    //}, error => this.toastrService.error('Error in connection please try agian.', 'Error get post list'));
   }
   updatePost(post) {
     this.currentPost = post;
-    console.log('update', post);
     this.checkUpdatePost = true;
     
   }
   deletePost(postID) {
     console.log('delete', postID);
     this.postsService.deleteBlogPost(postID).subscribe((data) => {
-      console.log('res: ', data);
       this.refreshTable();
     }, error => console.log(error));
     
   }
   createOrUpdatePost(form) {
-    console.log('Form: ', form);
     
     if (this.currentPost && this.currentPost.postID) {
       form.value.id = this.currentPost.postID;
-      console.log('Form: ', form);
       this.updatePost(form.value);
 
       this.postsService.updateBlogPost(form.value.id, form.value)
         .subscribe((data) => {
-          console.log(data);
-          
+          this.refreshTable();
           this.toastrService.success('This Post is updated Successfully', 'Update');
         }, error => console.log(error));
       
-      this.refreshTable();
+      
       this.checkUpdatePost = false;
     } else {
       //to create new post should remove the condition from html
       this.toastrService.success('This Post is created Successfully', 'Create new post');
-      this.getPosts();
     }
     form.reset();
   }
 }
-export interface Posts {
-  postID: number;
-  postTitle: string;
-  postContent: string;
-  postTime: Date;
-  isApproved: number;
-  userName: string;
-  userEmail: string;
-}
+
