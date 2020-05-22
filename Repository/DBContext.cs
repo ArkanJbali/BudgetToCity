@@ -21,6 +21,7 @@ namespace BudgetToCity.Repository
 
         public DbSet<Cities> Cities { get; set; }
         public DbSet<Users> Users { get; set; }
+        public DbSet<Cars> Cars { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -68,6 +69,23 @@ namespace BudgetToCity.Repository
                 entity.Property(e => e.Lname).HasColumnName("Lname");
                 entity.Property(e => e.Password).HasColumnName("Password");
                 entity.Property(e => e.isApproved).HasColumnName("isApproved");
+            });
+            modelBuilder.Entity<Cars>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+
+                entity.Property(e => e.Id).HasColumnName("Id");
+                entity.Property(e => e.Manufacturer).HasColumnName("Manufacturer");
+                entity.Property(e => e.Model).HasColumnName("Model");
+                entity.Property(e => e.Category).HasColumnName("Category");
+                entity.Property(e => e.Year).HasColumnName("Year");
+                entity.Property(e => e.Gear_box).HasColumnName("Gear_box");
+                entity.Property(e => e.Doors).HasColumnName("Doors");
+                entity.Property(e => e.Fuel_type).HasColumnName("Fuel_type");
+                entity.Property(e => e.Color).HasColumnName("Color");
+                entity.Property(e => e.Price_per_day).HasColumnName("Price_per_day");
+
             });
 
 

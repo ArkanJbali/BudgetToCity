@@ -12,6 +12,8 @@ namespace BudgetToCity.Models
         public virtual DbSet<Airports> Airports { get; set; }
         public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Cars> Cars { get; set; }
+
         public BudgeToCityContext()
         {
         }
@@ -114,6 +116,23 @@ namespace BudgetToCity.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
+            modelBuilder.Entity<Cars>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+
+                entity.Property(e => e.Id).HasColumnName("Id").IsUnicode(false);
+                entity.Property(e => e.Manufacturer).HasColumnName("Manufacturer").HasMaxLength(255).IsUnicode(false);
+                entity.Property(e => e.Model).HasColumnName("Model").HasMaxLength(255).IsUnicode(false);
+                entity.Property(e => e.Category).HasColumnName("Category").HasMaxLength(255).IsUnicode(false);
+                entity.Property(e => e.Year).HasColumnName("Year").HasMaxLength(255).IsUnicode(false);
+                entity.Property(e => e.Gear_box).HasColumnName("Gear_box").HasMaxLength(255).IsUnicode(false);
+                entity.Property(e => e.Doors).HasColumnName("Doors").HasMaxLength(255).IsUnicode(false);
+                entity.Property(e => e.Fuel_type).HasColumnName("Fuel_type").HasMaxLength(255).IsUnicode(false);
+                entity.Property(e => e.Color).HasColumnName("Color").HasMaxLength(255).IsUnicode(false);
+                entity.Property(e => e.Price_per_day).HasColumnName("Price_per_day").IsUnicode(false);
+
             });
 
             OnModelCreatingPartial(modelBuilder);
