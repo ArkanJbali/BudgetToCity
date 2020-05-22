@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
   len: number
   Users: IUsers[] = [];
 
-  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string,
+    private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) {
     http.get<IUsers[]>(baseUrl + 'api/Users').subscribe(result => {
       this.Users = result;
       this.len = this.Users.length;
@@ -41,11 +42,12 @@ export class LoginComponent implements OnInit {
       }
       if (this.Users[i].email == username) {
         if (this.passwordCheck(password) == true) {
-          console.log("yesss navigate to")
+          console.log("yesss navigate to");
+          this.router.navigate(['dashboard']);
           break;
         }
         else {
-          console.log("wrong password")
+          console.log("wrong password");
           break;
         }
          

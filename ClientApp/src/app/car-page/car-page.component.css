@@ -1,7 +1,7 @@
 
 .img-background {
   background: url("src\assets\carRent.png") no-repeat top center fixed;
-  height: 91.3%;
+  height: 90%;
   width: 100%;
   /*filter: blur(5px);*/
 }
@@ -16,13 +16,13 @@ section {
   align-items: center;
   background: url("src\assets\carRent.png");
   background-attachment: fixed;
-  height: 100vh;
+  height: 92.4vh;
 }
 section .box{
     position: relative;
     max-width: 70%;
     padding: 50px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.7);
     overflow: hidden;
     color: #000;
 }
@@ -30,8 +30,8 @@ section .box{
     position: absolute;
     content: '';
     top: -20px;
-    left: -20px;
-    right: -20px;
+    left: -15px;
+    right: -15px;
     bottom: -20px;
     background: url("src\assets\carRent.png");
     background-attachment: fixed;
@@ -45,13 +45,29 @@ section .box{
     font-size: 30px;
     text-transform: uppercase;
   }
+  section .box h6 {
+    position: relative;
+    padding: 0;
+    z-index: 2;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+  section div {
+    position: relative;
+    padding: 0;
+    z-index: 2;
+  }
   section .box p {
     position: relative;
     padding: 0;
-    margin: 0;
+    margin: 5%;
     z-index: 2;
-    font-size: 18px;
+    font-size: 20px;
+    text-align: center;
   }
+::placeholder {
+  color: #21201f;
+}
 .progress {
   display: inline-block;
   overflow: hidden;
@@ -135,14 +151,6 @@ div.progress:last-of-type span {
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700');
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 
-$f-primary : 'Josefin Sans', sans-serif;
-$f-secondary : 'Indie Flower', cursive;
-$c-front : #FFFFFF;
-$c-back : #1D1F20;
-$c-back-light : #383838;
-$c-hilight : #FFA500;
-$s-footer-height : 3rem;
-
 %boxShadow {
   box-shadow: 0 0 10rem 0 #000000;
 }
@@ -162,9 +170,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $c-back;
-  color: $c-front;
-  font-family: $f-primary;
+  background-color: #1D1F20;
+  color: #FFFFFF;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 10px;
   font-weight: 100;
   box-shadow: 0 0 10rem 0 #000000 inset;
@@ -177,11 +185,11 @@ body {
 }
 
 .cal-loader__plane {
-  fill: $c-hilight;
+  fill: #FFA500;
 }
 
 .cal-loader__path {
-  stroke: $c-front;
+  stroke: #FFFFFF;
   animation: 1.4s ease-in-out infinite loader-path;
 }
 

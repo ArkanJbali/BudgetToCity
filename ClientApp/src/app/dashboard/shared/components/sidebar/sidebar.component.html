@@ -11,9 +11,12 @@
 
   <h2 matSubheader>Pages</h2>
 
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">Dashboard</a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/posts">Posts</a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/articles">Articles</a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/admin" *ngIf="role == 'Admin'">Dashboard</a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/posts" *ngIf="role == 'Admin'">Posts</a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/users" *ngIf="role == 'Admin'">Users</a>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/manager" *ngIf="role == 'Hotel'">DashboardH</a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/users" *ngIf="role == 'Hotel'">Profile</a>
 
   <mat-divider></mat-divider>
 

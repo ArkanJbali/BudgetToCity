@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment/moment';
 import { PostsServiceService } from '../services/posts-service.service';
+import { Posts } from '../models/Posts.model';
 
 @Component({
   selector: 'app-user-posts',
@@ -74,12 +75,4 @@ export class UserPostsComponent implements OnInit {
         console.log(data);
       }, error => this.toastrService.error('Error in connection please try agian.', 'Error get post list'));
   }
-}
-export interface Posts {
-  postTitle: string;
-  postContent: string;
-  postTime: Date;
-  isApproved: number;
-  userName: string;
-  userEmail: string;
 }
