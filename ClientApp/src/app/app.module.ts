@@ -36,6 +36,10 @@ import { UserPostsComponent } from './user-posts/user-posts.component';
 import { UsersManagementComponent } from './dashboard/modules/users-management/users-management.component';
 import { DashboardHotelComponent } from './dashboard/modules/dashboard-hotel/dashboard-hotel.component';
 import { NotfoundComponent } from './dashboard/modules/notfound/notfound.component';
+import { DonutComponent } from './dashboard/shared/widgets/donut/donut.component';
+import { ColumnchartComponent } from './dashboard/shared/widgets/columnchart/columnchart.component';
+import { SalariesComponent } from './dashboard/shared/widgets/salaries/salaries.component';
+import { ManagerProfileComponent } from './dashboard/modules/manager-profile/manager-profile.component';
 
 
 @NgModule({
@@ -103,7 +107,8 @@ import { NotfoundComponent } from './dashboard/modules/notfound/notfound.compone
           { path: 'admin', component: DashboardComponent },
           { path: 'posts', component: PostsComponent },
           { path: 'users', component: UsersManagementComponent },
-          { path: 'manager', component: DashboardHotelComponent }
+          { path: 'manager', component: DashboardHotelComponent },
+          { path: 'profile', component: ManagerProfileComponent }
         ]
       }
     ])

@@ -14,7 +14,7 @@ export class DefaultComponent implements OnInit {
 
 
   ngOnInit() {
-    this.role = 'Admin';
+    this.role = 'Hotel';
     if (this.role == 'Admin') {
       this.router.navigate(['dashboard/admin']);
     }

@@ -3,55 +3,61 @@ import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 
 @Component({
-  selector: 'app-widget-pie',
-  templateUrl: './pie.component.html',
-  styleUrls: ['./pie.component.css']
+  selector: 'app-donut-widget',
+  templateUrl: './donut.component.html',
+  styleUrls: ['./donut.component.css']
 })
-export class PieComponent implements OnInit {
+export class DonutComponent implements OnInit {
   Highcharts = Highcharts;
   chartOptions = {};
 
   @Input() data = [];
-
   constructor() { }
 
   ngOnInit() {
     this.chartOptions = {
       chart: {
         plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
+        plotBorderWidth: 0,
+        plotShadow: false
       },
       title: {
-        text: 'Users Browsers'
+        text: 'Hotels Risks',
+        align: 'center',
+        verticalAlign: 'middle',
+        y: 60
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
       },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: true,
-            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-          }
+      accessibility: {
+        point: {
+          valueSuffix: '%'
         }
       },
-      exporting: {
-        enabled: true
-      },
-      credits: {
-        enabled: false
+      plotOptions: {
+        pie: {
+          dataLabels: {
+            enabled: true,
+            distance: -50,
+            style: {
+              fontWeight: 'bold',
+              color: 'white'
+            }
+          },
+          startAngle: -90,
+          endAngle: 90,
+          center: ['50%', '75%'],
+          size: '110%'
+        }
       },
       series: [{
-        name: 'Brands',
-        colorByPoint: true,
+        type: 'pie',
+        name: 'Hotel Revenue Risks',
+        innerSize: '50%',
         data: this.data
       }]
     };
-
     HC_exporting(Highcharts);
 
     setTimeout(() => {
@@ -59,6 +65,6 @@ export class PieComponent implements OnInit {
         new Event('resize')
       );
     }, 300);
-  }
-
+}
+ 
 }

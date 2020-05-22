@@ -8,7 +8,7 @@
 
 <div class="cards stats-cards" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
   <mat-card fxFlex="24">
-    <app-widget-card  label="New Users" total="12k" percentage="50" [data]="cards"></app-widget-card>
+    <app-widget-card label="New Users" total="12k" percentage="50" [data]="cards"></app-widget-card>
   </mat-card>
   <mat-card fxFlex="24" total>
     <app-widget-card label="Users Retention" total="10k" percentage="40" [data]="cards"></app-widget-card>
@@ -17,7 +17,7 @@
     <app-widget-card label="Users Engagement" total="12k" percentage="30" [data]="cards"></app-widget-card>
   </mat-card>
   <mat-card fxFlex="24">
-    <app-widget-card  label="Referral" total="6k" percentage="20" [data]="cards"></app-widget-card>
+    <app-widget-card label="Referral" total="6k" percentage="20" [data]="cards"></app-widget-card>
   </mat-card>
 </div>
 
@@ -86,3 +86,12 @@
   </div>
   <div fxFlex="30"><app-widget-pie [data]="pieChart"></app-widget-pie></div>
 </div>
+<br />
+<mat-divider></mat-divider>
+<br /><br />
+<div>
+
+  <app-salaries-widget></app-salaries-widget>
+</div>
+
+

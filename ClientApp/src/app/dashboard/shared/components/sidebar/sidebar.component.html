@@ -3,6 +3,7 @@
     <div class="header">
       <h2>Arkan Jbali</h2>
       <h4>admin@email.com</h4>
+      <h4 style="color:#f54e42">{{role}}</h4>
     </div>
     <img src="../assets/adminAvatar.png" alt="Arkan Jbali">
   </div>
@@ -15,8 +16,8 @@
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/posts" *ngIf="role == 'Admin'">Posts</a>
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/users" *ngIf="role == 'Admin'">Users</a>
 
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/manager" *ngIf="role == 'Hotel'">DashboardH</a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/users" *ngIf="role == 'Hotel'">Profile</a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/manager" *ngIf="role == 'Hotel'">Dashboard</a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard/profile" *ngIf="role == 'Hotel'">Profile</a>
 
   <mat-divider></mat-divider>
 

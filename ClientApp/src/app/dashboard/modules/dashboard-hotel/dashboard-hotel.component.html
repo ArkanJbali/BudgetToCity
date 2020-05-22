@@ -1,1 +1,14 @@
-<p>dashboard-hotel works!</p>
+<div>
+  <app-widget-area [data]="bigChart"></app-widget-area>
+</div>
+
+<mat-divider></mat-divider>
+
+<br />
+
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+  <div fxFlex="50">
+  <app-donut-widget [data]="donutChart"></app-donut-widget>
+  </div>
+  <div fxFlex="50"><app-columnchart-widget></app-columnchart-widget></div>
+</div>

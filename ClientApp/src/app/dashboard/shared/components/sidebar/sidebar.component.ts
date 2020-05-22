@@ -10,8 +10,8 @@ export class SidebarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    //this.role = 'Hotel';
-    this.role = 'Admin';
+    this.role = 'Hotel';
+    //this.role = 'Admin';
   }
 
 }

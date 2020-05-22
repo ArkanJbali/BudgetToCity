@@ -13,7 +13,8 @@ namespace BudgetToCity.Models
         public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Cars> Cars { get; set; }
-
+        public virtual DbSet<BudgetToCity.Models.HotelManager> HotelManager { get; set; }
+        public DbSet<BudgetToCity.Models.UsersPosts> UsersPosts { get; set; }
         public BudgeToCityContext()
         {
         }
@@ -134,12 +135,39 @@ namespace BudgetToCity.Models
                 entity.Property(e => e.Price_per_day).HasColumnName("Price_per_day").IsUnicode(false);
 
             });
+            modelBuilder.Entity<HotelManager>(entity =>
+            {
+                entity.HasKey(e => e.id);
 
+                entity.Property(e => e.managerName).HasColumnName("managerName")
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.managerEmail).HasColumnName("managerEmail")
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.hotelID).HasColumnName("hotelID")
+                    .IsRequired();
+
+                entity.Property(e => e.hotelName).HasColumnName("hotelName")
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.hotelDescription).HasColumnName("hotelDescription")
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+            });
             OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
-        public DbSet<BudgetToCity.Models.UsersPosts> UsersPosts { get; set; }
+       
     }
 }

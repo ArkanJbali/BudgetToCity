@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'app-dashboard-hotel',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-hotel.component.css']
 })
 export class DashboardHotelComponent implements OnInit {
-
-  constructor() { }
+  donutChart = [];
+  bigChart = [];
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
+    this.donutChart = this.dashboardService.donutChart();
+    this.bigChart = this.dashboardService.bigChart();
   }
 
 }

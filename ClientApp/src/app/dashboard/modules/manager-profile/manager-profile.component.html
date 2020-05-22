@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="tiheader">Your Profile</h1>
+
+    </div>
+  </div>
+  <div style="margin-bottom:5%;">
+    <div class="row">
+      <div class="col">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <img mat-card-avatar src="../assets/adminAvatar.png" />
+            <mat-card-title><b>{{hotelManager.managerName}}</b><br />{{hotelManager.managerEmail}}</mat-card-title>
+            <mat-card-subtitle>
+              <mat-icon>account_circle</mat-icon><span>{{hotelManager.hotelID}}</span> <br />
+              <mat-icon>today</mat-icon><span>{{hotelManager.hotelName}}</span>
+            </mat-card-subtitle>
+
+          </mat-card-header>
+
+          <mat-card-content>{{hotelManager.hotelDescription}}</mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

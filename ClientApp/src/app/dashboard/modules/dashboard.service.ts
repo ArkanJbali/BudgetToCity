@@ -61,4 +61,11 @@ export class DashboardService {
       y: 2.61
     }];
   }
+  donutChart() {
+    return [
+      ['Cutomer Retention', 30],
+      ['Revenue', 60],
+      ['Stock Market', 20]
+    ];
+  }
 }

@@ -1,0 +1,14 @@
+postCard {
+  margin-bottom: 10%;
+}
+.tiheader {
+  text-align: center;
+  margin-bottom: 5rem;
+  margin-top: 1.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 2rem;
+  position: relative;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}

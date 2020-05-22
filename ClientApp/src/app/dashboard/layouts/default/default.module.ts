@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { UsersManagementComponent } from '../../modules/users-management/users-management.component';
 import { DashboardHotelComponent } from '../../modules/dashboard-hotel/dashboard-hotel.component';
 import { NotfoundComponent } from '../../modules/notfound/notfound.component';
+import { ManagerProfileComponent } from '../../modules/manager-profile/manager-profile.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NotfoundComponent } from '../../modules/notfound/notfound.component';
     PostsComponent,
     UsersManagementComponent,
     DashboardHotelComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    ManagerProfileComponent
   ],
   imports: [
     FormsModule,
