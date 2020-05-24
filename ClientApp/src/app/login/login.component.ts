@@ -20,12 +20,13 @@ imports: [
 export class LoginComponent implements OnInit {
   len: number
   Users: IUsers[] = [];
-
+  currentUser: IUsers;
   constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string,
     private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) {
     http.get<IUsers[]>(baseUrl + 'api/Users').subscribe(result => {
       this.Users = result;
       this.len = this.Users.length;
+      console.log(result);
     }, error => console.error(error));
   }
 
@@ -41,25 +42,42 @@ export class LoginComponent implements OnInit {
         break;
       }
       if (this.Users[i].email == username) {
-        if (this.passwordCheck(password) == true) {
-          console.log("yesss navigate to");
-          this.router.navigate(['dashboard']);
+        if (this.passwordCheckLog(password) == true && this.Users[i].isApproved == 1) {
+          this.currentUser = this.Users[i];
+          //console.log(this.currentUser);
+          this.router.navigate(['dashboard', this.currentUser]);
+          break;
+        }
+        if (this.Users[i].isApproved == 0) {
+          this.toastrService.warning("your account in progress to get approved from administration.", "No account approval");
           break;
         }
         else {
-          console.log("wrong password");
+          this.toastrService.warning("Your Email/password is invalid." , "Invalid Entered Data");
           break;
         }
          
       }
     }
   }
-
-  passwordCheck(password) {
+  passwordCheckLog(password) {
     for (var i = 0; i < this.Users.length; i++) {
-      if (this.Users[i].password == password) 
-       return true;     
+      if (this.Users[i].password == password) {
+        //this.toastrService.info("Your password is: '" + this.Users[i].password + "'", "Password");
+        return true;
+      }
     }
+    return false;
+  }
+  passwordCheck(email) {
+    for (var i = 0; i < this.Users.length; i++) {
+      if (this.Users[i].email == email) {
+        console.log(this.Users[i].password);
+        this.toastrService.info("Your password is: '" + this.Users[i].password + "'", "Password");
+        return true;
+      }
+    }
+    this.toastrService.info("There is no Email registed like: '"+email+"'", "Email not founded!");
     return false;
   }
 }
@@ -67,12 +85,12 @@ export class LoginComponent implements OnInit {
 interface IUsers {
   email: string
   Phone: string
-  Permession: string
+  Permession: number
   Role: string
   Fname: string
   Lname: string
   password: string
-  isApproved: string
+  isApproved: number
 }
 
 
