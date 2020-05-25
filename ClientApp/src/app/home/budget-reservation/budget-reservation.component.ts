@@ -51,6 +51,8 @@ export class BudgetReservationComponent implements OnInit {
   diffInDays: number;
   locationResponseCheck = false;
   hotelResponseCheck = false;
+  tempArr = [0, 0];
+  totalBudget;
 
   constructor(public dialogRef: MatDialogRef<BudgetReservationComponent>,
     private _formBuilder: FormBuilder,
@@ -60,6 +62,7 @@ export class BudgetReservationComponent implements OnInit {
     private router: Router) {
     if (this.data) {
       this.userBudget = this.data['budget'];
+      this.totalBudget = this.userBudget;
       this.fromDate = this.data['fromDate'];
       this.toDate = this.data['returnDate'];
       this.fromPlace = this.data['fromDestination']['airportName'];
@@ -202,31 +205,51 @@ export class BudgetReservationComponent implements OnInit {
   isCheckedHotel;
   isCheckedHotelName;
   isHotelSelected = false;
+
   onChangeHotel(e) {
     this.isCheckedHotel = !this.isCheckedHotel;
     this.isCheckedHotelName = e;
     console.log(this.isCheckedHotelName);
+    //if (this.isCheckedHotelName != null && this.isHotelSelected == false) {
+      var splitted = this.isCheckedHotelName['price'].split("-");
+      var pricePerNight = splitted[1].replace(/[^0-9 ]/g, "");
+      console.log(pricePerNight);
+      this.tempArr[0] = pricePerNight;
+     
+      this.isHotelSelected = true;
+    //}
+    if (this.totalBudget <= this.userBudget && this.totalBudget > 0) {
+      this.totalBudget = this.userBudget - this.tempArr[0] - this.tempArr[1];
+
+    } else {
+      this.totalBudget = this.userBudget + this.tempArr[0] - this.tempArr[1];
+      this.toastrService.warning("You can't choose over budget", 'Budget limit!');
+    }
+    
   }
   isCheckedFlight;
   isCheckedFlightName;
   isFlightSelected = false;
   isFlightPriceSelected;
+
   onChangeFlight(e, price) {
     this.isCheckedFlight = !this.isCheckedFlight;
     this.isCheckedFlightName = e;
     this.isFlightPriceSelected = price;
+    this.tempArr[1] = this.isFlightPriceSelected;
+    if (this.totalBudget <= this.userBudget && this.totalBudget > 0) {
+      this.totalBudget = this.userBudget - this.tempArr[0] - this.tempArr[1];
+
+    } else {
+      this.totalBudget = this.userBudget - this.tempArr[0] + this.tempArr[1];
+      this.toastrService.warning("You can't choose over budget", 'Budget limit!');
+    }
     //console.log(this.isCheckedFlightName);
   }
   isDoneCanFetch = false;
   addHotel() {
     //console.log("Hotel Div: ", h);
-    if (this.isCheckedHotelName != null && this.isHotelSelected == false) {
-      var splitted = this.isCheckedHotelName['price'].split("-");
-      var pricePerNight = splitted[1].replace(/[^0-9 ]/g, "");
-      console.log(pricePerNight);
-      this.userBudget -= pricePerNight;
-      this.isHotelSelected = true;
-    }
+    
     if (this.isCheckedFlightName != null && this.isFlightSelected == false) {
       this.flightsArrData.push(this.flightsData['Carriers'][this.isCheckedFlightName]);
       this.flightsArrData.push(this.flightsData['Places']);
@@ -234,11 +257,8 @@ export class BudgetReservationComponent implements OnInit {
       this.carriersF2 = this.flightsArrData[0];
       this.quotesF2 = this.flightsArrData[2];
       this.placesF2 = this.flightsArrData[1];
-      console.log('carriersF2', this.carriersF2);
-      console.log('quotesF2', this.quotesF2);
-      console.log('placesF2', this.placesF2);
       console.log(this.flightsArrData);
-      this.userBudget -= this.isFlightPriceSelected;
+      //this.userBudget -= this.isFlightPriceSelected;
       this.isFlightSelected = true;
     }
     if (this.isFlightSelected == true && this.isHotelSelected == true) {
