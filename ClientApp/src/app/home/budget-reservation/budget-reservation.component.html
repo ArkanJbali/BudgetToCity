@@ -228,7 +228,8 @@
           </div>
           <div>
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button class="btn btn-outline-danger" (click)="stepper.reset()">Reset</button>
+            <button mat-button class="btn btn-primary" (click)="doneReservation()">Finish</button>
           </div>
         </mat-step>
       </mat-horizontal-stepper>
