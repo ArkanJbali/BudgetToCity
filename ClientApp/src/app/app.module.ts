@@ -77,7 +77,9 @@ import { ManagerProfileComponent } from './dashboard/modules/manager-profile/man
       innerStrokeColor: "#C7E596",
       animationDuration: 300
     }),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      progressBar: true
+    }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

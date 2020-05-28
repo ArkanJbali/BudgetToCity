@@ -56,3 +56,6 @@ postCard{
 mat-form-field {
   width: 100%;
 }
+.cardBorder {
+  border-top: 4px solid #d27f3d;
+}
