@@ -116,9 +116,7 @@ export class HotelPageComponent implements OnInit {
         this.locationID = data['data'][0]['result_object']['location_id'];
         this.locationResponseCheck = true;
         if (this.locationResponseCheck) {
-          setTimeout(() => {
-            this.getHotels();
-          }, 1500);
+          this.getHotels();
         }
       }
     }, err => {
@@ -142,7 +140,7 @@ export class HotelPageComponent implements OnInit {
     }
     }).subscribe(data => {
       if (data.hasOwnProperty('data') && Object.keys(data['data']).length > 0) {
-       
+          
         
         //for (var i = 0; i < data['data'].length; i++) {
           //console.log('has data: ', data['data']);
@@ -153,6 +151,13 @@ export class HotelPageComponent implements OnInit {
           //console.log('Price: ', data['data'][0]['price']);
           //console.log('Hotel Stars: ', data['data'][0]['hotel_class']);
           //console.log('URL: ', data['data'][0]['hac_offers']['offers'][0]['link']);
+        console.log(data['data'])
+        //if (data['data'][0]['hac_offers']['offers'][0]['link'] == null) {
+        //  console.log('Null link');
+        //}
+        //else {
+        //  console.log('NOT Null link');
+        //}
           console.log('hotels API work');
         //}
         
