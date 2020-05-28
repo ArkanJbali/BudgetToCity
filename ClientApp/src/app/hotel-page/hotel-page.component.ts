@@ -151,13 +151,7 @@ export class HotelPageComponent implements OnInit {
           //console.log('Price: ', data['data'][0]['price']);
           //console.log('Hotel Stars: ', data['data'][0]['hotel_class']);
           //console.log('URL: ', data['data'][0]['hac_offers']['offers'][0]['link']);
-        console.log(data['data'])
-        //if (data['data'][0]['hac_offers']['offers'][0]['link'] == null) {
-        //  console.log('Null link');
-        //}
-        //else {
-        //  console.log('NOT Null link');
-        //}
+
           console.log('hotels API work');
         //}
         

@@ -16,6 +16,12 @@ import * as moment from 'moment/moment';
   }]
 })
 export class BudgetReservationComponent implements OnInit {
+  progress = 0;
+  str: string[] = ['Validating your data...', 'Connecting to APIs ...', 'Fetching data...', 'Initializing components...', 'Initialization finish.']
+  subtitle: string = '';
+  progressBar = document.querySelector('.progress-bar');
+  intervalId;
+
   //hotels
   userBudget = 0;
   fromDate;
@@ -87,6 +93,31 @@ export class BudgetReservationComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
+    const getDownloadProgress = () => {
+      //console.log('getDownload', this);
+      if (this.progress <= 99) {
+        if (this.progress == 10) {
+          this.subtitle = this.str[0];
+        }
+        if (this.progress == 30) {
+          this.subtitle = this.str[1];
+        }
+        if (this.progress == 50) {
+          this.subtitle = this.str[2];
+        }
+        if (this.progress == 80) {
+          this.subtitle = this.str[3];
+        }
+        if (this.progress == 95) {
+          this.subtitle = this.str[4];
+        }
+        this.progress = this.progress + 1;
+      }
+      else {
+        clearInterval(this.intervalId);
+      }
+    }
+    this.intervalId = setInterval(getDownloadProgress, 200);
   }
   onClose() {
       this.dialogRef.close();
@@ -301,6 +332,9 @@ export class BudgetReservationComponent implements OnInit {
     let s: number;
     s = Number(this.tempArr[0]) + Number(this.tempArr[1]);
     this.toastrService.success("Reservation request send you paid: $" + s);
+  }
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 }
 interface HotelCard {

@@ -66,3 +66,136 @@
 .example-header-image {
   margin-left: 75%;
 }
+.s {
+  background: none;
+  text-align: center;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+%boxShadow {
+  box-shadow: 0 0 10rem 0 #000000;
+}
+
+%boxShadow--in {
+  box-shadow: 0 0 10rem 0 #000000 inset;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  @extend %boxShadow--in;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1D1F20;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 100;
+  box-shadow: 0 0 10rem 0 #000000 inset;
+}
+
+.svg-calLoader {
+  width: 230px;
+  height: 230px;
+  transform-origin: 115px 115px;
+  animation: 1.4s linear infinite loader-spin;
+}
+
+.cal-loader__plane {
+  fill: #FFA500;
+}
+
+.cal-loader__path {
+  stroke: black;
+  animation: 1.4s ease-in-out infinite loader-path;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-path {
+  0% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
+
+  50% {
+    stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10;
+  }
+
+  100% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
+}
+
+
+.progress {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 40%;
+  width: 50%;
+  color: black;
+  background: none;
+}
+
+div.progress{
+  width: 0px;
+  animation: reveal 3s infinite;
+}
+
+.loader {
+    margin-left: -255px;
+    animation: slidein 3s infinite;
+  }
+
+@keyframes slidein {
+  0% {
+    margin-left: -500px;
+  }
+
+  20% {
+    margin-left: -500px;
+  }
+
+  35% {
+    margin-left: 0px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    width: 0px;
+  }
+
+  20% {
+    opacity: 1;
+    width: 0px;
+  }
+
+  30% {
+    width: 355px;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    width: 355px;
+  }
+}
