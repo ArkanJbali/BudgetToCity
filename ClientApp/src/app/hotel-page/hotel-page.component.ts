@@ -15,6 +15,13 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['./hotel-page.component.css']
 })
 export class HotelPageComponent implements OnInit {
+  progress = 0;
+  str: string[] = ['Validating your data...', 'Connecting to APIs ...', 'Fetching data...', 'Initializing components...', 'Initialization finish.']
+  subtitle: string = '';
+  progressBar = document.querySelector('.progress-bar');
+  intervalId;
+  loaderCheck = false;
+
   hotelsData: HotelCard;
   locationID: number;
   diffInDays: number;
@@ -51,14 +58,44 @@ export class HotelPageComponent implements OnInit {
       Rooms: ['']
     });
     this.searchHotelForm.controls.Guests.setValue(this.total);
-
+    const getDownloadProgress = () => {
+      //console.log('getDownload', this);
+      if (this.progress <= 99) {
+        if (this.progress == 10) {
+          this.subtitle = this.str[0];
+        }
+        if (this.progress == 30) {
+          this.subtitle = this.str[1];
+        }
+        if (this.progress == 50) {
+          this.subtitle = this.str[2];
+        }
+        if (this.progress == 80) {
+          this.subtitle = this.str[3];
+        }
+        if (this.progress == 90) {
+          this.subtitle = this.str[4];
+        }
+        this.progress = this.progress + 1;
+      }
+      else {
+        clearInterval(this.intervalId);
+      }
+    }
+    this.intervalId = setInterval(getDownloadProgress, 200);
   }
   onSubmit(newEvent) {
     this.searchHotelForm.controls.City.setValue(this.myControl.value.city);
-
+    this.hotelResponseCheck = false;
     
     if (this.searchHotelForm.valid) {
-      this.getLocationID();
+      this.loaderCheck = true;
+      setTimeout(() => {
+
+       this.getLocationID();
+      }, 5000);
+
+      
       this.searchHotelForm.controls.checkInDate.setValue(moment(new Date(this.searchHotelForm.controls.checkInDate.value)).format('YYYY-MM-DD'));
       this.searchHotelForm.controls.checkOutDate.setValue(moment(new Date(this.searchHotelForm.controls.checkOutDate.value)).format('YYYY-MM-DD'));
       this.diffInDays = Math.abs(moment(new Date(this.searchHotelForm.controls.checkInDate.value)).diff(moment(new Date(this.searchHotelForm.controls.checkOutDate.value)), 'days'));
@@ -160,6 +197,7 @@ export class HotelPageComponent implements OnInit {
           this.hotelResponseCheck = true;
         }, 1000);
         setTimeout(() => {
+          this.loaderCheck = false;
           this.scroll();
         }, 2000);
 
@@ -172,6 +210,7 @@ export class HotelPageComponent implements OnInit {
       }
     });
   }
+
 }
 
 interface IHotel {

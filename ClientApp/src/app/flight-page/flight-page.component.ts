@@ -15,6 +15,14 @@ import { Router } from '@angular/router';
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }]
 })
 export class FlightPageComponent implements OnInit {
+  progress = 0;
+  str: string[] = ['Validating your data...', 'Connecting to APIs ...', 'Fetching data...', 'Initializing components...', 'Initialization finish.']
+  subtitle: string = '';
+  progressBar = document.querySelector('.progress-bar');
+  intervalId;
+  loaderCheck = false;
+
+
   quotesF: Quotes[];
   numberRand: number;
   plusOrMinus: number;
@@ -67,7 +75,31 @@ export class FlightPageComponent implements OnInit {
       travelers: ['', Validators.required]
     });
     this.searchFlightForm.controls.travelers.setValue(this.total);
- 
+    const getDownloadProgress = () => {
+      //console.log('getDownload', this);
+      if (this.progress <= 99) {
+        if (this.progress == 10) {
+          this.subtitle = this.str[0];
+        }
+        if (this.progress == 30) {
+          this.subtitle = this.str[1];
+        }
+        if (this.progress == 50) {
+          this.subtitle = this.str[2];
+        }
+        if (this.progress == 80) {
+          this.subtitle = this.str[3];
+        }
+        if (this.progress == 90) {
+          this.subtitle = this.str[4];
+        }
+        this.progress = this.progress + 1;
+      }
+      else {
+        clearInterval(this.intervalId);
+      }
+    }
+    this.intervalId = setInterval(getDownloadProgress, 200);
   }
   onSubmit(newEvent) {
     this.searchFlightForm.controls.fromAirportCode.setValue(this.myControl.value);
@@ -80,8 +112,13 @@ export class FlightPageComponent implements OnInit {
      // if (!this.responseCheck) {
       //  this.toastrService.warning('There is no matched searches', 'No result');
       //} else {
+      this.loaderCheck = true;
+      setTimeout(() => {
+        
+        this.getFlights();
+      }, 10000);
+
       
-      this.getFlights();
 
        
       //}
@@ -163,6 +200,7 @@ export class FlightPageComponent implements OnInit {
       }
     }, 1000);
     setTimeout(() => {
+      this.loaderCheck = false;
       this.scroll();
     }, 2000);
   }
@@ -187,6 +225,9 @@ export class FlightPageComponent implements OnInit {
   }
   addFlight(i,j) {
     confirm("You Choosed: " + i.Name + "\n" + "Price: " + j + "\n Click To Confirm");
+  }
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
   }
 }
 
