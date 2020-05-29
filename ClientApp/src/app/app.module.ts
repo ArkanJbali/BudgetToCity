@@ -40,7 +40,8 @@ import { DonutComponent } from './dashboard/shared/widgets/donut/donut.component
 import { ColumnchartComponent } from './dashboard/shared/widgets/columnchart/columnchart.component';
 import { SalariesComponent } from './dashboard/shared/widgets/salaries/salaries.component';
 import { ManagerProfileComponent } from './dashboard/modules/manager-profile/manager-profile.component';
-
+import { ChatDialogComponent } from './chat/chat-dialog/chat-dialog.component';
+import { ChatModule } from './chat/chat.module';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ManagerProfileComponent } from './dashboard/modules/manager-profile/man
     UserPostsComponent
   ],
   imports: [
+    ChatModule,
     FormsModule,
     DefaultModule,
     CommonModule,
@@ -103,6 +105,7 @@ import { ManagerProfileComponent } from './dashboard/modules/manager-profile/man
       { path: 'hotels', component: HotelPageComponent },
       { path: 'tour', component: TourPackagesComponent },
       { path: 'usersPosts', component: UserPostsComponent },
+      { path: 'chatbot', component: ChatDialogComponent },
       {
         path: 'dashboard', component: DefaultComponent, children: [
           { path: '', component: NotfoundComponent },

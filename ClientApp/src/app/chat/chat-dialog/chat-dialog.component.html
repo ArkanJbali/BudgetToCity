@@ -1,0 +1,15 @@
+<div class="container con">
+  <h1>BudgetToCity Bot</h1>
+  <hr />
+  <ng-container *ngFor="let message of messages | async; let i = index">
+    <div class="message" [ngClass]="{ 'from': message.sentBy === 'Bot',
+                                     'to': message.sentBy === 'User' }">
+      {{message.content}}<br />
+
+    </div>
+    <!--<span>s</span>-->
+  </ng-container>
+  <label for="nameField">Your Message: </label>
+  <input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" id="item" type="text" /><br />
+  <button (click)="sendMessage()">Send</button>
+</div>
