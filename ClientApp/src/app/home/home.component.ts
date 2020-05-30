@@ -9,8 +9,9 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import * as moment from 'moment/moment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogConfig } from "@angular/material";
+import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { BudgetReservationComponent } from './budget-reservation/budget-reservation.component';
+import { ChatDialogComponent } from '../chat/chat-dialog/chat-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private modalService: BsModalService, private formBuilder: FormBuilder,
     http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient,
-    private toastrService: ToastrService, private router: Router, private dialog: MatDialog,) {
+    private toastrService: ToastrService, private router: Router, private dialog: MatDialog) {
     http.get<Airport[]>(baseUrl + 'api/Airports').subscribe(result => {
       this.Airports = result;
 
@@ -107,6 +108,19 @@ export class HomeComponent implements OnInit {
     dialogConfig.height = '95%';
     dialogConfig.data = this.searchBudgetForm.value;
     this.dialog.open(BudgetReservationComponent, dialogConfig);
+  }
+  openChat() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
+    dialogConfig.height = '80%';
+    dialogConfig.position = { right: `10px`, top: `10px` }
+    this.dialog.open(ChatDialogComponent, dialogConfig);
+    //this.dialogRef.updatePosition({
+    //  top: `10px`,
+    //  right: `10px`
+    //});
   }
 }
 interface Airport {

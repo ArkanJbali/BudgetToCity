@@ -1,14 +1,12 @@
-.con {
-  background: white;
-  overflow-y: scroll;
-  height: 80%;
-}
+
 .message {
+  overflow-wrap: break-word;
   border-radius: 50px;
-  margin: 0 15px 10px;
+  margin: 0 15px 0px;
   padding: 15px 20px;
   position: relative;
   font-weight: bold;
+
 }
 
   .message.to {
@@ -28,3 +26,37 @@
     .message.from + .message.from {
       margin-top: -10px;
     }
+
+
+.time {
+  width: 30%;
+  margin: 0 0 10px 20px;
+  padding: 15px 20px;
+  position: relative;
+}
+
+  .time.to {
+    color: darkgray;
+    margin-right: auto;
+    text-align: right;
+  }
+
+  .time.from {
+    color: darkgray;
+    margin-left: auto;
+  }
+
+    .time.to + .time.to,
+    .time.from + .time.from {
+      margin-top: -5px;
+    }
+
+img {
+  width: 12%;
+  height: 12%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+footDiv {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}

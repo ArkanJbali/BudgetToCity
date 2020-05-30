@@ -29,7 +29,7 @@ import { PostsComponent } from './dashboard/modules/posts/posts.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './login/login.component';
-import { MatButtonModule, MatDialogModule, MatStepperModule, MatTooltipModule, MatCheckboxModule, MatPaginatorModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatStepperModule, MatTooltipModule, MatCheckboxModule, MatPaginatorModule, MatDialogRef } from '@angular/material';
 import { BudgetReservationComponent } from './home/budget-reservation/budget-reservation.component';
 import { TourPackagesComponent } from './tour-packages/tour-packages.component';
 import { UserPostsComponent } from './user-posts/user-posts.component';
@@ -121,6 +121,6 @@ import { ChatModule } from './chat/chat.module';
   exports: [RouterModule, BsDropdownModule, TooltipModule, ModalModule],
   providers: [MatDatepickerModule, HomeComponent],
   bootstrap: [AppComponent],
-  entryComponents: [BudgetReservationComponent]
+  entryComponents: [BudgetReservationComponent, ChatDialogComponent]
 })
 export class AppModule { }
