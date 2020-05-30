@@ -207,3 +207,23 @@ section {
   margin-top: 0;
   margin-bottom: 1rem;
 }
+.contact {
+  background: #001125;
+  color: white;
+}
+hr.line {
+  border: 0.5px solid white;
+}
+.iconImg {
+  width: 4%;
+  margin-right: 2%;
+  margin-left: 5%;
+}
+.copy {
+  text-align: center;
+}
+.socialFa {
+  font-size: 150%;
+  margin-right: 7%;
+  cursor: pointer;
+}
