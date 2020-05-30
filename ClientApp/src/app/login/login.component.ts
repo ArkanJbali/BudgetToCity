@@ -77,7 +77,9 @@ export class LoginComponent implements OnInit {
         return true;
       }
     }
-    this.toastrService.info("There is no Email registed like: '"+email+"'", "Email not founded!");
+    if (email) {
+      this.toastrService.info("There is no Email registed like: '" + email + "'", "Email not founded!");
+    }
     return false;
   }
 }
