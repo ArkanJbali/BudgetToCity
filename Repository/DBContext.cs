@@ -21,7 +21,7 @@ namespace BudgetToCity.Repository
 
         public DbSet<Cities> Cities { get; set; }
         public DbSet<Users> Users { get; set; }
-        public DbSet<Cars> Cars { get; set; }
+        public DbSet<BudgetToCity.Models.Cars> Cars { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -70,7 +70,7 @@ namespace BudgetToCity.Repository
                 entity.Property(e => e.Password).HasColumnName("Password");
                 entity.Property(e => e.isApproved).HasColumnName("isApproved");
             });
-            modelBuilder.Entity<Cars>(entity =>
+            modelBuilder.Entity<BudgetToCity.Models.Cars>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -84,7 +84,7 @@ namespace BudgetToCity.Repository
                 entity.Property(e => e.Doors).HasColumnName("Doors");
                 entity.Property(e => e.Fuel_type).HasColumnName("Fuel_type");
                 entity.Property(e => e.Color).HasColumnName("Color");
-                entity.Property(e => e.Price_per_day).HasColumnName("Price_per_day");
+                entity.Property(e => e.Price).HasColumnName("Price_per_day");
 
             });
 

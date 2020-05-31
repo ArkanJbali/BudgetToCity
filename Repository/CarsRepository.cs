@@ -1,4 +1,4 @@
-﻿using BudgetToCity.Model;
+﻿using BudgetToCity.Models;
 using BudgetToCity.Service;
 using System;
 using System.Collections.Generic;

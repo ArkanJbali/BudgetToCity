@@ -12,7 +12,8 @@ namespace BudgetToCity.Models
         public virtual DbSet<Airports> Airports { get; set; }
         public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<Cars> Cars { get; set; }
+        //public virtual DbSet<Cars> Cars { get; set; }
+        public DbSet<BudgetToCity.Models.Cars> Cars { get; set; }
         public virtual DbSet<BudgetToCity.Models.HotelManager> HotelManager { get; set; }
         public DbSet<BudgetToCity.Models.UsersPosts> UsersPosts { get; set; }
         public BudgeToCityContext()
@@ -132,7 +133,7 @@ namespace BudgetToCity.Models
                 entity.Property(e => e.Doors).HasColumnName("Doors").HasMaxLength(255).IsUnicode(false);
                 entity.Property(e => e.Fuel_type).HasColumnName("Fuel_type").HasMaxLength(255).IsUnicode(false);
                 entity.Property(e => e.Color).HasColumnName("Color").HasMaxLength(255).IsUnicode(false);
-                entity.Property(e => e.Price_per_day).HasColumnName("Price_per_day").IsUnicode(false);
+                entity.Property(e => e.Price).HasColumnName("Price").IsUnicode(false);
 
             });
             modelBuilder.Entity<HotelManager>(entity =>
@@ -167,6 +168,9 @@ namespace BudgetToCity.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+       
+
 
        
     }

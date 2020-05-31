@@ -1,70 +1,219 @@
 
 .img-background {
   background: url("src\assets\carRent.png") no-repeat top center fixed;
-  height: 90%;
+  height: 91%;
   width: 100%;
   /*filter: blur(5px);*/
 }
-body{
-    margin:0;
-    padding:0;
+
+.content {
+  background-color: white;
 }
-section {
+
+.blur {
+  box-shadow: 20px 20px 50px grey;
+}
+
+h1 {
+  color: white;
+  font-size: 2.75rem;
+  font-family: "Franklin Gothic Medium";
+}
+
+table {
+  color: white;
+
+  width: 100%;
+}
+
+.searchBtn {
+  float: right;
+}
+
+.btnRound {
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+  border-radius: 50%;
+}
+
+mat-label {
+  color: white;
+}
+
+.example-custom-date-class {
+  background: orange;
+  border-radius: 100%;
+}
+
+.centered {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80%;
+}
+
+.imageTxt {
   position: relative;
+  text-align: center;
+  color: black;
+}
+
+.selectBtn {
+  top: 50%;
+  left: 20%;
+}
+
+.example-card {
+  max-width: 100%;
+  margin: 4px
+}
+
+.example-header-image {
+  margin-left: 75%;
+}
+
+.s {
+  width: 40%;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+%boxShadow {
+  box-shadow: 0 0 10rem 0 #000000;
+}
+
+%boxShadow--in {
+  box-shadow: 0 0 10rem 0 #000000 inset;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  @extend %boxShadow--in;
+  box-sizing: border-box;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background: url("src\assets\carRent.png");
-  background-attachment: fixed;
-  height: 92.4vh;
+  justify-content: center;
+  background-color: #1D1F20;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 100;
+  box-shadow: 0 0 10rem 0 #000000 inset;
 }
-section .box{
-    position: relative;
-    max-width: 70%;
-    padding: 50px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.7);
-    overflow: hidden;
-    color: #000;
+
+.svg-calLoader {
+  width: 230px;
+  height: 230px;
+  transform-origin: 115px 115px;
+  animation: 1.4s linear infinite loader-spin;
 }
-  section .box::before {
-    position: absolute;
-    content: '';
-    top: -20px;
-    left: -15px;
-    right: -15px;
-    bottom: -20px;
-    background: url("src\assets\carRent.png");
-    background-attachment: fixed;
-    filter: blue(4px);
+
+.cal-loader__plane {
+  fill: #FFA500;
+}
+
+.cal-loader__path {
+  stroke: black;
+  animation: 1.4s ease-in-out infinite loader-path;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
   }
-  section .box h2{
-    position: relative;
-    padding: 0;
-    margin: 0 0 20px;
-    z-index: 2;
-    font-size: 30px;
-    text-transform: uppercase;
+}
+
+@keyframes loader-path {
+  0% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
   }
-  section .box h6 {
-    position: relative;
-    padding: 0;
-    z-index: 2;
-    font-size: 10px;
-    text-transform: uppercase;
+
+  50% {
+    stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10;
   }
-  section div {
-    position: relative;
-    padding: 0;
-    z-index: 2;
+
+  100% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
   }
-  section .box p {
-    position: relative;
-    padding: 0;
-    margin: 5%;
-    z-index: 2;
-    font-size: 20px;
-    text-align: center;
+}
+
+
+.progress {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 40%;
+  width: 50%;
+  color: black;
+  background: none;
+}
+
+div.progress {
+  width: 0px;
+  animation: reveal 3s infinite;
+}
+
+.loader {
+  font-size: 1rem;
+  margin-left: -255px;
+  animation: slidein 3s infinite;
+}
+
+@keyframes slidein {
+  0% {
+    margin-left: -500px;
   }
-::placeholder {
-  color: #21201f;
+
+  20% {
+    margin-left: -500px;
+  }
+
+  35% {
+    margin-left: 0px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    width: 0px;
+  }
+
+  20% {
+    opacity: 1;
+    width: 0px;
+  }
+
+  30% {
+    width: 355px;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    width: 355px;
+  }
+}
+
+mat-icon {
+  font-size: small;
 }
