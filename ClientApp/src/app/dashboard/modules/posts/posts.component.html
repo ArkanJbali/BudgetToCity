@@ -2,7 +2,7 @@
   <div class="mat-elevation-z8">
     <h3>Users Posts List</h3>
     <hr />
-    <table mat-table [dataSource]="dataSource" class="table">
+    <table mat-table matSort [dataSource]="dataSource" class="table">
 
       <!-- Position Column -->
       <ng-container matColumnDef="Post ID">
@@ -12,7 +12,7 @@
 
       <!-- Name Column -->
       <ng-container matColumnDef="Title">
-        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
         <td mat-cell *matCellDef="let element"> {{element.postTitle}} </td>
       </ng-container>
 
@@ -24,12 +24,12 @@
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="DateTime">
-        <th mat-header-cell *matHeaderCellDef> DateTime </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> DateTime </th>
         <td mat-cell *matCellDef="let element"> {{element.postTime | date:'HH:mm:ss dd/MM/yy'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="isApproved">
-        <th mat-header-cell *matHeaderCellDef> isApproved </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> isApproved </th>
         <td mat-cell *matCellDef="let element"> {{element.isApproved}} </td>
       </ng-container>
 

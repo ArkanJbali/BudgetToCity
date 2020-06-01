@@ -89,49 +89,55 @@
   <div class="content" style="margin-top:320px;" *ngIf="searchHotelForm.valid && hotelResponseCheck && hotelsData.length >0" >
     <div class="container blur">
       <br /><br />
-      <h3 style="color:black;">Choose Your Hotel: </h3>
-      <hr />
-            <div id="hotelsList" *ngFor="let h of hotelsData">
-              <mat-card class="example-card">
-                <mat-card-header>
-
-                  <mat-card-title><b>{{h.name}}</b></mat-card-title>
-                  <mat-card-subtitle>Rate: {{h.rating}}/5.0</mat-card-subtitle>
-                </mat-card-header>
-                <br />
-                <div class="container">
-                  <div class="row">
-                    <div class="col-4">
-                      <img mat-card-image src="{{h.photo.images.original.url}}" alt="Hotel">
-                    </div>
-                    <div class="col-8">
-                      <mat-card-content>
-                        <div class="example-header-image imageTxt">
-                          <img src="../assets/rating.png" style="width:40%;">
-                          <span class="centered">{{h.hotel_class}}</span>
-                        </div>
-                        <p>
-                          {{h.ranking}}
-
-                        </p>
-                        <br /><br />
-
-                        <h4>Price Per Night: {{h.price}}</h4>
-
-                        <br />
-                        <a class="btn btn-success selectBtn" href="{{h.hac_offers.offers[0].link}}" target="_blank">Visit Link <i class="fas fa-arrow-right"></i> </a>
-
-                      </mat-card-content>
-                    </div>
-                  </div>
+      <form [formGroup]="firstFormGroup">
+        <h3 style="color:black;">Choose Your Hotel: </h3>
+        <hr />
+        <div id="hotelsList" *ngFor="let h of hotelsData">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-checkbox formControlName="firstCtrl" required (change)="onChangeHotel(h)" [disabled]="isCheckedHotel && (isCheckedHotelName!=h)"
+                            matTooltip="*Please choose one hotel to complete your reservation"
+                            [matTooltipShowDelay]="1000"
+                            [matTooltipHideDelay]="2000">
+              </mat-checkbox><br />
+              <mat-card-title><b>{{h.name}}</b></mat-card-title>
+              <mat-card-subtitle>Rate: {{h.rating}}/5.0</mat-card-subtitle>
+            </mat-card-header>
+            <br />
+            <div class="container">
+              <div class="row">
+                <div class="col-4">
+                  <img mat-card-image src="{{h.photo.images.original.url}}" alt="Hotel">
                 </div>
+                <div class="col-8">
+                  <mat-card-content>
+                    <div class="example-header-image imageTxt">
+                      <img src="../assets/rating.png" style="width:40%;">
+                      <span class="centered">{{h.hotel_class}}</span>
+                    </div>
+                    <p>
+                      {{h.ranking}}
 
+                    </p>
+                    <br /><br />
 
+                    <h4>Price Per Night: {{h.price}}</h4>
 
-              </mat-card>
+                    <br />
+                    <a class="btn btn-success selectBtn" href="{{h.hac_offers.offers[0].link}}" target="_blank">Visit Link <i class="fas fa-arrow-right"></i> </a>
+
+                  </mat-card-content>
+                </div>
+              </div>
             </div>
-      <br /><br />
 
+
+
+          </mat-card>
+        </div>
+        <br /><br />
+        <button mat-button class="btn btn-primary" (click)="onSelectHotel()">Select Hotel</button>
+        </form>
     </div>
     <br /><br />
   </div>

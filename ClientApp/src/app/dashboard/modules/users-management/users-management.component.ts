@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Inject, ChangeDetectorRef } from '@angular/core';
 import { Users } from '../../../models/Users.model';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { DashboardService } from '../dashboard.service';
 import { HttpClient } from '@angular/common/http';
 import { UsersService } from '../../../services/users.service';
@@ -17,16 +17,15 @@ export class UsersManagementComponent implements OnInit {
   currentUser: Users = { email: null, phone: null, permession: null, role: null, fname: null, lname: null, password: null, isApproved: null };
   displayedColumns: string[] = ['Email', 'Phone', 'Permession', 'Role', 'Fname', 'Lname', 'Password', 'isApproved', 'Edit'];
   dataSource = new MatTableDataSource<Users>(this.users);
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
   constructor(private changeDetectorRefs: ChangeDetectorRef, private http: HttpClient, @Inject('BASE_URL') baseUrl: string,
     private toastrService: ToastrService, private usersService: UsersService) {
     this.getUsers();
   }
   ngOnInit() {
   }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator
-  }
+
   refreshTable() {
     this.usersService.getUsers()
       .subscribe(data => {
@@ -34,6 +33,7 @@ export class UsersManagementComponent implements OnInit {
         this.dataSource.data = data;
         this.changeDetectorRefs.detectChanges();
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }, error => this.toastrService.error('Error in connection please try agian.', 'Error get users'));
     this.currentUser = { email: null, phone: null, permession: null, role: null, fname: null, lname: null, password: null, isApproved: null };
   }
@@ -43,6 +43,8 @@ export class UsersManagementComponent implements OnInit {
         this.users = data;
         console.log(data);
         this.dataSource = new MatTableDataSource<Users>(this.users);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }, error => this.toastrService.error('Error in connection please try agian.', 'Error get users'));
   }
   updateUser(user) {

@@ -33,12 +33,14 @@ export class CarPageComponent implements OnInit {
   myControl = new FormControl();
   filteredOptions: Observable<ICars[]>;
 
+  firstFormGroup: FormGroup;
+
   displayedColumns: string[] = [/*'ID', */'Manufacturer', 'Model', 'Category', 'Year', 'Gear Box', 'Doors', 'Fuel Type', 'Color', 'Price', 's'];
   dataSource = new MatTableDataSource<Cars>(this.carsData);
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
 
-  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string,
+  constructor(private formBuilder: FormBuilder, private _formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string,
     private httpClient: HttpClient, private toastrService: ToastrService, private router: Router,
     private carsService: CarsService) {
     http.get<ICars[]>(baseUrl + 'api/Hotels').subscribe(result => {
@@ -50,7 +52,11 @@ export class CarPageComponent implements OnInit {
     this.getCars();
   }
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    //setTimeout(() => this.dataSource.paginator = this.paginator);
+
     this.searchCarForm = new FormGroup({
       City: new FormControl(),
       checkInDate: new FormControl(),
@@ -161,15 +167,30 @@ export class CarPageComponent implements OnInit {
         let maxI = this.getRandomNumberBetween();
         console.log(maxI, minI);
         this.dataSource = new MatTableDataSource<Cars>(this.carsData.slice(Math.min(minI, maxI), Math.max(minI, maxI)));
+        this.dataSource.paginator = this.paginator;
         if (this.carsData.slice(Math.min(minI, maxI), Math.max(minI, maxI)).length == 0) {
           this.toastrService.error('Sorry there are no cars available in these days.', 'Not found!');
         }
       }, error => this.toastrService.error('Error in connection please try agian.', 'Error get post list'));
   }
-  selectCar(element) {
-    this.toastrService.success('You paid for ' + this.diffInDays + ' days: $' + (this.diffInDays * Number(element.price)), 'Car Selected');
+  isCheckedCar;
+  isCheckedCarName;
+  isCarSelected = false;
+
+  onChangeCar(e) {
+    this.isCheckedCarName = e;
+    this.isCheckedCar = !this.isCheckedCar;
+    this.isCarSelected = true;
+
+  }
+  selectCar() {
+    let element = this.isCheckedCarName;
+    this.toastrService.success("You'll pay for " + this.diffInDays + " days: $" + (this.diffInDays * Number(element.price)), "Car Selected");
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   }
   getRandomNumberBetween() {
     return Math.floor(Math.random() * (this.carsData.length - 20) + 5);
-}
+  }
 }

@@ -32,7 +32,12 @@ export class HotelPageComponent implements OnInit {
   Hotels: IHotel[] = [];
   myControl = new FormControl();
   filteredOptions: Observable<IHotel[]>;
-  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) {
+
+  firstFormGroup: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private _formBuilder: FormBuilder,
+    http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient,
+    private toastrService: ToastrService, private router: Router) {
     http.get<IHotel[]>(baseUrl + 'api/Hotels').subscribe(result => {
       this.Hotels = result;
 
@@ -42,6 +47,9 @@ export class HotelPageComponent implements OnInit {
     }, error => console.error(error));
   }
   ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
     this.searchHotelForm = new FormGroup({
       City: new FormControl(),
       checkInDate: new FormControl(),
@@ -177,21 +185,21 @@ export class HotelPageComponent implements OnInit {
     }
     }).subscribe(data => {
       if (data.hasOwnProperty('data') && Object.keys(data['data']).length > 0) {
-          
-        
-        //for (var i = 0; i < data['data'].length; i++) {
-          //console.log('has data: ', data['data']);
-          //console.log('HotelName: ', data['data'][0]['name']);
-          //console.log('Image: ', data['data'][0]['photo']['images']['original']['url']);
-          //console.log('Ranking: ', data['data'][0]['ranking']);
-          //console.log('Rating: ', data['data'][0]['rating']);
-          //console.log('Price: ', data['data'][0]['price']);
-          //console.log('Hotel Stars: ', data['data'][0]['hotel_class']);
-          //console.log('URL: ', data['data'][0]['hac_offers']['offers'][0]['link']);
 
-          console.log('hotels API work');
+
+        //for (var i = 0; i < data['data'].length; i++) {
+        //console.log('has data: ', data['data']);
+        //console.log('HotelName: ', data['data'][0]['name']);
+        //console.log('Image: ', data['data'][0]['photo']['images']['original']['url']);
+        //console.log('Ranking: ', data['data'][0]['ranking']);
+        //console.log('Rating: ', data['data'][0]['rating']);
+        //console.log('Price: ', data['data'][0]['price']);
+        //console.log('Hotel Stars: ', data['data'][0]['hotel_class']);
+        //console.log('URL: ', data['data'][0]['hac_offers']['offers'][0]['link']);
+
+        console.log('hotels API work');
         //}
-        
+
         setTimeout(() => {
           this.hotelsData = data['data'];
           this.hotelResponseCheck = true;
@@ -202,6 +210,11 @@ export class HotelPageComponent implements OnInit {
         }, 2000);
 
       }
+      else {
+        setTimeout(() => {
+          this.toastrService.error("Sorry there is no hotels from: " + this.searchHotelForm.controls.checkInDate.value + " - to: " + this.searchHotelForm.controls.checkOutDate.value, 'No Hotels founded!!');
+        }, 1000);
+      }
     }, err => {
       console.log('Error Status: ', err.status);
       if (err.status == 400) {
@@ -209,6 +222,28 @@ export class HotelPageComponent implements OnInit {
         this.toastrService.error("Error in API get status: " + err.status, 'Error');
       }
     });
+  }
+  isCheckedHotel;
+  isCheckedHotelName;
+  isHotelSelected = false;
+
+  onChangeHotel(e) {
+    this.isCheckedHotelName = e;
+    var splitted = this.isCheckedHotelName['price'].split("-");
+    var pricePerNight = splitted[1].replace(/[^0-9 ]/g, "");
+    this.isCheckedHotel = !this.isCheckedHotel;
+    this.isHotelSelected = true;
+    console.log(pricePerNight);
+
+  }
+  onSelectHotel() {
+    var splitted = this.isCheckedHotelName['price'].split("-");
+    var pricePerNight = splitted[1].replace(/[^0-9 ]/g, "");
+
+    this.toastrService.success("Thank you your hotel has ben selected & you will pay : $" + pricePerNight + " for " + this.diffInDays + " days.", "Hotel Selected");
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   }
 
 }

@@ -179,8 +179,8 @@ export class FlightPageComponent implements OnInit {
   //jsonText = JSON.parse(data.toString());
   if (data.hasOwnProperty('Quotes') && Object.keys(data['Quotes']).length > 0) {
     this.carriersF = data['Carriers'];
-    
-    
+
+
     this.quotesF = data['Quotes'];
     this.placesF = data['Places'];
     this.priceFlight = data['Quotes'][0]['MinPrice'];
@@ -204,7 +204,12 @@ export class FlightPageComponent implements OnInit {
       this.scroll();
     }, 2000);
   }
-
+  else {
+    setTimeout(() => {
+      this.loaderCheck = false;
+      this.toastrService.error("Sorry there is no direct flights from: " + this.searchFlightForm.controls.fromAirportCode.value.airportCode + " - to: " + this.searchFlightForm.controls.toAirportCode.value.airportCode, 'No Flights founded!!');
+    }, 1000);
+  }
     }, err => {
     console.log('Error Status: ', err.status);
     if (err.status == 400) {

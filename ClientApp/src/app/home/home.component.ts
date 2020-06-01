@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
   public modalRef: BsModalRef; // {1}
 
   ngOnInit() {
+
     this.searchBudgetForm = new FormGroup({
       fromDestination: new FormControl(),
       toDestination: new FormControl(),
@@ -122,6 +123,8 @@ export class HomeComponent implements OnInit {
     //  right: `10px`
     //});
   }
+
+ 
 }
 interface Airport {
   airportCode: string;

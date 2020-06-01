@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Inject, ChangeDetectorRef } from '@angular/core';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -17,7 +17,8 @@ export class PostsComponent implements OnInit {
   checkUpdatePost: boolean = false;
   displayedColumns: string[] = ['Post ID','Title', 'Content', 'DateTime', 'isApproved', 'User Name', 'Email', 'Edit'];
   dataSource = new MatTableDataSource<Posts>(this.posts);
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
 
   baseURL;
@@ -29,13 +30,15 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+   
   }
   refreshTable() {
     this.postsService.getBlogPosts()
       .subscribe(data => {
         this.posts = data;
         this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         this.changeDetectorRefs.detectChanges();
         //this.dataSource = new MatTableDataSource<Posts>(this.posts);
 
@@ -46,6 +49,8 @@ export class PostsComponent implements OnInit {
       .subscribe(data => {
         this.posts = data;
         this.dataSource = new MatTableDataSource<Posts>(this.posts);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }, error => this.toastrService.error('Error in connection please try agian.', 'Error get post list'));
   }
   updatePost(post) {

@@ -141,6 +141,7 @@ export class BudgetReservationComponent implements OnInit {
         }
       }
     }, err => {
+        this.onClose();
       console.log('Error Status: ', err.status);
       if (err.status == 400) {
         this.locationResponseCheck = false;
@@ -172,6 +173,11 @@ export class BudgetReservationComponent implements OnInit {
         // loading part
         //}, 2000);
 
+      } else {
+        setTimeout(() => {
+          this.onClose();
+          this.toastrService.error("Sorry there is no hotels from: " + this.fromDate + " - to: " + this.toDate, 'No Hotels founded!!');
+        }, 1000);
       }
     }, err => {
       console.log('Error Status: ', err.status);
@@ -220,9 +226,16 @@ export class BudgetReservationComponent implements OnInit {
         //setTimeout(() => {
         //  //this.scroll();
         //}, 2000);
+      } else {
+        setTimeout(() => {
+          this.onClose();
+          this.toastrService.error("Sorry there is no direct flights from: " + this.fromPlace + " - to: " + this.toDestination, 'No Flights founded!!');
+        }, 1000);
+       
       }
 
     }, err => {
+        
       console.log('Error Status: ', err.status);
       if (err.status == 400) {
         this.responseCheck = false;
@@ -332,6 +345,7 @@ export class BudgetReservationComponent implements OnInit {
     let s: number;
     s = Number(this.tempArr[0]) + Number(this.tempArr[1]);
     this.toastrService.success("Reservation request send you paid: $" + s);
+    this.onClose();
   }
   ngOnDestroy() {
     clearInterval(this.intervalId);
