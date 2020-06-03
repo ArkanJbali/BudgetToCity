@@ -163,7 +163,7 @@ export class BudgetReservationComponent implements OnInit {
     }).subscribe(data => {
       if (data.hasOwnProperty('data') && Object.keys(data['data']).length > 0) {
         console.log('hotels API work');
-
+        //let testJ = data['data'];
         setTimeout(() => {
           this.hotelsData = data['data'];
           this.hotelResponseCheck = true;

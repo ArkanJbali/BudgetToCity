@@ -1,7 +1,15 @@
+/**
+ * Cities interface
+ *
+ */
 interface ICars {
   Id: string;
   city: string;
 }
+/**
+ * Cars interface
+ *
+ */
 interface Cars {
   Id: number;
   Manufacturer: string;

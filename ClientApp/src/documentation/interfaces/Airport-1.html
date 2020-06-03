@@ -1,0 +1,514 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Application documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Application documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>Airport</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>app/flight-page/flight-page.component.ts</code>
+        </p>
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#airportCode">airportCode</a>
+                                </li>
+                                <li>
+                                        <a href="#airportName">airportName</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="airportCode"></a>
+                                        <span class="name"><b>airportCode</b><a href="#airportCode"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>airportCode:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="airportName"></a>
+                                        <span class="name"><b>airportName</b><a href="#airportName"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>airportName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Inject } from &#x27;@angular/core&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { FormControl, FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { map, startWith } from &#x27;rxjs/operators&#x27;;
+import { MatCalendarCellCssClasses } from &#x27;@angular/material/datepicker&#x27;;
+import { MAT_DATE_LOCALE } from &#x27;@angular/material/core&#x27;;
+import * as moment from &#x27;moment/moment&#x27;;
+import { ToastrService } from &#x27;ngx-toastr&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+/**
+* The Flights Page
+*/
+@Component({
+  selector: &#x27;app-flight-page&#x27;,
+  templateUrl: &#x27;./flight-page.component.html&#x27;,
+  styleUrls: [&#x27;./flight-page.component.css&#x27;],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: &#x27;en-GB&#x27; }]
+})
+export class FlightPageComponent implements OnInit {
+  progress &#x3D; 0;
+  str: string[] &#x3D; [&#x27;Validating your data...&#x27;, &#x27;Connecting to APIs ...&#x27;, &#x27;Fetching data...&#x27;, &#x27;Initializing components...&#x27;, &#x27;Initialization finish.&#x27;]
+  subtitle: string &#x3D; &#x27;&#x27;;
+  progressBar &#x3D; document.querySelector(&#x27;.progress-bar&#x27;);
+  intervalId;
+  loaderCheck &#x3D; false;
+
+
+  quotesF: Quotes[];
+  numberRand: number;
+  plusOrMinus: number;
+  placesF: Places[];
+  carriersF: Carries[];
+  total &#x3D; 1;
+  priceFlight: number;
+  priceFlightsArr: number[] &#x3D; [];
+  directFlights: boolean;
+  responseCheck &#x3D; false;
+  Airports: Airport[] &#x3D; [];
+  myControl &#x3D; new FormControl();
+  myControl2 &#x3D; new FormControl();
+  filteredOptions: Observable&lt;Airport[]&gt;;
+  filteredOptions2: Observable&lt;Airport[]&gt;;
+  searchFlightForm: FormGroup;
+  /**
+   * The &quot;constructor&quot;
+   * @param formBuilder
+   * @param http
+   * @param baseUrl
+   * @param httpClient
+   * @param toastrService
+   * @param router
+   */
+  constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject(&#x27;BASE_URL&#x27;) baseUrl: string, private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) {
+
+    http.get&lt;Airport[]&gt;(baseUrl + &#x27;api/Airports&#x27;).subscribe(result &#x3D;&gt; {
+      this.Airports &#x3D; result;
+
+      this.filteredOptions &#x3D; this.myControl.valueChanges.pipe(startWith(&#x27;&#x27;),
+        map(value &#x3D;&gt; typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? value : value.airportName),
+        map(name &#x3D;&gt; name ? this._filter(name) : this.Airports.slice()));
+     
+      this.filteredOptions2 &#x3D; this.myControl2.valueChanges.pipe(startWith(&#x27;&#x27;),
+        map(value &#x3D;&gt; typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? value : value.airportName),
+        map(name &#x3D;&gt; name ? this._filter(name) : this.Airports.slice()));
+
+    }, error &#x3D;&gt; console.error(error));
+
+
+    
+  }
+/**
+* ngOnInit to initialize all needed parameters
+*/
+  ngOnInit() {
+    
+    this.searchFlightForm &#x3D; new FormGroup({
+      fromAirportCode: new FormControl(),
+      toAirportCode: new FormControl(),
+      departDate: new FormControl(),
+      returnDate: new FormControl(),
+      travelers: new FormControl(),
+    });
+    this.searchFlightForm &#x3D; this.formBuilder.group({
+      fromAirportCode: [&#x27;&#x27;, Validators.required],
+      toAirportCode: [&#x27;&#x27;, Validators.required],
+      departDate: [&#x27;&#x27;, Validators.required],
+      returnDate: [&#x27;&#x27;, Validators.required],
+      travelers: [&#x27;&#x27;, Validators.required]
+    });
+    this.searchFlightForm.controls.travelers.setValue(this.total);
+    const getDownloadProgress &#x3D; () &#x3D;&gt; {
+      //console.log(&#x27;getDownload&#x27;, this);
+      if (this.progress &lt;&#x3D; 99) {
+        if (this.progress &#x3D;&#x3D; 10) {
+          this.subtitle &#x3D; this.str[0];
+        }
+        if (this.progress &#x3D;&#x3D; 30) {
+          this.subtitle &#x3D; this.str[1];
+        }
+        if (this.progress &#x3D;&#x3D; 50) {
+          this.subtitle &#x3D; this.str[2];
+        }
+        if (this.progress &#x3D;&#x3D; 80) {
+          this.subtitle &#x3D; this.str[3];
+        }
+        if (this.progress &#x3D;&#x3D; 90) {
+          this.subtitle &#x3D; this.str[4];
+        }
+        this.progress &#x3D; this.progress + 1;
+      }
+      else {
+        clearInterval(this.intervalId);
+      }
+    }
+    this.intervalId &#x3D; setInterval(getDownloadProgress, 200);
+  }
+/**
+* Submit the form to start search for flights
+*/
+  onSubmit(newEvent) {
+    this.searchFlightForm.controls.fromAirportCode.setValue(this.myControl.value);
+    this.searchFlightForm.controls.toAirportCode.setValue(this.myControl2.value);
+
+
+    if (this.searchFlightForm.valid) {
+      this.searchFlightForm.controls.departDate.setValue(moment(new Date(this.searchFlightForm.controls.departDate.value)).format(&#x27;YYYY-MM-DD&#x27;));
+      this.searchFlightForm.controls.returnDate.setValue(moment(new Date(this.searchFlightForm.controls.returnDate.value)).format(&#x27;YYYY-MM-DD&#x27;));
+     // if (!this.responseCheck) {
+      //  this.toastrService.warning(&#x27;There is no matched searches&#x27;, &#x27;No result&#x27;);
+      //} else {
+      this.loaderCheck &#x3D; true;
+      setTimeout(() &#x3D;&gt; {
+        
+        this.getFlights();
+      }, 10000);
+
+      
+
+       
+      //}
+      console.log(this.searchFlightForm.value);
+    }
+    else {
+      console.log(&quot;Form invalid !!!!&quot;);
+      this.toastrService.error(&#x27;Should fill all required fields&#x27;, &#x27;Error&#x27;);
+    }
+   
+   
+  }
+  /**
+   * To make filtering of __Airports__
+   * @param value
+   */
+  private _filter(value: string): Airport[] {
+    const filterValue &#x3D; value.toLowerCase();
+    return this.Airports.filter(option &#x3D;&gt; option.airportName.toLowerCase().indexOf(filterValue) &#x3D;&#x3D;&#x3D; 0);
+  }
+  /**
+ * Get Date
+ */
+  dateClass &#x3D; (d: Date): MatCalendarCellCssClasses &#x3D;&gt; {
+    const date &#x3D; d.getDate();
+    // Highlight the 1st and 20th day of each month.
+    return (date &#x3D;&#x3D;&#x3D; 1 || date &#x3D;&#x3D;&#x3D; 20) ? &#x27;example-custom-date-class&#x27; : &#x27;&#x27;;
+  }
+/**
+* To Display Cities
+* @param airport
+*/
+  displayFn(airport: Airport): string {
+    return airport &amp;&amp; airport.airportName ? airport.airportName : &#x27;&#x27;;
+  }
+
+  getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  getPlusOrMinus() {
+    return  Math.random() &lt; 0.5 ? -1 : 1;
+  }
+  decremantTotal() {
+      if (this.total !&#x3D;&#x3D; 1) {
+        this.total &#x3D; this.total - 1;
+        this.searchFlightForm.controls.travelers.setValue(this.total);
+      }
+  }
+  incrementTotal() {
+    if (this.total !&#x3D;&#x3D; 8) {
+      this.total &#x3D; this.total + 1;
+      this.searchFlightForm.controls.travelers.setValue(this.total);
+    }
+  }
+/**
+ * Get Flights of selected city from __&quot;skyScanner&quot; API__
+ */
+  getFlights() {
+    var from &#x3D; (this.searchFlightForm.controls.fromAirportCode.value.airportCode) + &quot;-sky&quot;;
+    var to &#x3D; (this.searchFlightForm.controls.toAirportCode.value.airportCode) + &quot;-sky&quot;;
+    var depart &#x3D; this.searchFlightForm.controls.departDate.value;
+    var returns &#x3D; this.searchFlightForm.controls.returnDate.value;
+    this.httpClient.get(&quot;https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/&quot; + from + &quot;/&quot; + to + &quot;/&quot; + depart + &quot;?inboundpartialdate&#x3D;&quot; + returns + &quot;&quot;, {
+      &quot;headers&quot;: {
+      &quot;x-rapidapi-host&quot;: &quot;skyscanner-skyscanner-flight-search-v1.p.rapidapi.com&quot;,
+      &quot;x-rapidapi-key&quot;: &quot;df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f&quot;
+    }
+}).subscribe(data &#x3D;&gt; {
+  console.log(&#x27;Inside HTTPClient: &#x27;, data);
+  //jsonText &#x3D; JSON.parse(data.toString());
+  if (data.hasOwnProperty(&#x27;Quotes&#x27;) &amp;&amp; Object.keys(data[&#x27;Quotes&#x27;]).length &gt; 0) {
+    this.carriersF &#x3D; data[&#x27;Carriers&#x27;];
+
+
+    this.quotesF &#x3D; data[&#x27;Quotes&#x27;];
+    this.placesF &#x3D; data[&#x27;Places&#x27;];
+    this.priceFlight &#x3D; data[&#x27;Quotes&#x27;][0][&#x27;MinPrice&#x27;];
+    this.directFlights &#x3D; data[&#x27;Quotes&#x27;][0][&#x27;Direct&#x27;];
+    console.log(&quot;Carries: &quot;, this.carriersF[0]);
+    console.log(&quot;Quotes: &quot;, this.quotesF);
+    console.log(&quot;Places: &quot;, this.placesF);
+    //console.log(&#x27;Quotes: &#x27;, data[&#x27;Quotes&#x27;])
+    //console.log(&#x27;Carriers Length: &#x27;, Object.keys(data[&#x27;Carriers&#x27;]).length);
+    //console.log(&#x27;Price: &#x27;, data[&#x27;Quotes&#x27;][0][&#x27;MinPrice&#x27;], &quot;\nDirect? &quot;, data[&#x27;Quotes&#x27;][0][&#x27;Direct&#x27;]);
+    //console.log(jsonText.Places[0].IataCode, &quot;-&quot;, jsonText.Places[0].Name, &quot;   -  &quot;, jsonText.Places[1].IataCode, &quot;-&quot;, jsonText.Places[1].Name);
+    //console.log(&quot;Carries: &quot;, jsonText.Carriers[0].Name, &quot; - &quot;, jsonText.Carriers[1].Name);
+    setTimeout(() &#x3D;&gt; {
+      this.responseCheck &#x3D; true;
+      for (let i &#x3D; 0; i &lt; this.carriersF.length; i++) {
+        this.priceFlightsArr.push(Number(this.priceFlight) + (this.getPlusOrMinus() * this.getRndInteger(50, 150)));
+      }
+    }, 1000);
+    setTimeout(() &#x3D;&gt; {
+      this.loaderCheck &#x3D; false;
+      this.scroll();
+    }, 2000);
+  }
+  else {
+    setTimeout(() &#x3D;&gt; {
+      this.loaderCheck &#x3D; false;
+      this.toastrService.error(&quot;Sorry there is no direct flights from: &quot; + this.searchFlightForm.controls.fromAirportCode.value.airportCode + &quot; - to: &quot; + this.searchFlightForm.controls.toAirportCode.value.airportCode, &#x27;No Flights founded!!&#x27;);
+    }, 1000);
+  }
+    }, err &#x3D;&gt; {
+    console.log(&#x27;Error Status: &#x27;, err.status);
+    if (err.status &#x3D;&#x3D; 400) {
+      this.responseCheck &#x3D; false;
+      this.toastrService.error(&quot;Error in API get status: &quot;+err.status, &#x27;Error&#x27;);
+    }
+    if (err.status) {
+      this.responseCheck &#x3D; false;
+      this.toastrService.error(&quot;Error in API get status: &quot; + err.status, &#x27;Error&#x27;);
+    }
+    });
+  }
+  
+  scroll() {
+    var elmnt &#x3D; document.getElementById(&quot;flightList&quot;);
+      elmnt.scrollIntoView(true); 
+ 
+  }
+  addFlight(i,j) {
+    confirm(&quot;You Choosed: &quot; + i.Name + &quot;\n&quot; + &quot;Price: &quot; + j + &quot;\n Click To Confirm&quot;);
+  }
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+  }
+}
+
+interface Airport {
+  airportCode: string;
+  airportName: string;
+}
+
+interface Carries {
+  CarrierId: number;
+  Name: string;
+}
+interface Places {
+  CityId: string;
+  CityName: string;
+  CountryName: string;
+  IataCode: string;
+  Name: string;
+  PlaceId: number;
+  SkyscannerCode: string;
+  Type: string;
+}
+interface Quotes {
+  Direct: boolean;
+  MinPrice: number;
+  OutboundLeg: [];
+  QuoteDateTime: string;
+  QuoteId: number;
+}
+</code></pre>
+    </div>
+</div>
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'Airport-1.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,3 +1,7 @@
+/**
+ * Posts interface
+ *
+ */
 export interface Posts {
   postID: number;
   postTitle: string;

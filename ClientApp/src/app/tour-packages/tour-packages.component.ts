@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+/**
+ * The Packages Page
+ */
 @Component({
   selector: 'app-tour-packages',
   templateUrl: './tour-packages.component.html',

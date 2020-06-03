@@ -1,0 +1,370 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Application documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Application documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>Airport</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>app/home/home.component.ts</code>
+        </p>
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#airportCode">airportCode</a>
+                                </li>
+                                <li>
+                                        <a href="#airportName">airportName</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="airportCode"></a>
+                                        <span class="name"><b>airportCode</b><a href="#airportCode"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>airportCode:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="airportName"></a>
+                                        <span class="name"><b>airportName</b><a href="#airportName"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>airportName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, TemplateRef, OnInit, Inject } from &#x27;@angular/core&#x27;;
+import { BsModalRef, BsModalService } from &#x27;ngx-bootstrap/modal&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { FormControl, FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { map, startWith } from &#x27;rxjs/operators&#x27;;
+import { MatCalendarCellCssClasses } from &#x27;@angular/material/datepicker&#x27;;
+import { MAT_DATE_LOCALE } from &#x27;@angular/material/core&#x27;;
+import * as moment from &#x27;moment/moment&#x27;;
+import { ToastrService } from &#x27;ngx-toastr&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { MatDialog, MatDialogConfig, MatDialogRef } from &quot;@angular/material&quot;;
+import { BudgetReservationComponent } from &#x27;./budget-reservation/budget-reservation.component&#x27;;
+import { ChatDialogComponent } from &#x27;../chat/chat-dialog/chat-dialog.component&#x27;;
+
+@Component({
+  selector: &#x27;app-home&#x27;,
+  templateUrl: &#x27;./home.component.html&#x27;,
+  styleUrls: [&#x27;./home.component.css&#x27;],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: &#x27;en-GB&#x27; }]
+})
+export class HomeComponent implements OnInit {
+  Airports: Airport[] &#x3D; [];
+  myControl &#x3D; new FormControl();
+  filteredOptions: Observable&lt;Airport[]&gt;;
+  myControl2 &#x3D; new FormControl();
+  filteredOptions2: Observable&lt;Airport[]&gt;;
+  searchBudgetForm: FormGroup;
+  sliderValue &#x3D; 500;
+
+  constructor(private modalService: BsModalService, private formBuilder: FormBuilder,
+    http: HttpClient, @Inject(&#x27;BASE_URL&#x27;) baseUrl: string, private httpClient: HttpClient,
+    private toastrService: ToastrService, private router: Router, private dialog: MatDialog) {
+    http.get&lt;Airport[]&gt;(baseUrl + &#x27;api/Airports&#x27;).subscribe(result &#x3D;&gt; {
+      this.Airports &#x3D; result;
+
+      this.filteredOptions &#x3D; this.myControl.valueChanges.pipe(startWith(&#x27;&#x27;),
+        map(value &#x3D;&gt; typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? value : value.airportName),
+        map(name &#x3D;&gt; name ? this._filter(name) : this.Airports.slice()));
+
+      this.filteredOptions2 &#x3D; this.myControl2.valueChanges.pipe(startWith(&#x27;&#x27;),
+        map(value &#x3D;&gt; typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? value : value.airportName),
+        map(name &#x3D;&gt; name ? this._filter(name) : this.Airports.slice()));
+
+    }, error &#x3D;&gt; console.error(error));
+  } 
+  
+  public modalRef: BsModalRef; // {1}
+
+  ngOnInit() {
+
+    this.searchBudgetForm &#x3D; new FormGroup({
+      fromDestination: new FormControl(),
+      toDestination: new FormControl(),
+      fromDate: new FormControl(),
+      returnDate: new FormControl(),
+      budget: new FormControl(),
+    });
+    this.searchBudgetForm &#x3D; this.formBuilder.group({
+      fromDestination: [&#x27;&#x27;, Validators.required],
+      toDestination: [&#x27;&#x27;, Validators.required],
+      fromDate: [&#x27;&#x27;, Validators.required],
+      returnDate: [&#x27;&#x27;, Validators.required],
+      budget: [&#x27;&#x27;, Validators.required]
+    });
+    
+  }
+  onSubmit(newEvent) {
+    console.log(this.sliderValue);
+    this.searchBudgetForm.controls.fromDestination.setValue(this.myControl.value);
+    this.searchBudgetForm.controls.toDestination.setValue(this.myControl2.value);
+    this.searchBudgetForm.controls.budget.setValue(this.sliderValue);
+
+    if (this.searchBudgetForm.valid) {
+      this.searchBudgetForm.controls.fromDate.setValue(moment(new Date(this.searchBudgetForm.controls.fromDate.value)).format(&#x27;YYYY-MM-DD&#x27;));
+      this.searchBudgetForm.controls.returnDate.setValue(moment(new Date(this.searchBudgetForm.controls.returnDate.value)).format(&#x27;YYYY-MM-DD&#x27;));
+      console.log(&#x27;Home form data&#x27;, this.searchBudgetForm.value);
+      this.openStepper();
+    }
+    else {
+      console.log(&quot;Form invalid !!!!&quot;);
+      this.toastrService.error(&#x27;Should fill all required fields&#x27;, &#x27;Error&#x27;);
+    }
+  }
+
+  private _filter(value: string): Airport[] {
+    const filterValue &#x3D; value.toLowerCase();
+    return this.Airports.filter(option &#x3D;&gt; option.airportName.toLowerCase().indexOf(filterValue) &#x3D;&#x3D;&#x3D; 0);
+  }
+  dateClass &#x3D; (d: Date): MatCalendarCellCssClasses &#x3D;&gt; {
+    const date &#x3D; d.getDate();
+    // Highlight the 1st and 20th day of each month.
+    return (date &#x3D;&#x3D;&#x3D; 1 || date &#x3D;&#x3D;&#x3D; 20) ? &#x27;example-custom-date-class&#x27; : &#x27;&#x27;;
+  }
+  displayFn(airport: Airport): string {
+    return airport &amp;&amp; airport.airportName ? airport.airportName : &#x27;&#x27;;
+  }
+  public openModal(template: TemplateRef&lt;any&gt;) {
+    this.modalRef &#x3D; this.modalService.show(template); // {3}
+  }
+  valueChanged(e) {
+    //console.log(&#x27;e&#x27;, parseInt(e));
+    this.sliderValue &#x3D; parseInt(e);
+  }
+  openStepper() {
+    const dialogConfig &#x3D; new MatDialogConfig();
+    dialogConfig.disableClose &#x3D; false;
+    dialogConfig.autoFocus &#x3D; true;
+    dialogConfig.width &#x3D; &#x27;80%&#x27;;
+    dialogConfig.height &#x3D; &#x27;95%&#x27;;
+    dialogConfig.data &#x3D; this.searchBudgetForm.value;
+    this.dialog.open(BudgetReservationComponent, dialogConfig);
+  }
+  openChat() {
+    const dialogConfig &#x3D; new MatDialogConfig();
+    dialogConfig.disableClose &#x3D; false;
+    dialogConfig.autoFocus &#x3D; true;
+    dialogConfig.width &#x3D; &#x27;40%&#x27;;
+    dialogConfig.height &#x3D; &#x27;80%&#x27;;
+    dialogConfig.position &#x3D; { right: &#x60;10px&#x60;, top: &#x60;10px&#x60; }
+    this.dialog.open(ChatDialogComponent, dialogConfig);
+    //this.dialogRef.updatePosition({
+    //  top: &#x60;10px&#x60;,
+    //  right: &#x60;10px&#x60;
+    //});
+  }
+  decremantTotal() {
+    if (this.sliderValue !&#x3D;&#x3D; 500) {
+      this.sliderValue &#x3D; this.sliderValue - 500;
+      this.searchBudgetForm.controls.budget.setValue(this.sliderValue);
+    }
+    if (this.sliderValue &lt;&#x3D; 500) {
+      this.sliderValue &#x3D; 500;
+    }
+  }
+  incrementTotal() {
+    if (this.sliderValue !&#x3D;&#x3D; 10000) {
+      this.sliderValue &#x3D; this.sliderValue + 500;
+      this.searchBudgetForm.controls.budget.setValue(this.sliderValue);
+    }
+    if (this.sliderValue &gt;&#x3D; 10000) {
+      this.sliderValue &#x3D; 10000;
+    }
+  }
+ 
+}
+interface Airport {
+  airportCode: string;
+  airportName: string;
+}
+</code></pre>
+    </div>
+</div>
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'Airport.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

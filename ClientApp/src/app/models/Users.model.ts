@@ -1,3 +1,7 @@
+/**
+ * Users interface
+ *
+ */
 export interface Users {
   email: string;
   phone: string;

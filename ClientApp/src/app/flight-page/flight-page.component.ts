@@ -8,6 +8,9 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import * as moment from 'moment/moment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+/**
+* The Flights Page
+*/
 @Component({
   selector: 'app-flight-page',
   templateUrl: './flight-page.component.html',
@@ -39,6 +42,15 @@ export class FlightPageComponent implements OnInit {
   filteredOptions: Observable<Airport[]>;
   filteredOptions2: Observable<Airport[]>;
   searchFlightForm: FormGroup;
+  /**
+   * The "constructor"
+   * @param formBuilder
+   * @param http
+   * @param baseUrl
+   * @param httpClient
+   * @param toastrService
+   * @param router
+   */
   constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) {
 
     http.get<Airport[]>(baseUrl + 'api/Airports').subscribe(result => {
@@ -57,7 +69,9 @@ export class FlightPageComponent implements OnInit {
 
     
   }
-  
+/**
+* ngOnInit to initialize all needed parameters
+*/
   ngOnInit() {
     
     this.searchFlightForm = new FormGroup({
@@ -101,6 +115,9 @@ export class FlightPageComponent implements OnInit {
     }
     this.intervalId = setInterval(getDownloadProgress, 200);
   }
+/**
+* Submit the form to start search for flights
+*/
   onSubmit(newEvent) {
     this.searchFlightForm.controls.fromAirportCode.setValue(this.myControl.value);
     this.searchFlightForm.controls.toAirportCode.setValue(this.myControl2.value);
@@ -131,16 +148,26 @@ export class FlightPageComponent implements OnInit {
    
    
   }
+  /**
+   * To make filtering of __Airports__
+   * @param value
+   */
   private _filter(value: string): Airport[] {
     const filterValue = value.toLowerCase();
     return this.Airports.filter(option => option.airportName.toLowerCase().indexOf(filterValue) === 0);
   }
-
+  /**
+ * Get Date
+ */
   dateClass = (d: Date): MatCalendarCellCssClasses => {
     const date = d.getDate();
     // Highlight the 1st and 20th day of each month.
     return (date === 1 || date === 20) ? 'example-custom-date-class' : '';
   }
+/**
+* To Display Cities
+* @param airport
+*/
   displayFn(airport: Airport): string {
     return airport && airport.airportName ? airport.airportName : '';
   }
@@ -164,6 +191,9 @@ export class FlightPageComponent implements OnInit {
       this.searchFlightForm.controls.travelers.setValue(this.total);
     }
   }
+/**
+ * Get Flights of selected city from __"skyScanner" API__
+ */
   getFlights() {
     var from = (this.searchFlightForm.controls.fromAirportCode.value.airportCode) + "-sky";
     var to = (this.searchFlightForm.controls.toAirportCode.value.airportCode) + "-sky";

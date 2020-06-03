@@ -7,7 +7,10 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 //import { AuthenticationService } from './_services';
 //import { User } from './_models';
-
+/**
+ * The Login Page
+ *
+ */
 imports: [
   BrowserModule,
   FormsModule
@@ -19,8 +22,19 @@ imports: [
 })
 export class LoginComponent implements OnInit {
   len: number
+  /**
+  * Local reference of Posts
+  */
   Users: IUsers[] = [];
   currentUser: IUsers;
+/**
+ * The "constructor"
+ *
+ * @param {FormBuilder} formBuilder A FormBuilder
+ * @param {HttpClient} http A HttpClient
+ * @param {ToastrService} toastrService A ToastrService
+ * @param {Router} router A Router
+ */
   constructor(private formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string,
     private httpClient: HttpClient, private toastrService: ToastrService, private router: Router) {
     http.get<IUsers[]>(baseUrl + 'api/Users').subscribe(result => {
@@ -32,7 +46,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  /**
+   * To login to the dashboard
+   * @param username
+   * @param password
+   */
   login(username, password) {
     this.len = this.Users.length;
     for (var i = 0; i <= this.Users.length + 1; i++) {
@@ -60,6 +78,10 @@ export class LoginComponent implements OnInit {
       }
     }
   }
+  /**
+   * To check if the password correct or not
+   * @param password
+   */
   passwordCheckLog(password) {
     for (var i = 0; i < this.Users.length; i++) {
       if (this.Users[i].password == password) {
@@ -69,6 +91,10 @@ export class LoginComponent implements OnInit {
     }
     return false;
   }
+  /**
+   * Return a password if forgetten
+   * @param email
+   */
   passwordCheck(email) {
     for (var i = 0; i < this.Users.length; i++) {
       if (this.Users[i].email == email) {
@@ -83,7 +109,9 @@ export class LoginComponent implements OnInit {
     return false;
   }
 }
-
+/**
+ * Users Interface
+ */
 interface IUsers {
   email: string
   Phone: string

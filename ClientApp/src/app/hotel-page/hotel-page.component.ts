@@ -8,7 +8,9 @@ import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
-
+/**
+* The Hotels Page
+*/
 @Component({
   selector: 'app-hotel-page',
   templateUrl: './hotel-page.component.html',
@@ -35,7 +37,16 @@ export class HotelPageComponent implements OnInit {
   filteredOptions: Observable<IHotel[]>;
 
   firstFormGroup: FormGroup;
-
+  /**
+   * The "constructor"
+   * @param formBuilder
+   * @param _formBuilder
+   * @param http
+   * @param baseUrl
+   * @param httpClient
+   * @param toastrService
+   * @param router
+   */
   constructor(private formBuilder: FormBuilder, private _formBuilder: FormBuilder,
     http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient,
     private toastrService: ToastrService, private router: Router) {
@@ -47,6 +58,10 @@ export class HotelPageComponent implements OnInit {
         map(name => name ? this._filter(name) : this.Hotels.slice()));
     }, error => console.error(error));
   }
+
+/**
+* ngOnInit to initialize all needed parameters
+*/
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -94,12 +109,15 @@ export class HotelPageComponent implements OnInit {
     }
     this.intervalId = setInterval(getDownloadProgress, 200);
   }
+/**
+* Submit the form to start search for hotels
+*/
   onSubmit(newEvent) {
    
     this.hotelResponseCheck = false;
-    
+    this.searchHotelForm.controls.City.setValue(this.myControl.value.city);
     if (this.searchHotelForm.valid) {
-      this.searchHotelForm.controls.City.setValue(this.myControl.value.city);
+   
       this.loaderCheck = true;
       setTimeout(() => {
 
@@ -123,12 +141,18 @@ export class HotelPageComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.Hotels.filter(option => option.city.toLowerCase().indexOf(filterValue) === 0);
   }
-
+/**
+ * Get Date
+ */
   dateClass = (d: Date): MatCalendarCellCssClasses => {
     const date = d.getDate();
     // Highlight the 1st and 20th day of each month.
     return (date === 1 || date === 20) ? 'example-custom-date-class' : '';
   }
+  /**
+   * To Display Cities
+   * @param hotel
+   */
   displayFn(hotel: IHotel): string {
     return hotel && hotel.city ? hotel.city : '';
   }
@@ -163,6 +187,9 @@ export class HotelPageComponent implements OnInit {
     }
 
   }
+  /**
+   * Get Location ID of selected city from __"tripAdvisor" API__
+   */
   getLocationID() {
     var from = (this.searchHotelForm.controls.City.value);
     this.httpClient.get("https://tripadvisor1.p.rapidapi.com/locations/search?location_id=1&limit=30&sort=relevance&offset=0&lang=en_US&currency=USD&units=km&query=" + from + "", {
@@ -187,6 +214,9 @@ export class HotelPageComponent implements OnInit {
       }
     });
   }
+  /**
+   * Get All hotels that have the same location ID from __API__
+   * */
   getHotels() {
     var locationId = this.locationID;
     var checkin = this.searchHotelForm.controls.checkInDate.value;
@@ -241,7 +271,9 @@ export class HotelPageComponent implements OnInit {
   isCheckedHotel;
   isCheckedHotelName;
   isHotelSelected = false;
-
+/**
+* To Make just one selectable hotel
+*/
   onChangeHotel(e) {
     this.isCheckedHotelName = e;
     var splitted = this.isCheckedHotelName['price'].split("-");
@@ -251,6 +283,9 @@ export class HotelPageComponent implements OnInit {
     console.log(pricePerNight);
 
   }
+/**
+* After Select Hotel Print a Message
+*/
   onSelectHotel() {
     var splitted = this.isCheckedHotelName['price'].split("-");
     var pricePerNight = splitted[1].replace(/[^0-9 ]/g, "");

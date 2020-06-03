@@ -3,8 +3,16 @@ import { environment } from '../../environments/environment';
 import { ApiAiClient } from 'api-ai-javascript/es6/ApiAiClient';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { formatDate } from '@angular/common';
-
+/**
+* Its a Chatbot Service
+*/
 export class Message {
+  /**
+   * The "constructor" of Message
+   * @param content
+   * @param sentBy
+   * @param timeMsg
+   */
   constructor(public content: string, public sentBy: string, public timeMsg: string) {}
 }
 @Injectable({
@@ -17,12 +25,17 @@ export class ChatService {
   conversation = new BehaviorSubject<Message[]>([]);
 
   constructor() { }
-  // Adds message to source
+  /**
+   * Adds message to source
+   * @param msg
+   */
   update(msg: Message) {
     this.conversation.next([msg]);
   }
-
-  //Sends and recieves messages via DialogFlow
+  /**
+   * Sends and recieves messages via DialogFlow
+   * @param msg
+   */
   converse(msg: string) {
     this.userTimeSendMessage = formatDate(new Date(), 'HH:mm:ss a', 'en-US');
     const userMessage = new Message(msg, 'User', this.userTimeSendMessage);
@@ -36,6 +49,9 @@ export class ChatService {
 
     });
   }
+  /**
+   * First Message
+   */
   talk() {
     this.client.textRequest('Who are you!').
       then(res => {

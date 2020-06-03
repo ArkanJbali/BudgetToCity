@@ -9,7 +9,9 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CarsService } from '../services/cars.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-
+/**
+* The Cars Page
+*/
 @Component({
   selector: 'app-car-page',
   templateUrl: './car-page.component.html',
@@ -37,9 +39,22 @@ export class CarPageComponent implements OnInit {
 
   displayedColumns: string[] = [/*'ID', */'Manufacturer', 'Model', 'Category', 'Year', 'Gear Box', 'Doors', 'Fuel Type', 'Color', 'Price', 's'];
   dataSource = new MatTableDataSource<Cars>(this.carsData);
+/**
+  * The data-binding value of the ViewChild, added on enter to the paginator
+  */
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
-
+  /**
+   * The "constructor"
+   * @param formBuilder
+   * @param _formBuilder
+   * @param http
+   * @param baseUrl
+   * @param httpClient
+   * @param toastrService
+   * @param router
+   * @param carsService
+   */
   constructor(private formBuilder: FormBuilder, private _formBuilder: FormBuilder, http: HttpClient, @Inject('BASE_URL') baseUrl: string,
     private httpClient: HttpClient, private toastrService: ToastrService, private router: Router,
     private carsService: CarsService) {
@@ -51,6 +66,9 @@ export class CarPageComponent implements OnInit {
     }, error => console.error(error));
     this.getCars();
   }
+/**
+* ngOnInit to initialize all needed parameters
+*/
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -98,7 +116,9 @@ export class CarPageComponent implements OnInit {
     this.intervalId = setInterval(getDownloadProgress, 200);
   }
 
-
+/**
+* Submit the form to start search for cars
+*/
   onSubmit(newEvent) {
     this.searchCarForm.controls.City.setValue(this.myControl.value.city);
     this.carResponseCheck = false;
@@ -125,16 +145,26 @@ export class CarPageComponent implements OnInit {
     }
 
   }
+/**
+* To make filtering of __Cities__
+* @param value
+*/
   private _filter(value: string): ICars[] {
     const filterValue = value.toLowerCase();
     return this.Cars.filter(option => option.city.toLowerCase().indexOf(filterValue) === 0);
   }
-
+/**
+* Get Date
+*/
   dateClass = (d: Date): MatCalendarCellCssClasses => {
     const date = d.getDate();
     // Highlight the 1st and 20th day of each month.
     return (date === 1 || date === 20) ? 'example-custom-date-class' : '';
   }
+/**
+* To Display Cars
+* @param car
+*/
   displayFn(car: ICars): string {
     return car && car.city ? car.city : '';
   }
@@ -156,7 +186,9 @@ export class CarPageComponent implements OnInit {
       elmnt.scrollIntoView(true);
     }
   }
-
+/**
+* Get Cars of selected city from __"tripAdvisor" API__
+*/
   getCars() {
     this.carsService.getCars()
       .subscribe(data => {
@@ -176,13 +208,18 @@ export class CarPageComponent implements OnInit {
   isCheckedCar;
   isCheckedCarName;
   isCarSelected = false;
-
+/**
+* To Make just one selectable car
+*/
   onChangeCar(e) {
     this.isCheckedCarName = e;
     this.isCheckedCar = !this.isCheckedCar;
     this.isCarSelected = true;
 
   }
+/**
+* After Select Car Print a Message
+*/
   selectCar() {
     let element = this.isCheckedCarName;
     this.toastrService.success("You'll pay for " + this.diffInDays + " days: $" + (this.diffInDays * Number(element.price)), "Car Selected");

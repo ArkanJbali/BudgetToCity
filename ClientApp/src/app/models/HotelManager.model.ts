@@ -1,3 +1,7 @@
+/**
+ * Hotel Manager interface
+ *
+ */
 export interface HotelManager {
   id: number;
   managerName: string;
