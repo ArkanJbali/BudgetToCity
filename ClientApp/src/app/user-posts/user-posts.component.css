@@ -59,3 +59,8 @@ mat-form-field {
 .cardBorder {
   border-top: 4px solid #d27f3d;
 }
+input[type=text] {
+  background: transparent;
+  font-family: Arial, FontAwesome;
+  color: black;
+}

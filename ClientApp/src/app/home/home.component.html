@@ -15,7 +15,7 @@
       <div class="tab-content" id="v-pills-tabContent">
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
           <br />
-          <span style="margin-left:2%;">MAKE YOUR TRIP</span><hr />
+          <span style="margin-left:2%;">MAKE YOUR TRIP</span> <br />
           <div class="container">
             <form [formGroup]="searchBudgetForm" (ngSubmit)="onSubmit(searchBudgetForm.value)">
               <div class="row">
@@ -71,15 +71,19 @@
               <br />
               <div class="row">
                 <div class="col">
-                  <mat-icon>monetization_on</mat-icon> Choose your budget:<br />
-                  <input type="range" min="200" max="10000" #ranger value="10" formControlName="budget" (input)="valueChanged($event.target.value)">{{sliderValue | currency}}
+                  <mat-form-field class="example-full-width ">
+                    <mat-label style="font-size:1.2rem;"><mat-icon>monetization_on</mat-icon><span> Choose your budget: </span></mat-label>
+                    <div class="number-input md-number-input">
+                      <button type="button" (click)="decremantTotal()" class="minus"> - </button>
+                      <input class="quantity" type="number" matInput formControlName="budget" (input)="valueChanged($event.target.value)" min="500" max="10000" step="100" value="{{sliderValue}}">
+                      <button type="button" (click)="incrementTotal()" class="plus"> + </button>
+                    </div>
+                    <br />
+                    <input type="range" class="slider" min="500" max="10000" #ranger value="500" formControlName="budget" (input)="valueChanged($event.target.value)">
+                    <br />{{sliderValue | currency}}
+                  </mat-form-field>
                 </div>
-
-
-              </div>
-              <div class="row">
-                <div class="col"></div>
-                <div class="col">
+                <div class="col"  style="margin-top:20%;">
                   <button type="reset" class="btn btn-outline resetBtn" mat-raised-button>
                     Reset
                   </button>
@@ -88,6 +92,11 @@
                     Search <i class="fas fa-arrow-right"></i>
                   </button>
                 </div>
+
+              </div>
+              <div class="row">
+                <div class="col"></div>
+                
               </div>
               <!-- <button type="button" class="btn btn-success searchBtn" mat-raised-button (click)="openStepper()" style="margin-left:5%;"> Open </button>-->
 

@@ -27,7 +27,8 @@ export class HotelPageComponent implements OnInit {
   diffInDays: number;
   locationResponseCheck = false;
   hotelResponseCheck = false;
-  total = 1;
+  totalRooms = 1;
+  totalGuest = 1;
   searchHotelForm: FormGroup;
   Hotels: IHotel[] = [];
   myControl = new FormControl();
@@ -63,9 +64,10 @@ export class HotelPageComponent implements OnInit {
       checkInDate: ['', Validators.required],
       checkOutDate: ['', Validators.required],
       Guests: ['', Validators.required],
-      Rooms: ['']
+      Rooms: ['', Validators.required]
     });
-    this.searchHotelForm.controls.Guests.setValue(this.total);
+    this.searchHotelForm.controls.Guests.setValue(this.totalGuest);
+    this.searchHotelForm.controls.Rooms.setValue(this.totalRooms);
     const getDownloadProgress = () => {
       //console.log('getDownload', this);
       if (this.progress <= 99) {
@@ -93,10 +95,11 @@ export class HotelPageComponent implements OnInit {
     this.intervalId = setInterval(getDownloadProgress, 200);
   }
   onSubmit(newEvent) {
-    this.searchHotelForm.controls.City.setValue(this.myControl.value.city);
+   
     this.hotelResponseCheck = false;
     
     if (this.searchHotelForm.valid) {
+      this.searchHotelForm.controls.City.setValue(this.myControl.value.city);
       this.loaderCheck = true;
       setTimeout(() => {
 
@@ -130,15 +133,27 @@ export class HotelPageComponent implements OnInit {
     return hotel && hotel.city ? hotel.city : '';
   }
   decremantTotal() {
-    if (this.total !== 1) {
-      this.total = this.total - 1;
-      this.searchHotelForm.controls.travelers.setValue(this.total);
+    if (this.totalGuest !== 1) {
+      this.totalGuest = this.totalGuest - 1;
+      this.searchHotelForm.controls.Guests.setValue(this.totalGuest);
     }
   }
   incrementTotal() {
-    if (this.total !== 8) {
-      this.total = this.total + 1;
-      this.searchHotelForm.controls.travelers.setValue(this.total);
+    if (this.totalGuest !== 8) {
+      this.totalGuest = this.totalGuest + 1;
+      this.searchHotelForm.controls.Guests.setValue(this.totalGuest);
+    }
+  }
+  decremantTotal2() {
+    if (this.totalRooms !== 1) {
+      this.totalRooms = this.totalRooms - 1;
+      this.searchHotelForm.controls.Rooms.setValue(this.totalRooms);
+    }
+  }
+  incrementTotal2() {
+    if (this.totalRooms !== 8) {
+      this.totalRooms = this.totalRooms + 1;
+      this.searchHotelForm.controls.Rooms.setValue(this.totalRooms);
     }
   }
   scroll() {

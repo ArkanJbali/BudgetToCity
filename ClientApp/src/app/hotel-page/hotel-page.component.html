@@ -42,18 +42,18 @@
               <button type="button" class="btn btn-outline-danger btnRound" (click)="decremantTotal()">-</button>
               <mat-form-field class="example-full-width" style="width:30%;">
                 <mat-label>Guests</mat-label>
-                <input type="text" matInput name="travelers" id="Travelers" formControlName="Guests" [value]="total" style="display:inline-block;">
+                <input type="text" matInput name="travelers" id="Travelers" formControlName="Guests" [value]="totalGuest" style="display:inline-block;">
               </mat-form-field>
               <button type="button" class="btn btn-outline-success btnRound" (click)="incrementTotal()">+</button>
 
             </td>
             <td>
-              <button type="button" class="btn btn-outline-danger btnRound" (click)="decremantTotal()">-</button>
+              <button type="button" class="btn btn-outline-danger btnRound" (click)="decremantTotal2()">-</button>
               <mat-form-field class="example-full-width" style="width:30%;">
                 <mat-label>Rooms</mat-label>
-                <input type="text" matInput name="rooms" id="rooms" formControlName="Rooms" [value]="total" style="display:inline-block;">
+                <input type="text" matInput name="rooms" id="rooms" formControlName="Rooms" [value]="totalRooms" style="display:inline-block;">
               </mat-form-field>
-              <button type="button" class="btn btn-outline-success btnRound" (click)="incrementTotal()">+</button>
+              <button type="button" class="btn btn-outline-success btnRound" (click)="incrementTotal2()">+</button>
 
             </td>
           </tr>

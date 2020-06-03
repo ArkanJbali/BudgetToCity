@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   myControl2 = new FormControl();
   filteredOptions2: Observable<Airport[]>;
   searchBudgetForm: FormGroup;
-  sliderValue = 200;
+  sliderValue = 500;
 
   constructor(private modalService: BsModalService, private formBuilder: FormBuilder,
     http: HttpClient, @Inject('BASE_URL') baseUrl: string, private httpClient: HttpClient,
@@ -66,6 +66,7 @@ export class HomeComponent implements OnInit {
     
   }
   onSubmit(newEvent) {
+    console.log(this.sliderValue);
     this.searchBudgetForm.controls.fromDestination.setValue(this.myControl.value);
     this.searchBudgetForm.controls.toDestination.setValue(this.myControl2.value);
     this.searchBudgetForm.controls.budget.setValue(this.sliderValue);
@@ -123,7 +124,24 @@ export class HomeComponent implements OnInit {
     //  right: `10px`
     //});
   }
-
+  decremantTotal() {
+    if (this.sliderValue !== 500) {
+      this.sliderValue = this.sliderValue - 500;
+      this.searchBudgetForm.controls.budget.setValue(this.sliderValue);
+    }
+    if (this.sliderValue <= 500) {
+      this.sliderValue = 500;
+    }
+  }
+  incrementTotal() {
+    if (this.sliderValue !== 10000) {
+      this.sliderValue = this.sliderValue + 500;
+      this.searchBudgetForm.controls.budget.setValue(this.sliderValue);
+    }
+    if (this.sliderValue >= 10000) {
+      this.sliderValue = 10000;
+    }
+  }
  
 }
 interface Airport {

@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     http.get<IUsers[]>(baseUrl + 'api/Users').subscribe(result => {
       this.Users = result;
       this.len = this.Users.length;
-      console.log(result);
+      //console.log(result);
     }, error => console.error(error));
   }
 
