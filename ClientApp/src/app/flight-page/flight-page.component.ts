@@ -242,13 +242,10 @@ export class FlightPageComponent implements OnInit {
   }
     }, err => {
     console.log('Error Status: ', err.status);
-    if (err.status == 400) {
-      this.responseCheck = false;
-      this.toastrService.error("Error in API get status: "+err.status, 'Error');
-    }
     if (err.status) {
+      this.loaderCheck = false;
       this.responseCheck = false;
-      this.toastrService.error("Error in API get status: " + err.status, 'Error');
+      this.toastrService.error("Error in Flights API connection", 'Error');
     }
     });
   }
@@ -258,8 +255,12 @@ export class FlightPageComponent implements OnInit {
       elmnt.scrollIntoView(true); 
  
   }
-  addFlight(i,j) {
-    confirm("You Choosed: " + i.Name + "\n" + "Price: " + j + "\n Click To Confirm");
+  addFlight(i, j) {
+    this.toastrService.success("Thank you, your flight " + i.Name + "\nhas ben selected & you will pay : $" + j, "Flight Selected");
+    //confirm("You Choosed: " + i.Name + "\n" + "Price: $" + j + "\n Click To Confirm");
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   }
   ngOnDestroy() {
     clearInterval(this.intervalId);

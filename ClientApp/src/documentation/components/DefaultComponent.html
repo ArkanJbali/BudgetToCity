@@ -292,7 +292,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>sideBarToggler()</code>
+<code>sideBarToggler(s)</code>
                 </td>
             </tr>
 
@@ -309,8 +309,35 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>s</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -448,7 +475,7 @@ export class DefaultComponent implements OnInit {
       this.router.navigate([&#x27;dashboard&#x27;]);
     }
   }
-  sideBarToggler() {
+  sideBarToggler(s) {
     this.sideBarOpen &#x3D; !this.sideBarOpen;
   }
 }

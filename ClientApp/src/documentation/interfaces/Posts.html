@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>app/services/posts-service.service.ts</code>
+            <code>app/models/Posts.model.ts</code>
         </p>
 
             <p class="comment">
@@ -325,115 +325,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { HttpHeaders, HttpClient } from &#x27;@angular/common/http&#x27;;
-import { Observable, throwError } from &#x27;rxjs&#x27;;
-import { retry, catchError } from &#x27;rxjs/operators&#x27;;
-/**
- * The Posts Service
- */
-@Injectable({
-  providedIn: &#x27;root&#x27;
-})
-export class PostsServiceService {
-/**
-* The __httpOption__ to define the headers
-*
-*  __Example :__
-*  headers: new HttpHeaders({
-*    &#x27;Content-Type&#x27;: &#x27;application/json; charset&#x3D;utf-8&#x27;
-*  })
-*/
-  httpOptions &#x3D; {
-    headers: new HttpHeaders({
-      &#x27;Content-Type&#x27;: &#x27;application/json; charset&#x3D;utf-8&#x27;
-    })
-  };
-  myAppUrl: string;
-  myApiUrl: string;
-/**
-* The &quot;constructor&quot;
-*
-* @param {HttpClient} http A HttpClient
-*/
-  constructor(private http: HttpClient) {
-    this.myAppUrl &#x3D; &#x27;https://localhost:44391/&#x27;;
-    this.myApiUrl &#x3D; &#x27;api/UsersPosts/&#x27;;
-  }
-/**
-* Get All Posts
-*
-*/
-  getBlogPosts(): Observable&lt;Posts[]&gt; {
-    return this.http.get&lt;Posts[]&gt;(this.myAppUrl + this.myApiUrl)
-      .pipe(
-        retry(1),
-        catchError(this.errorHandler)
-      );
-  }
-/**
-* Get Post by ID
-*
-*/
-  getBlogPost(postID: number): Observable&lt;Posts&gt; {
-    return this.http.get&lt;Posts&gt;(this.myAppUrl + this.myApiUrl + postID)
-      .pipe(
-        retry(1),
-        catchError(this.errorHandler)
-      );
-  }
-/**
-* Add Manager
-*
-*/
-  saveBlogPost(userPost): Observable&lt;Posts&gt; {
-    return this.http.post&lt;Posts&gt;(this.myAppUrl + this.myApiUrl, JSON.stringify(userPost), this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.errorHandler)
-      );
-  }
-/**
-* Update Post
-*
-*/
-  updateBlogPost(postId: number, userPost): Observable&lt;Posts&gt; {
-    return this.http.put&lt;Posts&gt;(this.myAppUrl + this.myApiUrl + postId, JSON.stringify(userPost), this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.errorHandler)
-      );
-  }
-/**
-* Delete Post
-*
-*/
-  deleteBlogPost(postID: number): Observable&lt;Posts&gt; {
-    return this.http.delete&lt;Posts&gt;(this.myAppUrl + this.myApiUrl + postID)
-      .pipe(
-        retry(1),
-        catchError(this.errorHandler)
-      );
-  }
-
-  errorHandler(error) {
-    let errorMessage &#x3D; &#x27;&#x27;;
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage &#x3D; error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage &#x3D; &#x60;Error Code: ${error.status}\nMessage: ${error.message}&#x60;;
-    }
-    console.log(errorMessage);
-    return throwError(errorMessage);
-  }
-}
-/**
- * Posts interface
- *
- */
-export interface Posts {
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Posts {
   postID: number;
   postTitle: string;
   postContent: string;

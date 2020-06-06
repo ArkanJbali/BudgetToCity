@@ -483,7 +483,8 @@ export class HotelPageComponent implements OnInit {
     this.httpClient.get(&quot;https://tripadvisor1.p.rapidapi.com/locations/search?location_id&#x3D;1&amp;limit&#x3D;30&amp;sort&#x3D;relevance&amp;offset&#x3D;0&amp;lang&#x3D;en_US&amp;currency&#x3D;USD&amp;units&#x3D;km&amp;query&#x3D;&quot; + from + &quot;&quot;, {
       &quot;headers&quot;: {
         &quot;x-rapidapi-host&quot;: &quot;tripadvisor1.p.rapidapi.com&quot;,
-        &quot;x-rapidapi-key&quot;: &quot;df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f&quot;
+        //&quot;x-rapidapi-key&quot;: &quot;df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f&quot;
+        &quot;x-rapidapi-key&quot;: &quot;bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d&quot;
       }
     }).subscribe(data &#x3D;&gt; {
       //console.log(&#x27;Inside HTTPClient - location: &#x27;, data);
@@ -514,7 +515,8 @@ export class HotelPageComponent implements OnInit {
     this.httpClient.get(&quot;https://tripadvisor1.p.rapidapi.com/hotels/list?offset&#x3D;0&amp;currency&#x3D;USD&amp;limit&#x3D;30&amp;checkin&#x3D;&quot; + checkin + &quot;&amp;order&#x3D;asc&amp;lang&#x3D;en_US&amp;sort&#x3D;recommended&amp;nights&#x3D;&quot; + nights + &quot;&amp;location_id&#x3D;&quot; + locationId + &quot;&amp;adults&#x3D;&quot; + adults + &quot;&amp;rooms&#x3D;&quot; + rooms + &quot;&quot;, {
       &quot;headers&quot;: {
       &quot;x-rapidapi-host&quot;: &quot;tripadvisor1.p.rapidapi.com&quot;,
-      &quot;x-rapidapi-key&quot;: &quot;df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f&quot;
+      //&quot;x-rapidapi-key&quot;: &quot;df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f&quot;
+        &quot;x-rapidapi-key&quot;: &quot;bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d&quot;
     }
     }).subscribe(data &#x3D;&gt; {
       if (data.hasOwnProperty(&#x27;data&#x27;) &amp;&amp; Object.keys(data[&#x27;data&#x27;]).length &gt; 0) {
@@ -532,16 +534,18 @@ export class HotelPageComponent implements OnInit {
 
         console.log(&#x27;hotels API work&#x27;);
         //}
-
-        setTimeout(() &#x3D;&gt; {
-          this.hotelsData &#x3D; data[&#x27;data&#x27;];
-          this.hotelResponseCheck &#x3D; true;
-        }, 1000);
-        setTimeout(() &#x3D;&gt; {
-          this.loaderCheck &#x3D; false;
-          this.scroll();
-        }, 2000);
-
+        if (data[&#x27;data&#x27;][0][&#x27;hac_offers&#x27;][&#x27;offers&#x27;][0][&#x27;link&#x27;] &#x3D;&#x3D; null) {
+          this.toastrService.error(&quot;Sorry there is error occure with Hotels API &quot;, &quot;API Error&quot;);
+        } else {
+          setTimeout(() &#x3D;&gt; {
+            this.hotelsData &#x3D; data[&#x27;data&#x27;];
+            this.hotelResponseCheck &#x3D; true;
+          }, 1000);
+          setTimeout(() &#x3D;&gt; {
+            this.loaderCheck &#x3D; false;
+            this.scroll();
+          }, 2000);
+        }
       }
       else {
         setTimeout(() &#x3D;&gt; {

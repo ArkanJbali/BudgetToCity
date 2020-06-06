@@ -195,7 +195,8 @@ export class HotelPageComponent implements OnInit {
     this.httpClient.get("https://tripadvisor1.p.rapidapi.com/locations/search?location_id=1&limit=30&sort=relevance&offset=0&lang=en_US&currency=USD&units=km&query=" + from + "", {
       "headers": {
         "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-        "x-rapidapi-key": "df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f"
+        //"x-rapidapi-key": "df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f"
+        "x-rapidapi-key": "bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d"
       }
     }).subscribe(data => {
       //console.log('Inside HTTPClient - location: ', data);
@@ -210,7 +211,7 @@ export class HotelPageComponent implements OnInit {
       console.log('Error Status: ', err.status);
       if (err.status == 400) {
         this.locationResponseCheck = false;
-        this.toastrService.error("Error in API get status: " + err.status, 'Error');
+        this.toastrService.error("Error in Locations API Connection.", 'Error');
       }
     });
   }
@@ -226,7 +227,8 @@ export class HotelPageComponent implements OnInit {
     this.httpClient.get("https://tripadvisor1.p.rapidapi.com/hotels/list?offset=0&currency=USD&limit=30&checkin=" + checkin + "&order=asc&lang=en_US&sort=recommended&nights=" + nights + "&location_id=" + locationId + "&adults=" + adults + "&rooms=" + rooms + "", {
       "headers": {
       "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-      "x-rapidapi-key": "df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f"
+      //"x-rapidapi-key": "df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f"
+        "x-rapidapi-key": "bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d"
     }
     }).subscribe(data => {
       if (data.hasOwnProperty('data') && Object.keys(data['data']).length > 0) {
@@ -244,16 +246,21 @@ export class HotelPageComponent implements OnInit {
 
         console.log('hotels API work');
         //}
-
-        setTimeout(() => {
-          this.hotelsData = data['data'];
-          this.hotelResponseCheck = true;
-        }, 1000);
-        setTimeout(() => {
+        if (!data['data'][0]['hac_offers']['offers'][0]['link']) {
+          this.toastrService.error("Sorry there is error occure with Hotels API ", "API Error");
           this.loaderCheck = false;
-          this.scroll();
-        }, 2000);
+          this.hotelResponseCheck = false;
 
+        } else {
+          setTimeout(() => {
+            this.hotelsData = data['data'];
+            this.hotelResponseCheck = true;
+          }, 1000);
+          setTimeout(() => {
+            this.loaderCheck = false;
+            this.scroll();
+          }, 2000);
+        }
       }
       else {
         setTimeout(() => {
@@ -262,9 +269,10 @@ export class HotelPageComponent implements OnInit {
       }
     }, err => {
       console.log('Error Status: ', err.status);
-      if (err.status == 400) {
+        if (err.status) {
+        this.loaderCheck = false;
         this.hotelResponseCheck = false;
-        this.toastrService.error("Error in API get status: " + err.status, 'Error');
+          this.toastrService.error("Error in Hotels API Connection.", 'Error');
       }
     });
   }

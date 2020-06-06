@@ -37,7 +37,7 @@ export class DefaultComponent implements OnInit {
       this.router.navigate(['dashboard']);
     }
   }
-  sideBarToggler() {
+  sideBarToggler(s) {
     this.sideBarOpen = !this.sideBarOpen;
   }
 }

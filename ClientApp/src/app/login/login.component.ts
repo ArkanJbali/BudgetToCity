@@ -21,6 +21,8 @@ imports: [
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  username = "";
+  password = "";
   len: number
   /**
   * Local reference of Posts
