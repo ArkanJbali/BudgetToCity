@@ -402,13 +402,10 @@ export class FlightPageComponent implements OnInit {
   }
     }, err &#x3D;&gt; {
     console.log(&#x27;Error Status: &#x27;, err.status);
-    if (err.status &#x3D;&#x3D; 400) {
-      this.responseCheck &#x3D; false;
-      this.toastrService.error(&quot;Error in API get status: &quot;+err.status, &#x27;Error&#x27;);
-    }
     if (err.status) {
+      this.loaderCheck &#x3D; false;
       this.responseCheck &#x3D; false;
-      this.toastrService.error(&quot;Error in API get status: &quot; + err.status, &#x27;Error&#x27;);
+      this.toastrService.error(&quot;Error in Flights API connection&quot;, &#x27;Error&#x27;);
     }
     });
   }
@@ -418,8 +415,12 @@ export class FlightPageComponent implements OnInit {
       elmnt.scrollIntoView(true); 
  
   }
-  addFlight(i,j) {
-    confirm(&quot;You Choosed: &quot; + i.Name + &quot;\n&quot; + &quot;Price: &quot; + j + &quot;\n Click To Confirm&quot;);
+  addFlight(i, j) {
+    this.toastrService.success(&quot;Thank you, your flight &quot; + i.Name + &quot;\nhas ben selected &amp; you will pay : $&quot; + j, &quot;Flight Selected&quot;);
+    //confirm(&quot;You Choosed: &quot; + i.Name + &quot;\n&quot; + &quot;Price: $&quot; + j + &quot;\n Click To Confirm&quot;);
+    setTimeout(() &#x3D;&gt; {
+      window.location.reload();
+    }, 2000);
   }
   ngOnDestroy() {
     clearInterval(this.intervalId);

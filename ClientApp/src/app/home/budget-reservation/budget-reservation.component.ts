@@ -128,7 +128,8 @@ export class BudgetReservationComponent implements OnInit {
       "headers": {
         "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
         //"x-rapidapi-key": "df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f"
-          "x-rapidapi-key": "bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d"
+        "x-rapidapi-key": "bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d"
+        //"x-rapidapi-key": "3297667827msha61217f3d0c09c5p16192djsnb83c2ebd9582"
       }
     }).subscribe(data => {
       //console.log('Inside HTTPClient - locations: ', data);
@@ -161,6 +162,7 @@ export class BudgetReservationComponent implements OnInit {
         "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
         //"x-rapidapi-key": "df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f"
         "x-rapidapi-key": "bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d"
+        //"x-rapidapi-key": "3297667827msha61217f3d0c09c5p16192djsnb83c2ebd9582"
       }
     }).subscribe(data => {
       if (data.hasOwnProperty('data') && Object.keys(data['data']).length > 0) {

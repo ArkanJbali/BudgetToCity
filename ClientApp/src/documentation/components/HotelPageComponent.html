@@ -642,8 +642,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="221"
-                            class="link-to-prism">app/hotel-page/hotel-page.component.ts:221</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="222"
+                            class="link-to-prism">app/hotel-page/hotel-page.component.ts:222</a></div>
                 </td>
             </tr>
 
@@ -843,8 +843,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="281"
-                            class="link-to-prism">app/hotel-page/hotel-page.component.ts:281</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="287"
+                            class="link-to-prism">app/hotel-page/hotel-page.component.ts:287</a></div>
                 </td>
             </tr>
 
@@ -911,8 +911,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="293"
-                            class="link-to-prism">app/hotel-page/hotel-page.component.ts:293</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="299"
+                            class="link-to-prism">app/hotel-page/hotel-page.component.ts:299</a></div>
                 </td>
             </tr>
 
@@ -1276,7 +1276,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="275" class="link-to-prism">app/hotel-page/hotel-page.component.ts:275</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="281" class="link-to-prism">app/hotel-page/hotel-page.component.ts:281</a></div>
                             </td>
                         </tr>
 
@@ -1297,7 +1297,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="276" class="link-to-prism">app/hotel-page/hotel-page.component.ts:276</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="282" class="link-to-prism">app/hotel-page/hotel-page.component.ts:282</a></div>
                             </td>
                         </tr>
 
@@ -1323,7 +1323,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="277" class="link-to-prism">app/hotel-page/hotel-page.component.ts:277</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="283" class="link-to-prism">app/hotel-page/hotel-page.component.ts:283</a></div>
                             </td>
                         </tr>
 
@@ -1853,6 +1853,7 @@ export class HotelPageComponent implements OnInit {
         &quot;x-rapidapi-host&quot;: &quot;tripadvisor1.p.rapidapi.com&quot;,
         //&quot;x-rapidapi-key&quot;: &quot;df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f&quot;
         &quot;x-rapidapi-key&quot;: &quot;bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d&quot;
+        //&quot;x-rapidapi-key&quot;: &quot;3297667827msha61217f3d0c09c5p16192djsnb83c2ebd9582&quot;
       }
     }).subscribe(data &#x3D;&gt; {
       //console.log(&#x27;Inside HTTPClient - location: &#x27;, data);
@@ -1867,7 +1868,7 @@ export class HotelPageComponent implements OnInit {
       console.log(&#x27;Error Status: &#x27;, err.status);
       if (err.status &#x3D;&#x3D; 400) {
         this.locationResponseCheck &#x3D; false;
-        this.toastrService.error(&quot;Error in API get status: &quot; + err.status, &#x27;Error&#x27;);
+        this.toastrService.error(&quot;Error in Locations API Connection.&quot;, &#x27;Error&#x27;);
       }
     });
   }
@@ -1885,6 +1886,7 @@ export class HotelPageComponent implements OnInit {
       &quot;x-rapidapi-host&quot;: &quot;tripadvisor1.p.rapidapi.com&quot;,
       //&quot;x-rapidapi-key&quot;: &quot;df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f&quot;
         &quot;x-rapidapi-key&quot;: &quot;bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d&quot;
+      //  &quot;x-rapidapi-key&quot;: &quot;3297667827msha61217f3d0c09c5p16192djsnb83c2ebd9582&quot;
     }
     }).subscribe(data &#x3D;&gt; {
       if (data.hasOwnProperty(&#x27;data&#x27;) &amp;&amp; Object.keys(data[&#x27;data&#x27;]).length &gt; 0) {
@@ -1902,8 +1904,11 @@ export class HotelPageComponent implements OnInit {
 
         console.log(&#x27;hotels API work&#x27;);
         //}
-        if (data[&#x27;data&#x27;][0][&#x27;hac_offers&#x27;][&#x27;offers&#x27;][0][&#x27;link&#x27;] &#x3D;&#x3D; null) {
+        if (!data[&#x27;data&#x27;][0][&#x27;hac_offers&#x27;][&#x27;offers&#x27;][0][&#x27;link&#x27;]) {
           this.toastrService.error(&quot;Sorry there is error occure with Hotels API &quot;, &quot;API Error&quot;);
+          this.loaderCheck &#x3D; false;
+          this.hotelResponseCheck &#x3D; false;
+
         } else {
           setTimeout(() &#x3D;&gt; {
             this.hotelsData &#x3D; data[&#x27;data&#x27;];
@@ -1922,9 +1927,10 @@ export class HotelPageComponent implements OnInit {
       }
     }, err &#x3D;&gt; {
       console.log(&#x27;Error Status: &#x27;, err.status);
-      if (err.status &#x3D;&#x3D; 400) {
+        if (err.status) {
+        this.loaderCheck &#x3D; false;
         this.hotelResponseCheck &#x3D; false;
-        this.toastrService.error(&quot;Error in API get status: &quot; + err.status, &#x27;Error&#x27;);
+          this.toastrService.error(&quot;Error in Hotels API Connection.&quot;, &#x27;Error&#x27;);
       }
     });
   }

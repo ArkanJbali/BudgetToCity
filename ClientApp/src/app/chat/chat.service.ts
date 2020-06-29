@@ -45,6 +45,7 @@ export class ChatService {
       const botTimeSendMessage = formatDate(res.timestamp, 'HH:mm:ss a', 'en-US');
       const speech = res.result.fulfillment.speech;
       const botMessage = new Message(speech, 'Bot', botTimeSendMessage);
+      
       this.update(botMessage);
 
     });
@@ -57,6 +58,7 @@ export class ChatService {
       then(res => {
         this.userTimeSendMessage = formatDate(new Date(), 'HH:mm:ss a', 'en-US');
         const speech = res.result.fulfillment.speech;
+        console.log(res);
         const botMessage = new Message(speech, 'Bot', this.userTimeSendMessage);
         this.update(botMessage);
       });

@@ -288,7 +288,8 @@ export class BudgetReservationComponent implements OnInit {
       &quot;headers&quot;: {
         &quot;x-rapidapi-host&quot;: &quot;tripadvisor1.p.rapidapi.com&quot;,
         //&quot;x-rapidapi-key&quot;: &quot;df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f&quot;
-          &quot;x-rapidapi-key&quot;: &quot;bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d&quot;
+        &quot;x-rapidapi-key&quot;: &quot;bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d&quot;
+        //&quot;x-rapidapi-key&quot;: &quot;3297667827msha61217f3d0c09c5p16192djsnb83c2ebd9582&quot;
       }
     }).subscribe(data &#x3D;&gt; {
       //console.log(&#x27;Inside HTTPClient - locations: &#x27;, data);
@@ -306,7 +307,7 @@ export class BudgetReservationComponent implements OnInit {
       console.log(&#x27;Error Status: &#x27;, err.status);
       if (err.status &#x3D;&#x3D; 400) {
         this.locationResponseCheck &#x3D; false;
-        this.toastrService.error(&quot;Error in API get status: &quot; + err.status, &#x27;Error&#x27;);
+        this.toastrService.error(&quot;Error in API connection&quot;, &#x27;Error&#x27;);
       }
     });
   }
@@ -321,6 +322,7 @@ export class BudgetReservationComponent implements OnInit {
         &quot;x-rapidapi-host&quot;: &quot;tripadvisor1.p.rapidapi.com&quot;,
         //&quot;x-rapidapi-key&quot;: &quot;df49c2e13emshde8e160f8cf5243p17dec4jsn5aaaec01207f&quot;
         &quot;x-rapidapi-key&quot;: &quot;bd145c28d3msh9e87443c933ee51p1784afjsnd7369dde937d&quot;
+        //&quot;x-rapidapi-key&quot;: &quot;3297667827msha61217f3d0c09c5p16192djsnb83c2ebd9582&quot;
       }
     }).subscribe(data &#x3D;&gt; {
       if (data.hasOwnProperty(&#x27;data&#x27;) &amp;&amp; Object.keys(data[&#x27;data&#x27;]).length &gt; 0) {
@@ -349,7 +351,7 @@ export class BudgetReservationComponent implements OnInit {
       console.log(&#x27;Error Status: &#x27;, err.status);
       if (err.status &#x3D;&#x3D; 400) {
         this.hotelResponseCheck &#x3D; false;
-        this.toastrService.error(&quot;Error in API get status: &quot; + err.status, &#x27;Error&#x27;);
+        this.toastrService.error(&quot;Error in Hotels API Connection.&quot;, &#x27;Error&#x27;);
       }
     });
   }
@@ -405,7 +407,7 @@ export class BudgetReservationComponent implements OnInit {
       console.log(&#x27;Error Status: &#x27;, err.status);
       if (err.status &#x3D;&#x3D; 400) {
         this.responseCheck &#x3D; false;
-        this.toastrService.error(&quot;Error in API get status: &quot; + err.status, &#x27;Error&#x27;);
+        this.toastrService.error(&quot;Error in Flights API Connection.&quot;, &#x27;Error&#x27;);
       }
     });
   }
