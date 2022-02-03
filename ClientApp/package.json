@@ -8,7 +8,9 @@
     "build:ssr": "ng run BudgetToCity:server:dev",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "private": true,
   "dependencies": {
@@ -40,7 +42,8 @@
     "popper.js": "^1.16.1",
     "rxjs": "^6.6.3",
     "tslib": "^1.11.1",
-    "zone.js": "0.9.1"
+    "zone.js": "0.9.1",
+    "snyk": "^1.653.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.26",
@@ -66,5 +69,6 @@
     "protractor": "~5.4.2",
     "ts-node": "~8.4.1",
     "tslint": "~5.20.0"
-  }
+  },
+  "snyk": true
 }
