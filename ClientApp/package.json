@@ -43,7 +43,7 @@
     "rxjs": "^6.6.3",
     "tslib": "^1.11.1",
     "zone.js": "0.9.1",
-    "@snyk/protect": "latest"
+    "@snyk/protect": "1.848.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.26",
